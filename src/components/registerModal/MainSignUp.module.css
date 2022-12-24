@@ -1,0 +1,25 @@
+.registerModal{
+    display: flex;
+    width: 603px;
+    /* height: 672px; */
+    border-radius: 30px;
+    margin: 0 auto;
+    border: 3px solid gray;
+    justify-content: center;
+    padding-top: 18.5px;
+    padding-bottom: 58px;
+    background-color: white;
+    float: left;
+    transition: 0.5s;
+}
+.modalClose{
+    display: none;
+}
+.modalOpen{
+    display: block;
+}
+.mainSignUp{
+    display: flex;
+    position: relative;
+    justify-content: center;
+}

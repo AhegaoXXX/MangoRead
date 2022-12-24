@@ -1,0 +1,17 @@
+.loginModal{
+    display: flex;
+    width: 603px;
+    height: 389px;
+    border-radius: 30px;
+    margin: 0 auto;
+    border: 3px solid gray;
+    justify-content: center;
+    padding-top: 31px;
+    padding-bottom: 58px;
+    background-color: white;
+    float: left;
+    transition: 0.5s;
+}
+.loginBtn{
+    border-bottom: 5px solid #AD02E0;
+} 
