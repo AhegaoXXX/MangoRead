@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { Provider } from "react-redux";
-import { applyMiddleware, createStore } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
-import thunk from 'redux-thunk';
-import store from "./store"
+import store from "./redux"
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 

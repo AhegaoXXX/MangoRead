@@ -22,8 +22,6 @@ import axios from 'axios';
 
 // import { DOMEN_SERVER, DOMEN_SITE } from 'http://134.122.75.14:8666';
 import { useMutation } from 'react-query';
-import {signUp} from '../../store/authSlices/signUpSlice';
-import {signIn} from '../../store/authSlices/signInSlice';
 import { getCookie, setCookie } from "react-use-cookie";
 
 
@@ -33,7 +31,6 @@ import { getCookie, setCookie } from "react-use-cookie";
 
 
 
-const API_URL = 'http://134.122.75.14:8666/api';
 const style = {
 position: 'absolute',
 top: '50%',
@@ -85,8 +82,6 @@ function MainSignUp() {
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        // dispatch(signUp())
-        // dispatch(signIn())
     }, [])
 
     const [placeholderUsername, setPlaceholderUsername] = useState('Username');
@@ -118,13 +113,6 @@ function MainSignUp() {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    const [images, setImages] = useState(['']);
-    const maxNumber = 40;
-    const onChange = (imageList, addUpdateIndex) => {
-        
-        setImages(imageList);
-        
-    };
 
     let formData = new FormData();
 
@@ -136,12 +124,12 @@ function MainSignUp() {
     const handleRegister = (e)=>{
         if (username=="" || nickname=="" || password==""){
 
-            dispatch(signUp({
-                username:"",
-                nickname:"",
-                image_file:"",
-                password:"",
-            }))
+            // dispatch(signUp({
+            //     username:"",
+            //     nickname:"",
+            //     image_file:"",
+            //     password:"",
+            // }))
             setPlaceholderUsername("This field is required");
             setPlaceholderNickname("This field is required");
             setPlaceholderPassword("This field is required");
@@ -153,28 +141,23 @@ function MainSignUp() {
             
             const checkPost = "1234567890";
 
-            formData.append("username", "1234567890");
-            formData.append("nickname", "1234567890");
+            formData.append("username", checkPost);
+            formData.append("nickname", checkPost);
             formData.append("image_file", imageX); 
-            // formData.append("image_file", images['data_url']); 
-            formData.append("password", "1234567890");
+            formData.append("password", checkPost);
             
-            const config = {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            }
-            axios.post("http://134.122.75.14:8666/api/auth/signup/",      
+            axios.post('http://134.122.75.14:8666/api/auth/signup/',      
               formData,
               {
-                  headers: {
+                headers: {
                     'Content-Type': 'multipart/form-data',
-                  },
-                  body: formData,
+                },
 
               }
             )
             .then(response=> console.log(response))
             .catch(function (error) {
-               alert(error+images['data_url']);
+               alert(error);
                console.log();
             });
 
@@ -190,10 +173,10 @@ function MainSignUp() {
 
         if (logUser==="" || logPass===""){
 
-            dispatch(signIn({
-                username:"",
-                password:"",
-            }))
+            // dispatch(signIn({
+            //     username:"",
+            //     password:"",
+            // }))
             setPlaceholderUsername("This field is required");
             setPlaceholderPassword("This field is required");
             setPlaceholderColor('red')
@@ -464,48 +447,6 @@ function MainSignUp() {
                                 }}
                             >
                                 <FormControl>
-                                    {/* <ImageUploading
-                                        value={images}
-                                        onChange={onChange}
-                                        maxNumber={maxNumber}
-                                        dataURLKey="data_url"
-                                    >
-                                        {({
-                                            imageList,
-                                            onImageUpload,
-                                        }) => (
-                                            <div className="upload__image-wrapper">
-                                                {imageList.map((image, index) => (
-                                                    <div key={index} className="image-item">
-                                                        <Avatar 
-                                                            src={image['data_url']} sx={{
-                                                                width:"181px",
-                                                                height:"181px",
-                                                                marginTop:'16px',
-                                                                marginBottom:'20px',
-                                                            }}
-                                                        type="img"
-                                                        name="img"
-                                                        />
-                                                        <div className="image-item__btn-wrapper">
-                                                        </div>
-                                                    </div>
-                                                ))}
-
-                                                <Button
-                                                    className='uploadAva'
-                                                    onClick={onImageUpload}
-                                                    sx={{
-                                                        color:"black",
-                                                        fontWeight:"400",
-                                                        fontSize:"16px",
-                                                        fontFamily:"Montserrat",
-                                                        margin:' 0 0 40px 0',
-                                                        padding:'0 0 0 15px',
-                                                    }}>ДОБАВИТЬ ФОТО</Button>
-                                            </div>
-                                        )}
-                                    </ImageUploading> */}
                                         <Input 
                                             onChange={handleImage}
                                             sx={{

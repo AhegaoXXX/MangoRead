@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
 import classes from './MainPage.module.css'
@@ -15,14 +15,14 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import CardsMainPage from '../../components/cardsMainPage/CardsMainPage';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+import {useDispatch, useSelector} from "react-redux"
+import {Link} from "react-router-dom";
 
 
 
 function renderRow(props) {
-
   const { index, style } = props;
-
-  
 
   return (
     <ListItem style={style} key={index} component="div" disablePadding>
@@ -34,7 +34,6 @@ function renderRow(props) {
 }
 
 function MainPage() {
-
   const theme = createTheme({
     palette: {
       primary: {
@@ -45,19 +44,42 @@ function MainPage() {
   })
 
 
-  const arr = new Array([])
-  for(let i = 0;i<11;i++){
-    arr.push(i)
+  const [data, setData] = useState([]);
+  const dispatch= useDispatch();
+  const state = useSelector((state)=>state.data)
+  const handleRequest = () =>{
+    dispatch({type:"GET_DATA", payload: data})
   }
+  useEffect(()=>{
+    axios.get('http://134.122.75.14:8666/api/v1/top-manga/')
+    .then((data)=>setData(data?.data?.results))
+  }, [])
+  useEffect(()=>{
+    handleRequest();
+  }, [data])
+
+  const {card}=useSelector(state=>state.catalogReducer)
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <div className={classes.mainPage}>
       <Header/>
 
-      <Box sx={{
-        display:"flex",
-        height:"846px",
-        backgroundColor:"F3F3F3",
+      <Box 
+        sx={{
+          display:"flex",
+          height:"846px",
+          backgroundColor:"F3F3F3",
       }}>
         <Container
           sx={{
@@ -69,11 +91,11 @@ function MainPage() {
             flexDirection:"column"
           }}>
 
-          <Box sx={{
-            display:"flex",
-            justifyContent:"space-between",
-            width:"1240px"
-            
+          <Box 
+            sx={{
+              display:"flex",
+              justifyContent:"space-between",
+              width:"1240px"
             }}>
             <Box sx={{
               display:"flex",
@@ -166,15 +188,23 @@ function MainPage() {
               </Box>
             </Box>
 
-            <Box sx={{
-              display:'flex',
-              flexWrap:"wrap",
-              width:"820px",
-              height:"700px",
-              justifyContent:"space-between",
+            <Box 
+              sx={{
+                display:'flex',
+                flexWrap:"wrap",
+                width:"820px",
+                height:"700px",
+                justifyContent:"space-between",
             }}>
 
-              {arr.map(item => <CardsMainPage key={item} />)} 
+              {/* {arr.map(item => <CardsMainPage key={item} post={{image : imageX , year: yearX, name : nameX}}/>)}  */}
+              {data ? data?.slice(1, 13).map((item, i) =>
+                <Link to={`/${item?.id }`}
+                  className={classes.card}>
+                    <CardsMainPage key={item} post={{image : item?.image , year: item?.issue_year, name : item?.ru_name}} />
+                </Link>)
+                :
+                <>AAA</>}
 
             </Box>
           </Box>
