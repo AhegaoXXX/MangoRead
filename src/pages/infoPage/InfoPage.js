@@ -10,9 +10,11 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import img1 from '../../img/avatar1.jpg'
+import { Link } from 'react-router-dom';
 
 
-function InfoPage() {
+
+function InfoPage(props) {
 
   const theme = createTheme({
     palette: {
@@ -50,19 +52,24 @@ function InfoPage() {
             display:"flex",
             // paddingTop:"33px",
             // paddingBottom:"33px",
+            "& a":{
+              textDecoration:"none",
+            },
           }}>
-            <Button sx={{
-              display:'flex',
-              color:"grey", 
-              height:'70px',
-              alignItems:"center",
-              marginRight:"auto",
-              textTransform:"inherit",
-              fontSize:"24px",
-              fontFamily:"Montserrat",
-            }}>
-              <ArrowBackIcon sx={{fontSize:"24px", marginRight:"8px"}}/> Назад
-            </Button>
+            <Link to={-1}>
+              <Button sx={{
+                display:'flex',
+                color:"grey", 
+                height:'70px',
+                alignItems:"center",
+                marginRight:"auto",
+                textTransform:"inherit",
+                fontSize:"24px",
+                fontFamily:"Montserrat",
+              }}>
+                <ArrowBackIcon sx={{fontSize:"24px", marginRight:"8px"}}/> Назад
+              </Button>
+            </Link>
           </Box>
 
           <Box sx={{
@@ -80,7 +87,7 @@ function InfoPage() {
 
               }}
               alt="img"
-              src={img1}>
+              src={props.image}>
             </Box>
             <Box sx={{
                 display:"flex",

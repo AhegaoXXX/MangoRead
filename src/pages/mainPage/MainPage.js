@@ -208,7 +208,7 @@ function MainPage() {
 
               {/* {arr.map(item => <CardsMainPage key={item} post={{image : imageX , year: yearX, name : nameX}}/>)}  */}
               {data ? data?.slice(1, 13).map((item, i) =>
-                <NavLink to={`/${item.id}`}>
+                <NavLink to={`/${item.id}`} info={{image : item.image}}>
                   <CardsMainPage key={item} post={{image : item?.image , year: item?.issue_year, name : item?.ru_name}} />
                 </NavLink>)
                 :
