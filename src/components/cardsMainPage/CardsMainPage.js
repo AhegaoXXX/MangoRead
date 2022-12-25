@@ -4,18 +4,18 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import MainPage from '../../pages/mainPage/MainPage';
+
 
 
 function CardsMainPage(props) {
 
-  const [card, setCard] = useState([]);
+  // const [news, setNews] = useState([]);
 
-  useEffect(()=>{
-    fetch('http://134.122.75.14:8666/api/v1/manga/')
-    .then(response=>response.json())
-    .then(data=>setCard(data))
-  }, []);
+  // useEffect(()=>{
+  //     fetch('https://jsonplaceholder.typicode.com/posts')
+  //     .then(response=>response.json())
+  //     .then(data=>setNews(data))
+  // }, []);
 
 
 
@@ -23,12 +23,6 @@ function CardsMainPage(props) {
 
   return (
     <>
-      {
-        card.map(item=><p>{item.title}
-            <Link to={`/news/${item.id}`}>Посмотреть</Link>
-        </p>)
-      }
-
 
       <Box 
         sx={{

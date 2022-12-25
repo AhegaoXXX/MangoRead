@@ -155,6 +155,7 @@ function MainSignUp() {
 
               }
             )
+            
             .then(response=> console.log(response))
             .catch(function (error) {
                alert(error);
