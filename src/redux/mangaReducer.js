@@ -4,6 +4,7 @@ const initialState = {
     mangas: [],
     manga: [],
     comment: [],
+    genres: [],
 }
 
 export function mangaReducer (state = initialState, action) {
@@ -14,6 +15,8 @@ export function mangaReducer (state = initialState, action) {
             return {...state, manga: [action.payload]}
         case types.COMMENT_INFO:
             return {...state, comment: action.payload}
+        case types.GENRE_INFO:
+            return {...state, genres: action.payload}    
 
 
         default: return state

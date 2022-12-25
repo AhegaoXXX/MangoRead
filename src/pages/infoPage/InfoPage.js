@@ -14,9 +14,7 @@ import { Link } from 'react-router-dom';
 import MainPage from '../mainPage/MainPage';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {getInfoMangaAction} from '../../redux/actions'
-import {getCommentAction} from '../../redux/actions'
-
+import {getInfoMangaAction, getCommentAction, getGenreAction} from '../../redux/actions'
 
 
 
@@ -25,13 +23,18 @@ function InfoPage(props) {
   const {id} = useParams()
   const manga = useSelector(state=>state.mangaReducer.manga)
   const comment = useSelector(state=>state.mangaReducer.comment)
+  const genres = useSelector(state=>state.mangaReducer.genres)
+
   useEffect(()=>{
     dispatch(getInfoMangaAction(id))
     dispatch(getCommentAction(id))
+    dispatch(getGenreAction())
   },[])
-  // useEffect(()=>{
-  //     dispatch(getCommentAction(id))
-  // },[])
+
+  
+
+  
+
 
 
   const theme = createTheme({
@@ -149,8 +152,7 @@ function InfoPage(props) {
                           fontFamily:"Montserrat",
                           fontWeight: 400,
         
-                        }}>Жанр: {item.genre}</Typography>
-        
+                        }}>Жанр: {item.genre.map((i)=>(<>{genres[i].title}, </>))}</Typography>
                     </Box>
                   </Box>
                   <Box sx={{
@@ -185,7 +187,8 @@ function InfoPage(props) {
                     </Typography>
                   </Box>
 
-                  <Box sx={{
+                  <Box 
+                    sx={{
                       display:'flex',
                       flexDirection:'column',
                       height:"819px",
@@ -199,12 +202,12 @@ function InfoPage(props) {
                         fontWeight:"500"
                       }}>Топ рецензий</Typography>
           
-                      {comment ? comment?.slice(0, 3).map((comm, id) =>
+                      {comment ? comment?.slice(0, 4).map((comm, id) =>
                         <>
                           <Box sx={{
                             display:"flex",
                             paddingTop:"33px",
-                            height:"231px"
+                            height:"200px"
                           }}>
                             <Box sx={{
                               display:"flex",

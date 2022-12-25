@@ -55,8 +55,8 @@ function MainPage(props) {
   // }, [data])
 
   const data = useSelector(state => state.mangaReducer.mangas)
-    useEffect(() => {
-      dispatch(getMangaAction())
+  useEffect(() => {
+    dispatch(getMangaAction())
   }, [])
     
 
