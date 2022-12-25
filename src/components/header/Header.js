@@ -7,6 +7,10 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
 import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import MainPage from '../../pages/mainPage/MainPage';
+
+
 
 function Header(props) {
     const dispatch = useDispatch();
@@ -21,18 +25,24 @@ function Header(props) {
                     width: "1240px",
                     display:"flex", 
                     height: "110px",
-                    justifyContent:"space-between"
+                    justifyContent:"space-between",
+                    "& a":{
+                        textDecoration:"none",
+                    }
                 }}>
-
-                <div className={classes.logo}>
-                    <div className={classes.logoImg}>
-                        <img src={logo} alt='logo'/>
+                <NavLink to="/">
+                    <div className={classes.logo}>
+                        <div className={classes.logoImg}>
+                            <img src={logo} alt='logo'/>
+                        </div>
+                        
+                        
+                        <div className={classes.logoText}>
+                            <h1>MangoRead</h1>
+                            <p>Читай мангу с нами</p>
+                        </div>
                     </div>
-                    <div className={classes.logoText}>
-                        <h1>MangoRead</h1>
-                        <p>Читай мангу с нами</p>
-                    </div>
-                </div>
+                </NavLink>
                 <div className={classes.search}>
                     <Input
                         sx={{
