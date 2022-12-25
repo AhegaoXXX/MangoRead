@@ -9,9 +9,9 @@ import CardsMainPage from './components/cardsMainPage/CardsMainPage';
 function App(props) {
   return (
     <Routes>
-        <Route index element={<MainPage/>} />
-        <Route path="/:id" element={<InfoPage info={props.info}/>}/>
-      </Routes>
+      <Route index element={<MainPage/>} />
+      <Route path="/:id" element={<InfoPage/>}/>
+    </Routes>
   );
 }
 
