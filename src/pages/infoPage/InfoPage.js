@@ -9,28 +9,28 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import img1 from '../../img/avatar1.jpg'
 import { Link } from 'react-router-dom';
 import MainPage from '../mainPage/MainPage';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {getInfoMangaAction, getCommentAction, getGenreAction} from '../../redux/actions'
+import {getInfoManga, getComment, getGenre} from '../../store/mangaSlice'
+
 
 
 
 function InfoPage(props) {
   const dispatch = useDispatch();
   const {id} = useParams()
+
   const manga = useSelector(state=>state.mangaReducer.manga)
   const comment = useSelector(state=>state.mangaReducer.comment)
   const genres = useSelector(state=>state.mangaReducer.genres)
 
   useEffect(()=>{
-    dispatch(getInfoMangaAction(id))
-    dispatch(getCommentAction(id))
-    dispatch(getGenreAction())
+    dispatch(getInfoManga(id))
+    dispatch(getComment(id))
+    dispatch(getGenre())
   },[])
-
   
 
   
@@ -283,7 +283,6 @@ function InfoPage(props) {
 
       <Footer/>
     </div>
-    
   )
 }
 

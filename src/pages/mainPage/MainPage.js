@@ -18,8 +18,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import {useDispatch, useSelector} from "react-redux"
 import {Link, NavLink} from "react-router-dom";
-import {getMangaAction} from "../../redux/actions";
-import { mangaReducer } from '../../redux/mangaReducer';
+import {getMangas} from '../../store/mangaSlice'
+
 
 
 
@@ -46,18 +46,11 @@ function MainPage(props) {
   })
   const dispatch= useDispatch();
 
-// const state = useSelector((state)=>state.data)
-  // const handleRequest = () =>{
-  //   dispatch({type:"GET_DATA", payload: data})
-  // }
-  // useEffect(()=>{
-  //   handleRequest();
-  // }, [data])
-
   const data = useSelector(state => state.mangaReducer.mangas)
   useEffect(() => {
-    dispatch(getMangaAction())
+    dispatch(getMangas())
   }, [])
+
     
 
 
@@ -65,10 +58,11 @@ function MainPage(props) {
     <div className={classes.mainPage}>
       <Header/>
 
-      <Box sx={{
-        display:"flex",
-        height:"846px",
-        backgroundColor:"F3F3F3",
+      <Box 
+        sx={{
+          display:"flex",
+          height:"846px",
+          backgroundColor:"F3F3F3",
       }}>
         <Container
           sx={{
@@ -80,11 +74,11 @@ function MainPage(props) {
             flexDirection:"column"
           }}>
 
-          <Box sx={{
-            display:"flex",
-            justifyContent:"space-between",
-            width:"1240px"
-            
+          <Box 
+            sx={{
+              display:"flex",
+              justifyContent:"space-between",
+              width:"1240px"
             }}>
             <Box sx={{
               display:"flex",
@@ -177,15 +171,15 @@ function MainPage(props) {
               </Box>
             </Box>
 
-            <Box sx={{
+            <Box 
+            sx={{
               display:'flex',
               flexWrap:"wrap",
               width:"820px",
               height:"700px",
               justifyContent:"space-between",
             }}>
-
-              {data ? data?.slice(1, 13).map((item) =>
+              {{data} ? data.slice(1, 13).map((item) =>
                 <NavLink to={`/${item.id}`} info={{image : item.image}}>
                   <CardsMainPage key={item} post={{image : item?.image , year: item?.issue_year, name : item?.ru_name}} />
                 </NavLink>)
@@ -237,7 +231,6 @@ function MainPage(props) {
   )
 }
 
-// post={{image : logo , name : "plant" , cost: "$795" , size:"XXL" , color:"black"}}
 
 
 export default MainPage

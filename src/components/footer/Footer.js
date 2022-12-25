@@ -13,6 +13,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -40,22 +41,27 @@ function Footer() {
         >
           <Container disableGutters maxWidth="1240px"
             sx={{
-                fontFamily: "Montserrat",
-                width: "1240px",
-                display:"flex", 
-                alignItems:"center",
-                justifyContent:"space-between",
+              fontFamily: "Montserrat",
+              width: "1240px",
+              display:"flex", 
+              alignItems:"center",
+              justifyContent:"space-between",
+              "& a":{
+                textDecoration:"none"
+              }
             }}>
-
-            <Box className={classes.logo}>
-              <div className={classes.logoImg}>
-                <img src={logo} alt='logo'/>
-              </div>
-              <div className={classes.logoText}>
-                  <h1>MangoRead</h1>
-                  <p>Читай мангу с нами</p>
-              </div>
-            </Box>
+            <NavLink to="/">
+              <Box className={classes.logo}>
+                <div className={classes.logoImg}>
+                  <img src={logo} alt='logo'/>
+                </div>
+                <div className={classes.logoText}>
+                    <h1>MangoRead</h1>
+                    <p>Читай мангу с нами</p>
+                </div>
+              </Box>
+            </NavLink>
+            
 
             <Box sx={{ 
               height:"136px",
