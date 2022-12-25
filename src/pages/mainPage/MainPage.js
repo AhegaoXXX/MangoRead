@@ -17,7 +17,7 @@ import CardsMainPage from '../../components/cardsMainPage/CardsMainPage';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import {useDispatch, useSelector} from "react-redux"
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 
 
@@ -208,9 +208,11 @@ function MainPage() {
 
               {/* {arr.map(item => <CardsMainPage key={item} post={{image : imageX , year: yearX, name : nameX}}/>)}  */}
               {data ? data?.slice(1, 13).map((item, i) =>
-                <CardsMainPage key={item} post={{image : item?.image , year: item?.issue_year, name : item?.ru_name}} />)
+                <NavLink to={`/${item.id}`}>
+                  <CardsMainPage key={item} post={{image : item?.image , year: item?.issue_year, name : item?.ru_name}} />
+                </NavLink>)
                 :
-                <>AAA</>}
+                <>OMG</>}
 
             </Box>
           </Box>
