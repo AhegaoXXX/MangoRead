@@ -12,12 +12,6 @@
     float: left;
     transition: 0.5s;
 }
-.modalClose{
-    display: none;
-}
-.modalOpen{
-    display: block;
-}
 .mainSignUp{
     display: flex;
     position: relative;

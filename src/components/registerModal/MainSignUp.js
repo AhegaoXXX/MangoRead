@@ -20,7 +20,6 @@ import {FormControl} from '@mui/material';
 import swal from 'sweetalert';
 import axios from 'axios';
 
-// import { DOMEN_SERVER, DOMEN_SITE } from 'http://134.122.75.14:8666';
 import { useMutation } from 'react-query';
 import { getCookie, setCookie } from "react-use-cookie";
 
@@ -101,7 +100,9 @@ function MainSignUp() {
     
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [open, setOpen] = React.useState(false);
+    
     const handleOpen = () => setOpen(true);
+
     const handleClose = () => {
         setOpen(false)
         setPlaceholderUsername("Username");
@@ -224,258 +225,106 @@ function MainSignUp() {
 
 
     return (
+        <Modal
+            open={open}
+            className={classes.modalWindow1}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            sx={{
+                overflow:"hidden",
+                position:'fixed',
+                // left:"31.5%",
+                left:"calc(50% - 301px)",
 
+            }}
 
-
-        <div className={classes.mainSignUp}>
-
-            <Button onClick={handleOpen}>Open modal</Button>
-
-            <Modal
-                open={open}
-                className={classes.modalWindow1}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-                sx={{
-                    overflow:"hidden",
-                    position:'fixed',
-                    // left:"31.5%",
-                    left:"calc(50% - 301px)",
-
-                }}
-
-            >
-                <div className={classes.registerModal}>
+        >
+            <div className={classes.registerModal}>
+                <Box sx={{
+                    width:"500px",
+                    // height:"672px",
+                    display:"flex",
+                    flexDirection:'column',
+                    // justifyContent:"center",
+                }}>
                     <Box sx={{
-                        width:"500px",
-                        // height:"672px",
                         display:"flex",
-                        flexDirection:'column',
-                        // justifyContent:"center",
-                    }}>
-                        <Box sx={{
-                            display:"flex",
-                            flexDirection:"row-reverse",
-                            padding:"0",
-                            margin:'0',
-                            ".MuiSvgIcon-root":{
-                                path:{
-                                    fontSize: "large",
-                                }
+                        flexDirection:"row-reverse",
+                        padding:"0",
+                        margin:'0',
+                        ".MuiSvgIcon-root":{
+                            path:{
+                                fontSize: "large",
                             }
-                        }}>
-                            <Button onClick={handleClose}
-                                sx={{
-                                    padding:"0",
-                                    margin:'0',
-                                    '.MuiSvgIcon-fontSizeLarge':{
-                                        fontSize:"35px",
-                                        path:{
-                                            transform:'scale(1.1)'
-                                        }
+                        }
+                    }}>
+                        <Button onClick={handleClose}
+                            sx={{
+                                padding:"0",
+                                margin:'0',
+                                '.MuiSvgIcon-fontSizeLarge':{
+                                    fontSize:"35px",
+                                    path:{
+                                        transform:'scale(1.1)'
                                     }
-                                }}>
-                                <CloseIcon fontSize="large" sx={{color:"black",}}/>
-                            </Button>
-                        </Box>
+                                }
+                            }}>
+                            <CloseIcon fontSize="large" sx={{color:"black",}}/>
+                        </Button>
+                    </Box>
 
-                        <Box sx={{ 
-                            borderBottom: 1, 
-                            borderColor: 'divider', 
-                            width:"100%",
-                            borderBottom:"2px solid #878787",
-                            textAlign:"start", 
-                        }}>
-                            <Tabs 
-                                value={value} 
-                                onChange={handleChange} 
-                                aria-label="basic tabs"
-                                indicatorColor="secondary"
-                                textColor="black"
-                                >
+                    <Box sx={{ 
+                        borderBottom: 1, 
+                        borderColor: 'divider', 
+                        width:"100%",
+                        borderBottom:"2px solid #878787",
+                        textAlign:"start", 
+                    }}>
+                        <Tabs 
+                            value={value} 
+                            onChange={handleChange} 
+                            aria-label="basic tabs"
+                            indicatorColor="secondary"
+                            textColor="black"
+                            >
 
-                                <Tab label="Вход" {...a11yProps(0)} 
-                                    sx={{
-                                        display:'flex',
-                                        color:"black",
-                                        textDecoration:'none',
-                                        fontSize:"24px",
-                                        fontWeight:"400px",
-                                        lineHeight:"35px",
-                                        padding:'0',
-                                        height:"35px",
-                                        marginRight:"30px",
-                                    }}
-                                />
-                                <Tab label="Регистрация" {...a11yProps(1)} sx={{
+                            <Tab label="Вход" {...a11yProps(0)} 
+                                sx={{
+                                    display:'flex',
                                     color:"black",
                                     textDecoration:'none',
                                     fontSize:"24px",
-                                    padding:'0',
                                     fontWeight:"400px",
                                     lineHeight:"35px",
+                                    padding:'0',
                                     height:"35px",
-                                }}/>
-                            </Tabs>
-                        </Box>
-                        <TabPanel value={value} index={0} 
-                            sx={{
-                                
-                            }}
-                        >
-                            <Box  sx={{
-                                display:'flex',
-                                flexDirection:"column",
-                                alignItems:'center',
-                                paddingTop:"45px",
-                            }}>
-                                <FormControl>
-                                    <Input
-                                        sx={{
-                                            width:"500px",
-                                            height: "52px",
-                                            fontSize:"20px",
-                                            border: "2px solid grey",
-                                            borderRadius: "8px",
-                                            paddingLeft:"16px",
-                                            fontSize:"24px",
-                                            fontWeight:"400",
-                                            display:"flex",
-                                            letterSpacing: "1.5px",
-                                            fontFamily:"Montserrat",
-                                            marginBottom:'30px',
-                                            color:`${placeholderColor}`,
-                                        }}
-                                        disableUnderline
-                                        placeholder={placeholderUsername}
-                                        type="username"
-                                        id="logUser"
-                                        name="logUser"
-                                        value={logUser}
-                                        onChange={e => setLogUser(e.target.value)}
-                                    />
-                                </FormControl>
-                                
-                                <FormControl>
-                                    <Input
-                                        sx={{
-                                            width:"500px",
-                                            height: "52px",
-                                            fontSize:"20px",
-                                            border: "2px solid grey",
-                                            borderRadius: "8px",
-                                            paddingLeft:"16px",
-                                            fontSize:"24px",
-                                            fontWeight:"400",
-                                            display:"flex",
-                                            letterSpacing: "1.5px",
-                                            fontFamily:"Montserrat",
-                                            marginBottom:'30px',
-                                            color:`${placeholderColor}`,
-                                        }}
-                                        disableUnderline
-                                        placeholder={placeholderPassword}
-                                        type="password"
-                                        id="logPass"
-                                        name="logPass"
-                                        
-                                        value={logPass}
-                                        onChange={e => setLogPass(e.target.value)}
-                                    />
-                                </FormControl>
-                                
-
-                                <Box sx={{
-                                    display:'flex',
-                                    width:'254px',
-                                    height:'35px',
-                                    marginRight:"auto",
-                                    marginBottom:"30px",
-                                }}>
-                                    <Checkbox {...label} color="secondary" size="large" classes={{root: 'custom-checkbox-root'}} className={classes.myCheckBox}
-                                        sx={{
-                                            borderColor:"#AD02E0",
-                                            padding:"0 35px 0 0",
-                                            color: "#AD02E0",
-                                            width:"30px",
-                                            '.MuiSvgIcon-fontSizeLarge':{
-                                                fontSize:"42.5px",
-                                                path:{
-                                                    transform:'scale(1.1)'
-                                                }
-                                            },
-                                        }}
-                                    />
-
-                                    <Typography sx={{
-                                        fontFamily:"Montserrat",
-                                        color:'#878787',
-                                        fontSize:"24px",
-                                        whiteSpace:"nowrap"
-
-                                    }}>Запомнить меня</Typography>
-                                </Box>
-
-                                <Button
-                                    onClick={handleLogin}
-                                    className={classes.button}
-                                    sx={{
-                                        letterSpacing: "1.5px",
-                                        fontSize:"16px",
-                                        backgroundColor:"#AD02E0",
-                                        color:"white",
-                                        width:"500px",
-                                        height: "52px",
-                                        borderRadius: "8px",
-                                        ':hover': {
-                                            backgroundColor:"#AD02E0",
-                                            boxShadow:"0 0 10px 2px #AD02E0",
-                                        },
-                                        ':active': {
-                                            backgroundColor:"purple",
-                                        },
-                                    }}
-                                    variant="contained"
-                                >Вход</Button>
-                            </Box>
-                             
-                        </TabPanel>
-
-                        <TabPanel value={value} index={1} 
-                            sx={{
-                                "& form":{
-                                    display:'flex',
-                                    flexDirection:"column",
-                                    alignItems:'center',
-                                }
-                            }}>
-                            <form id="formElement"
-                                >
-                                <Input 
-                                    onChange={handleImage}
-                                    sx={{
-                                        width:"181px",
-                                        height:"181px",
-                                        marginTop:'16px',
-                                        marginBottom:'20px',
-                                    }}
-                                    type="file"
-                                    name="image_file"
-                                    accept="image/*"
-                                />
-
-                                {/* <Button
-                                    className='uploadAva'
-                                    onClick={handleApi}
-                                    sx={{
-                                        color:"black",
-                                        fontWeight:"400",
-                                        fontSize:"16px",
-                                        fontFamily:"Montserrat",
-                                        margin:' 0 0 40px 0',
-                                        padding:'0 0 0 15px',
-                                    }}>ДОБАВИТЬ ФОТО</Button> */}
+                                    marginRight:"30px",
+                                }}
+                            />
+                            <Tab label="Регистрация" {...a11yProps(1)} sx={{
+                                color:"black",
+                                textDecoration:'none',
+                                fontSize:"24px",
+                                padding:'0',
+                                fontWeight:"400px",
+                                lineHeight:"35px",
+                                height:"35px",
+                            }}/>
+                        </Tabs>
+                    </Box>
+                    <TabPanel value={value} index={0} 
+                        sx={{
+                            
+                        }}
+                    >
+                        <Box  sx={{
+                            display:'flex',
+                            flexDirection:"column",
+                            alignItems:'center',
+                            paddingTop:"45px",
+                        }}>
+                            <FormControl>
                                 <Input
                                     sx={{
                                         width:"500px",
@@ -495,10 +344,14 @@ function MainSignUp() {
                                     disableUnderline
                                     placeholder={placeholderUsername}
                                     type="username"
-                                    name="username"
-                                    value={username}
-                                    onChange={e => setUsername(e.target.value)}
+                                    id="logUser"
+                                    name="logUser"
+                                    value={logUser}
+                                    onChange={e => setLogUser(e.target.value)}
                                 />
+                            </FormControl>
+                            
+                            <FormControl>
                                 <Input
                                     sx={{
                                         width:"500px",
@@ -514,72 +367,209 @@ function MainSignUp() {
                                         fontFamily:"Montserrat",
                                         marginBottom:'30px',
                                         color:`${placeholderColor}`,
-
-                                    }}
-                                    disableUnderline
-                                    placeholder={placeholderNickname}
-                                    type="nickname"
-                                    id="nickname"
-                                    name="nickname"
-                                    value={nickname}
-                                    onChange={e => setNickname(e.target.value)}
-                                />
-                                <Input
-                                    sx={{
-                                        width:"500px",
-                                        height: "52px",
-                                        fontSize:"20px",
-                                        border: "2px solid grey",
-                                        borderRadius: "8px",
-                                        paddingLeft:"16px",
-                                        fontSize:"24px",
-                                        fontWeight:"400",
-                                        display:"flex",
-                                        letterSpacing: "1.5px",
-                                        fontFamily:"Montserrat",
-                                        marginBottom:'30px',
-                                        color:`${placeholderColor}`
                                     }}
                                     disableUnderline
                                     placeholder={placeholderPassword}
                                     type="password"
-                                    id="password"
-                                    name="password"
-                                    value={password}
-                                    onChange={e => setPassword(e.target.value)}
+                                    id="logPass"
+                                    name="logPass"
+                                    
+                                    value={logPass}
+                                    onChange={e => setLogPass(e.target.value)}
                                 />
+                            </FormControl>
+                            
 
-                                <Button
-                                    onClick={handleRegister}
+                            <Box sx={{
+                                display:'flex',
+                                width:'254px',
+                                height:'35px',
+                                marginRight:"auto",
+                                marginBottom:"30px",
+                            }}>
+                                <Checkbox {...label} color="secondary" size="large" classes={{root: 'custom-checkbox-root'}} className={classes.myCheckBox}
                                     sx={{
-                                        letterSpacing: "1.5px",
-                                        fontSize:"16px",
-                                        backgroundColor:"#AD02E0",
-                                        color:"white",
-                                        width:"500px",
-                                        height: "52px",
-                                        borderRadius: "8px",
-                                        ':hover': {
-                                            backgroundColor:"#AD02E0",
-                                            boxShadow:"0 0 10px 2px #AD02E0",
-                                        },
-                                        ':active': {
-                                            backgroundColor:"purple",
+                                        borderColor:"#AD02E0",
+                                        padding:"0 35px 0 0",
+                                        color: "#AD02E0",
+                                        width:"30px",
+                                        '.MuiSvgIcon-fontSizeLarge':{
+                                            fontSize:"42.5px",
+                                            path:{
+                                                transform:'scale(1.1)'
+                                            }
                                         },
                                     }}
-                                    variant="contained"
-                                >Регистрация </Button>
-                                
-                                {/* <Input  type="submit" > Register</Input> */}
-                            </form>
-                        </TabPanel>
-                    </Box>
-                </div>
-            </Modal>
-            
-            
-            
-        </div>
+                                />
+
+                                <Typography sx={{
+                                    fontFamily:"Montserrat",
+                                    color:'#878787',
+                                    fontSize:"24px",
+                                    whiteSpace:"nowrap"
+
+                                }}>Запомнить меня</Typography>
+                            </Box>
+
+                            <Button
+                                onClick={handleLogin}
+                                className={classes.button}
+                                sx={{
+                                    letterSpacing: "1.5px",
+                                    fontSize:"16px",
+                                    backgroundColor:"#AD02E0",
+                                    color:"white",
+                                    width:"500px",
+                                    height: "52px",
+                                    borderRadius: "8px",
+                                    ':hover': {
+                                        backgroundColor:"#AD02E0",
+                                        boxShadow:"0 0 10px 2px #AD02E0",
+                                    },
+                                    ':active': {
+                                        backgroundColor:"purple",
+                                    },
+                                }}
+                                variant="contained"
+                            >Вход</Button>
+                        </Box>
+                            
+                    </TabPanel>
+
+                    <TabPanel value={value} index={1} 
+                        sx={{
+                            "& form":{
+                                display:'flex',
+                                flexDirection:"column",
+                                alignItems:'center',
+                            }
+                        }}>
+                        <form id="formElement"
+                            >
+                            <Input 
+                                onChange={handleImage}
+                                sx={{
+                                    width:"181px",
+                                    height:"181px",
+                                    marginTop:'16px',
+                                    marginBottom:'20px',
+                                }}
+                                type="file"
+                                name="image_file"
+                                accept="image/*"
+                            />
+
+                            {/* <Button
+                                className='uploadAva'
+                                onClick={handleApi}
+                                sx={{
+                                    color:"black",
+                                    fontWeight:"400",
+                                    fontSize:"16px",
+                                    fontFamily:"Montserrat",
+                                    margin:' 0 0 40px 0',
+                                    padding:'0 0 0 15px',
+                                }}>ДОБАВИТЬ ФОТО</Button> */}
+                            <Input
+                                sx={{
+                                    width:"500px",
+                                    height: "52px",
+                                    fontSize:"20px",
+                                    border: "2px solid grey",
+                                    borderRadius: "8px",
+                                    paddingLeft:"16px",
+                                    fontSize:"24px",
+                                    fontWeight:"400",
+                                    display:"flex",
+                                    letterSpacing: "1.5px",
+                                    fontFamily:"Montserrat",
+                                    marginBottom:'30px',
+                                    color:`${placeholderColor}`,
+                                }}
+                                disableUnderline
+                                placeholder={placeholderUsername}
+                                type="username"
+                                name="username"
+                                value={username}
+                                onChange={e => setUsername(e.target.value)}
+                            />
+                            <Input
+                                sx={{
+                                    width:"500px",
+                                    height: "52px",
+                                    fontSize:"20px",
+                                    border: "2px solid grey",
+                                    borderRadius: "8px",
+                                    paddingLeft:"16px",
+                                    fontSize:"24px",
+                                    fontWeight:"400",
+                                    display:"flex",
+                                    letterSpacing: "1.5px",
+                                    fontFamily:"Montserrat",
+                                    marginBottom:'30px',
+                                    color:`${placeholderColor}`,
+
+                                }}
+                                disableUnderline
+                                placeholder={placeholderNickname}
+                                type="nickname"
+                                id="nickname"
+                                name="nickname"
+                                value={nickname}
+                                onChange={e => setNickname(e.target.value)}
+                            />
+                            <Input
+                                sx={{
+                                    width:"500px",
+                                    height: "52px",
+                                    fontSize:"20px",
+                                    border: "2px solid grey",
+                                    borderRadius: "8px",
+                                    paddingLeft:"16px",
+                                    fontSize:"24px",
+                                    fontWeight:"400",
+                                    display:"flex",
+                                    letterSpacing: "1.5px",
+                                    fontFamily:"Montserrat",
+                                    marginBottom:'30px',
+                                    color:`${placeholderColor}`
+                                }}
+                                disableUnderline
+                                placeholder={placeholderPassword}
+                                type="password"
+                                id="password"
+                                name="password"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                            />
+
+                            <Button
+                                onClick={handleRegister}
+                                sx={{
+                                    letterSpacing: "1.5px",
+                                    fontSize:"16px",
+                                    backgroundColor:"#AD02E0",
+                                    color:"white",
+                                    width:"500px",
+                                    height: "52px",
+                                    borderRadius: "8px",
+                                    ':hover': {
+                                        backgroundColor:"#AD02E0",
+                                        boxShadow:"0 0 10px 2px #AD02E0",
+                                    },
+                                    ':active': {
+                                        backgroundColor:"purple",
+                                    },
+                                }}
+                                variant="contained"
+                            >Регистрация </Button>
+                            
+                            {/* <Input  type="submit" > Register</Input> */}
+                        </form>
+                    </TabPanel>
+                </Box>
+            </div>
+        </Modal>
     )
 }
 

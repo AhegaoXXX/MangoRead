@@ -10,18 +10,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import MainPage from '../../pages/mainPage/MainPage';
 import {getSearch, getMangas} from '../../store/mangaSlice'
+import MainSignUp from '../registerModal/MainSignUp';
 
 
 
 function Header(props) {
     const dispatch = useDispatch();
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {
+        setOpen(false)
+    };
     const [search, setSearch] = useState("")
 
     const regExpSearch = / /g;
 
     useEffect(()=>{
         dispatch(getMangas(search))
-        console.log(search);
     }, [])
 
 
@@ -35,7 +39,9 @@ function Header(props) {
                     height: "110px",
                     justifyContent:"space-between",
                     "& a":{
+                        display:"flex",
                         textDecoration:"none",
+                        justifyContent:"center"
                     }
                 }}>
                 <NavLink to="/">
@@ -79,8 +85,9 @@ function Header(props) {
                             </Button>
                         }
                         type="search"
-                        onChange={(e)=> { setSearch(e.target.value); dispatch(getMangas(search ? 
-                            `?search=${search.replace(regExpSearch, "%20")}`: ""))} }
+                        onChange={(e)=> dispatch(
+                            e.target.value
+                                ? getMangas(`?search=${e.target.value.replace(regExpSearch, "%20")}`): "")}
                     />
                 </div>
                 <div className={classes.register}>
@@ -106,6 +113,7 @@ function Header(props) {
                             },
                         }}
                         variant="outlined"
+                        onClick={ () =>{setOpen(true)}}
                     >Войти</Button>
                     <Button 
                         sx={{
@@ -125,10 +133,15 @@ function Header(props) {
                             },
                         }}
                         variant="contained"
+                        onClick={ () =>{setOpen(true)}}
                     >Регистрация</Button>
                 </div>
+                
+                {
+                setOpen &&
+                <MainSignUp />
+                }
             </Container>
-            
         </div>
     )
 }
