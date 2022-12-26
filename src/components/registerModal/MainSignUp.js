@@ -62,9 +62,9 @@ function TabPanel(props) {
     );
 }
 TabPanel.propTypes = {
-children: PropTypes.node,
-index: PropTypes.number.isRequired,
-value: PropTypes.number.isRequired,
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
 };
 function a11yProps(index) {
 return {
@@ -114,7 +114,6 @@ function MainSignUp() {
         setValue(newValue);
     };
 
-    let formData = new FormData();
 
     const [imageX, setImage] = useState('')
     function handleImage (e) {
@@ -136,30 +135,38 @@ function MainSignUp() {
             setPlaceholderColor('red')
 
         } else {
-
-            
+            let formData = new FormData();
             
             const checkPost = "1234567890";
-
             formData.append("username", checkPost);
             formData.append("nickname", checkPost);
             formData.append("image_file", imageX); 
             formData.append("password", checkPost);
+            const obj = {}
+            formData.forEach((item,id)=>{
+                obj[id]=item
+            })
             
-            axios.post('http://134.122.75.14:8666/api/auth/signup/',      
-              formData,
-              {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-
-              }
-            )
+            // axios.post('http://134.122.75.14:8666/api/auth/signup/',      
+            //   obj
+            //   ,{
+            //     headers: {
+            //         'Content-Type': 'multipart/form-data',
+            //     },
+            //   }
+            // )
+            
+            axios({
+                method:'POST',
+                url:'http://134.122.75.14:8666/api/auth/signup/',
+                headers:{'Content-type':'multipart/form-data'},
+                data:obj
+            })
             
             .then(response=> console.log(response))
             .catch(function (error) {
                alert(error);
-               console.log();
+               console.log(obj);
             });
 
             swal({
@@ -167,7 +174,7 @@ function MainSignUp() {
             });
         }
     }
-
+    
     const handleLogin = (e)=>{
 
         e.preventDefault();
@@ -187,12 +194,10 @@ function MainSignUp() {
             
 
             axios.get('http://134.122.75.14:8666/api/auth/signin/',
-                
                 {
                     headers: {
                         'Content-Type': 'application/json',  
                     },
-
                 }
             )
             .then(response=> console.log(response))
@@ -437,123 +442,112 @@ function MainSignUp() {
                              
                         </TabPanel>
 
-                        <TabPanel value={value} index={1} >
-                            
-
-                            <Box
-                                sx={{
+                        <TabPanel value={value} index={1} 
+                            sx={{
+                                "& form":{
                                     display:'flex',
                                     flexDirection:"column",
-                                    alignItems:'center'
-                                }}
-                            >
-                                <FormControl>
-                                        <Input 
-                                            onChange={handleImage}
-                                            sx={{
-                                                width:"181px",
-                                                height:"181px",
-                                                marginTop:'16px',
-                                                marginBottom:'20px',
-                                            }}
-                                        type="file"
-                                        name="file"
-                                        />
-                                        {/* <Button
-                                            className='uploadAva'
-                                            onClick={handleApi}
-                                            sx={{
-                                                color:"black",
-                                                fontWeight:"400",
-                                                fontSize:"16px",
-                                                fontFamily:"Montserrat",
-                                                margin:' 0 0 40px 0',
-                                                padding:'0 0 0 15px',
-                                            }}>ДОБАВИТЬ ФОТО</Button> */}
-                                </FormControl>
-                                
-                                <FormControl>
-                                    <Input
-                                        sx={{
-                                            width:"500px",
-                                            height: "52px",
-                                            fontSize:"20px",
-                                            border: "2px solid grey",
-                                            borderRadius: "8px",
-                                            paddingLeft:"16px",
-                                            fontSize:"24px",
-                                            fontWeight:"400",
-                                            display:"flex",
-                                            letterSpacing: "1.5px",
-                                            fontFamily:"Montserrat",
-                                            marginBottom:'30px',
-                                            color:`${placeholderColor}`,
-                                        }}
-                                        disableUnderline
-                                        placeholder={placeholderUsername}
-                                        type="username"
-                                        name="username"
-                                        value={username}
-                                        onChange={e => setUsername(e.target.value)}
-                                    />
-                                </FormControl>
-                                
-                                <FormControl>
-                                    <Input
-                                        sx={{
-                                            width:"500px",
-                                            height: "52px",
-                                            fontSize:"20px",
-                                            border: "2px solid grey",
-                                            borderRadius: "8px",
-                                            paddingLeft:"16px",
-                                            fontSize:"24px",
-                                            fontWeight:"400",
-                                            display:"flex",
-                                            letterSpacing: "1.5px",
-                                            fontFamily:"Montserrat",
-                                            marginBottom:'30px',
-                                            color:`${placeholderColor}`,
+                                    alignItems:'center',
+                                }
+                            }}>
+                            <form id="formElement"
+                                >
+                                <Input 
+                                    onChange={handleImage}
+                                    sx={{
+                                        width:"181px",
+                                        height:"181px",
+                                        marginTop:'16px',
+                                        marginBottom:'20px',
+                                    }}
+                                    type="file"
+                                    name="image_file"
+                                    accept="image/*"
+                                />
 
-                                        }}
-                                        disableUnderline
-                                        placeholder={placeholderNickname}
-                                        type="nickname"
-                                        id="nickname"
-                                        name="nickname"
-                                        value={nickname}
-                                        onChange={e => setNickname(e.target.value)}
-                                    />
-                                </FormControl>
-                                
-                                <FormControl>
-                                    <Input
-                                        sx={{
-                                            width:"500px",
-                                            height: "52px",
-                                            fontSize:"20px",
-                                            border: "2px solid grey",
-                                            borderRadius: "8px",
-                                            paddingLeft:"16px",
-                                            fontSize:"24px",
-                                            fontWeight:"400",
-                                            display:"flex",
-                                            letterSpacing: "1.5px",
-                                            fontFamily:"Montserrat",
-                                            marginBottom:'30px',
-                                            color:`${placeholderColor}`
-                                        }}
-                                        disableUnderline
-                                        placeholder={placeholderPassword}
-                                        type="password"
-                                        id="password"
-                                        name="password"
-                                        value={password}
-                                        onChange={e => setPassword(e.target.value)}
-                                        
-                                    />
-                                </FormControl>
-                                
+                                {/* <Button
+                                    className='uploadAva'
+                                    onClick={handleApi}
+                                    sx={{
+                                        color:"black",
+                                        fontWeight:"400",
+                                        fontSize:"16px",
+                                        fontFamily:"Montserrat",
+                                        margin:' 0 0 40px 0',
+                                        padding:'0 0 0 15px',
+                                    }}>ДОБАВИТЬ ФОТО</Button> */}
+                                <Input
+                                    sx={{
+                                        width:"500px",
+                                        height: "52px",
+                                        fontSize:"20px",
+                                        border: "2px solid grey",
+                                        borderRadius: "8px",
+                                        paddingLeft:"16px",
+                                        fontSize:"24px",
+                                        fontWeight:"400",
+                                        display:"flex",
+                                        letterSpacing: "1.5px",
+                                        fontFamily:"Montserrat",
+                                        marginBottom:'30px',
+                                        color:`${placeholderColor}`,
+                                    }}
+                                    disableUnderline
+                                    placeholder={placeholderUsername}
+                                    type="username"
+                                    name="username"
+                                    value={username}
+                                    onChange={e => setUsername(e.target.value)}
+                                />
+                                <Input
+                                    sx={{
+                                        width:"500px",
+                                        height: "52px",
+                                        fontSize:"20px",
+                                        border: "2px solid grey",
+                                        borderRadius: "8px",
+                                        paddingLeft:"16px",
+                                        fontSize:"24px",
+                                        fontWeight:"400",
+                                        display:"flex",
+                                        letterSpacing: "1.5px",
+                                        fontFamily:"Montserrat",
+                                        marginBottom:'30px',
+                                        color:`${placeholderColor}`,
+
+                                    }}
+                                    disableUnderline
+                                    placeholder={placeholderNickname}
+                                    type="nickname"
+                                    id="nickname"
+                                    name="nickname"
+                                    value={nickname}
+                                    onChange={e => setNickname(e.target.value)}
+                                />
+                                <Input
+                                    sx={{
+                                        width:"500px",
+                                        height: "52px",
+                                        fontSize:"20px",
+                                        border: "2px solid grey",
+                                        borderRadius: "8px",
+                                        paddingLeft:"16px",
+                                        fontSize:"24px",
+                                        fontWeight:"400",
+                                        display:"flex",
+                                        letterSpacing: "1.5px",
+                                        fontFamily:"Montserrat",
+                                        marginBottom:'30px',
+                                        color:`${placeholderColor}`
+                                    }}
+                                    disableUnderline
+                                    placeholder={placeholderPassword}
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    value={password}
+                                    onChange={e => setPassword(e.target.value)}
+                                />
 
                                 <Button
                                     onClick={handleRegister}
@@ -575,7 +569,9 @@ function MainSignUp() {
                                     }}
                                     variant="contained"
                                 >Регистрация </Button>
-                            </Box>
+                                
+                                {/* <Input  type="submit" > Register</Input> */}
+                            </form>
                         </TabPanel>
                     </Box>
                 </div>
