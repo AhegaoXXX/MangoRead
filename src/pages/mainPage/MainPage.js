@@ -21,7 +21,6 @@ import {getMangas} from '../../store/mangaSlice'
 
 
 
-
 function renderRow(props) {
   const { index, style } = props;
 
@@ -46,11 +45,18 @@ function MainPage(props) {
   const dispatch= useDispatch();
 
   const data = useSelector(state => state.mangaReducer.mangas)
+  const currentPage = useSelector(state => state.mangaReducer.currentPage)
+  const perPage = useSelector(state => state.mangaReducer.perPage)
+  const totalCount = useSelector(state => state.mangaReducer.totalCount)
+
+  const pages = [1,2,3,4,5]
+
 
   useEffect(() => {
     dispatch(getMangas())
+  }, [currentPage])
 
-  }, [])
+
 
 
 
@@ -70,149 +76,153 @@ function MainPage(props) {
             width: "1240px",
             display:"flex", 
             alignItems:"center",
-            justifyContent:"flex-end",
+            justifyContent:"center",
             flexDirection:"column"
           }}>
-
           <Box 
             sx={{
               display:"flex",
-              justifyContent:"space-between",
-              width:"1240px"
-            }}>
-            <Box sx={{
-              display:"flex",
-              width:'400px',
-              height:'700px',
-              boxShadow: '0 4px 15px 0px rgba(128, 128, 128, 0.226)',
+              alignItems:"center",
               justifyContent:"center",
-              borderRadius:"15px"
 
-              }}>
-              <Box sx={{
-                display:"flex",
-                flexDirection:"column",
-                width:'360px',
-                justifyContent:"space-between",
-                alignItems:"center",
-              }}>
-                <Button sx={{
-                  display:'flex',
-                  color:"grey", 
-                  height:'70px',
-                  alignItems:"center",
-                  marginRight:"auto",
-                  textTransform:"inherit",
-                  fontSize:"24px"
-                }}>
-                  <ArrowBackIosIcon/> Назад
-                </Button>
-
-                <Box
-                  sx={{ height: 400, maxWidth: 700, bgcolor: 'background.paper' }}
-                >
-                  <FixedSizeList
-                    height={402.5}
-                    width={314}
-                    itemSize={35}
-                    itemCount={40}
-                    overscanCount={11.5}
-                  >
-                    {renderRow}
-                  </FixedSizeList>
-                </Box>
-
-                <Box sx={{
-                  display:"flex", 
-                  justifyContent:"space-between",
-                  height:"72px",
-                  width:"100%",
-                  alignItems:"center"
-                  }}>
-                  <Button 
-                      sx={{
-                          letterSpacing: "1.5px",
-                          fontSize:"16px",
-                          backgroundColor:"#AD02E0",
-                          color:"white",
-                          width:"174px",
-                          height:"52px",
-                          borderRadius: "8px",
-                          ':hover': {
-                            backgroundColor:"#AD02E0",
-                            boxShadow:"0 0 10px 2px #AD02E0",
-                          },
-                          ':active': {
-                              backgroundColor:"purple",
-                          },
-                      }}
-                      variant="contained"
-                  >Сбросить</Button>
-                  <Button 
-                      sx={{
-                          letterSpacing: "1.5px",
-                          fontSize:"16px",
-                          backgroundColor:"#AD02E0",
-                          color:"white",
-                          width:"174px",
-                          height:"52px",
-                          borderRadius: "8px",
-                          ':hover': {
-                            backgroundColor:"#AD02E0",
-                            boxShadow:"0 0 10px 2px #AD02E0",
-                          },
-                          ':active': {
-                              backgroundColor:"purple",
-                          },
-                      }}
-                      variant="contained"
-                  >Применить</Button>
-                </Box>
-              </Box>
-            </Box>
-
-            <Box 
-            sx={{
-              display:'flex',
-              flexWrap:"wrap",
-              width:"820px",
-              height:"700px",
-              justifyContent:"space-between",
-            }}>
-              {data ? data.slice(1, 13).map((item) =>
-                <NavLink to={`/${item.id}`} info={{image : item.image}}>
-                  <CardsMainPage key={item} post={{image : item?.image , year: item?.issue_year, name : item?.ru_name}} />
-                </NavLink>)
-                :
-                <>OMG!!!!!</>}
-
-            </Box>
-          </Box>
-
-
-          <Box sx={{
-            display:"flex",
-            alignItems:"center",
-            justifyContent:"center",
-            height:"115px"
           }}>
             <ThemeProvider theme={theme}>
-              <Stack spacing={2}>
-                <Pagination count={99} size="large" color="primary" sx={{
-                  button:{
-                    color: '#A5A5A5',
-                    fontSize:"24px",
-                    width:"45px",
-                    height:"45px",
-                    borderRadius:"50%"
-                  },
-                  ".MuiPagination-root":{
-                    fontSize:"24px",
+              <Stack spacing={3}>
+                  <Box 
+                    sx={{
+                      display:"flex",
+                      justifyContent:"space-between",
+                      width:"1240px"
+                    }}>
+                    <Box sx={{
+                      display:"flex",
+                      width:'400px',
+                      height:'700px',
+                      boxShadow: '0 4px 15px 0px rgba(128, 128, 128, 0.226)',
+                      justifyContent:"center",
+                      borderRadius:"15px"
 
-                  }
+                      }}>
+                      <Box sx={{
+                        display:"flex",
+                        flexDirection:"column",
+                        width:'360px',
+                        justifyContent:"space-between",
+                        alignItems:"center",
+                      }}>
+                        <Button sx={{
+                          display:'flex',
+                          color:"grey", 
+                          height:'70px',
+                          alignItems:"center",
+                          marginRight:"auto",
+                          textTransform:"inherit",
+                          fontSize:"24px"
+                        }}>
+                          <ArrowBackIosIcon/> Назад
+                        </Button>
 
+                        <Box
+                          sx={{ height: 400, maxWidth: 700, bgcolor: 'background.paper' }}
+                        >
+                          <FixedSizeList
+                            height={402.5}
+                            width={314}
+                            itemSize={35}
+                            itemCount={40}
+                            overscanCount={11.5}
+                          >
+                            {renderRow}
+                          </FixedSizeList>
+                        </Box>
 
-                }}
+                        <Box sx={{
+                          display:"flex", 
+                          justifyContent:"space-between",
+                          height:"72px",
+                          width:"100%",
+                          alignItems:"center"
+                          }}>
+                          <Button 
+                              sx={{
+                                  letterSpacing: "1.5px",
+                                  fontSize:"16px",
+                                  backgroundColor:"#AD02E0",
+                                  color:"white",
+                                  width:"174px",
+                                  height:"52px",
+                                  borderRadius: "8px",
+                                  ':hover': {
+                                    backgroundColor:"#AD02E0",
+                                    boxShadow:"0 0 10px 2px #AD02E0",
+                                  },
+                                  ':active': {
+                                      backgroundColor:"purple",
+                                  },
+                              }}
+                              variant="contained"
+                          >Сбросить</Button>
+                          <Button 
+                              sx={{
+                                  letterSpacing: "1.5px",
+                                  fontSize:"16px",
+                                  backgroundColor:"#AD02E0",
+                                  color:"white",
+                                  width:"174px",
+                                  height:"52px",
+                                  borderRadius: "8px",
+                                  ':hover': {
+                                    backgroundColor:"#AD02E0",
+                                    boxShadow:"0 0 10px 2px #AD02E0",
+                                  },
+                                  ':active': {
+                                      backgroundColor:"purple",
+                                  },
+                              }}
+                              variant="contained"
+                          >Применить</Button>
+                        </Box>
+                      </Box>
+                    </Box>
+
+                    <Box 
+                    sx={{
+                      display:'flex',
+                      flexWrap:"wrap",
+                      width:"820px",
+                      height:"700px",
+                      justifyContent:"space-between",
+                    }}>
+                      {data ? data.slice(1, 13).map((item) =>
+                        <NavLink to={`/${item.id}`} info={{image : item.image}}>
+                          <CardsMainPage key={item} post={{image : item?.image , year: item?.issue_year, name : item?.ru_name}} />
+                        </NavLink>)
+                        :
+                        <>OMG!!!!!</>}
+
+                    </Box>
+                  </Box>
+
+                <Pagination count={30} size="large" color="primary" 
+                  sx={{
+                    button:{
+                      color: '#A5A5A5',
+                      fontSize:"24px",
+                      width:"45px",
+                      height:"45px",
+                      borderRadius:"50%",
+
+                    },
+                    ".MuiPagination-root":{
+                      fontSize:"24px",
+                    },
+                    "& ul":{
+                      justifyContent:"center"
+                    }
+
+                  }}
+                  onClick={()=>dispatch(currentPage())}
+
                 />
               </Stack>
             </ThemeProvider>

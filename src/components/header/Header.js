@@ -8,25 +8,33 @@ import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import MainPage from '../../pages/mainPage/MainPage';
 import {getSearch, getMangas} from '../../store/mangaSlice'
 import MainSignUp from '../registerModal/MainSignUp';
+import { getModalOpenClose} from '../../store/modalSlice';
+
 
 
 
 function Header(props) {
     const dispatch = useDispatch();
-    const [open, setOpen] = React.useState(false);
-    const handleClose = () => {
-        setOpen(false)
-    };
     const [search, setSearch] = useState("")
-
     const regExpSearch = / /g;
-
     useEffect(()=>{
         dispatch(getMangas(search))
     }, [])
+
+
+    const handleOpen = ()=>dispatch(getModalOpenClose())
+    const [open, setOpen] = React.useState(false);
+    // const openAction = useSelector(state => state.modalReducer.mode)
+    // useEffect(() => {
+    //     setOpen(openAction)
+    //     console.log(openAction);
+    // }, [])
+    
+
+
+    
 
 
     return (
@@ -86,8 +94,8 @@ function Header(props) {
                         }
                         type="search"
                         onChange={(e)=> dispatch(
-                            e.target.value
-                                ? getMangas(`?search=${e.target.value.replace(regExpSearch, "%20")}`): "")}
+                            getMangas(e.target.value
+                            ? `?search=${e.target.value.replace(regExpSearch, "%20")}`: ""))}
                     />
                 </div>
                 <div className={classes.register}>
@@ -113,7 +121,7 @@ function Header(props) {
                             },
                         }}
                         variant="outlined"
-                        onClick={ () =>{setOpen(true)}}
+                        onClick={handleOpen}
                     >Войти</Button>
                     <Button 
                         sx={{
@@ -133,14 +141,11 @@ function Header(props) {
                             },
                         }}
                         variant="contained"
-                        onClick={ () =>{setOpen(true)}}
+                        onClick={handleOpen}
                     >Регистрация</Button>
                 </div>
                 
-                {
-                setOpen &&
-                <MainSignUp />
-                }
+                <MainSignUp open={open} />
             </Container>
         </div>
     )

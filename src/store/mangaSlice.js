@@ -43,6 +43,10 @@ export const getSearch = createAsyncThunk(
         dispatch(searchInfo(dataX))
     }
 )
+export const getPages = createAsyncThunk(
+    'getPages',
+    
+)
 
 
 
@@ -54,10 +58,14 @@ const mangaSlice = createSlice({
         comment: [],
         genres: [],
         searchRes: [],
+        currentPage:1,
+        perPage:12,
+        totalCount:352,
     },
     reducers:{
         mangasInfo: (state, action) =>{
             state.mangas = action.payload;
+            state.totalCount = action.payload;
         },
         infoManga: (state, action) =>{
             state.manga = [action.payload];
@@ -69,12 +77,16 @@ const mangaSlice = createSlice({
             state.genres = action.payload;
         },
         searchInfo: (state, action) =>{
-            state.searchRes = [action.payload];
+            state.searchRes = action.payload;
+        },
+        setCurrentPage: (state, action) =>{
+            state.currentPage = action.payload;
         },
     }
 })
 
 
-export const {mangasInfo, infoManga, commentInfo, genreInfo, searchInfo} = mangaSlice.actions;
+export const {mangasInfo, infoManga, commentInfo, genreInfo, searchInfo, setCurrentPage} 
+= mangaSlice.actions;
 
 export default mangaSlice.reducer;
