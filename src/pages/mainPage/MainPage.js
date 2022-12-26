@@ -15,7 +15,6 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import CardsMainPage from '../../components/cardsMainPage/CardsMainPage';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from 'axios';
 import {useDispatch, useSelector} from "react-redux"
 import {Link, NavLink} from "react-router-dom";
 import {getMangas} from '../../store/mangaSlice'
@@ -47,11 +46,12 @@ function MainPage(props) {
   const dispatch= useDispatch();
 
   const data = useSelector(state => state.mangaReducer.mangas)
+
   useEffect(() => {
     dispatch(getMangas())
+
   }, [])
 
-    
 
 
   return (
@@ -179,12 +179,12 @@ function MainPage(props) {
               height:"700px",
               justifyContent:"space-between",
             }}>
-              {{data} ? data.slice(1, 13).map((item) =>
+              {data ? data.slice(1, 13).map((item) =>
                 <NavLink to={`/${item.id}`} info={{image : item.image}}>
                   <CardsMainPage key={item} post={{image : item?.image , year: item?.issue_year, name : item?.ru_name}} />
                 </NavLink>)
                 :
-                <>OMG</>}
+                <>OMG!!!!!</>}
 
             </Box>
           </Box>

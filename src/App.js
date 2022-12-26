@@ -11,9 +11,9 @@ import CardsMainPage from './components/cardsMainPage/CardsMainPage';
 function App(props) {
   return (
     <Routes>
-      {/* <Route index element={<MainPage/>} /> */}
+      <Route index element={<MainPage/>} />
       <Route path="/:id" element={<InfoPage/>}/>
-      <Route index element={<MainSignUp/>} />
+      {/* <Route index element={<MainSignUp/>} /> */}
     </Routes>
   );
 }

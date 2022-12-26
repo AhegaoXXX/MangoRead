@@ -6,15 +6,23 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import MainPage from '../../pages/mainPage/MainPage';
+import {getSearch, getMangas} from '../../store/mangaSlice'
 
 
 
 function Header(props) {
     const dispatch = useDispatch();
-    const [searchFilter, setSearchFilter] = useState([])
+    const [search, setSearch] = useState("")
+
+    const regExpSearch = / /g;
+
+    useEffect(()=>{
+        dispatch(getMangas(search))
+        console.log(search);
+    }, [])
 
 
     return (
@@ -59,14 +67,17 @@ function Header(props) {
                         disableUnderline
                         placeholder="Placeholder"
                         startAdornment={
-                            <InputAdornment position="start">
-                                <SearchIcon sx={{
-                                    color:"black",
-                                    paddingRight:"4px"}}/>
-                            </InputAdornment>
+                            <Button onClick={()=> dispatch(getMangas(`?search=${search.replace(regExpSearch, "%20")}`))} >
+
+                                <InputAdornment position="start">
+                                    <SearchIcon sx={{
+                                        color:"black",
+                                        paddingRight:"4px"}}/>
+                                </InputAdornment>
+                            </Button>
                         }
                         type="search"
-                        onChange={e=>setSearchFilter(e.target.value)}
+                        onChange={e=>setSearch(e.target.value)}
                         
                     />
                 </div>

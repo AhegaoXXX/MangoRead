@@ -5,7 +5,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const getMangas = createAsyncThunk(
     'getMangas',
     async (data, {rejectWithValue, dispatch})=>{
-        const response = await fetch('http://134.122.75.14:8666/api/v1/top-manga/')
+        const response = await fetch(`http://134.122.75.14:8666/api/v1/top-manga/${data}`)
         const dataX = await response.json()
         dispatch(mangasInfo(dataX?.results))
 
@@ -35,6 +35,16 @@ export const getGenre = createAsyncThunk(
         dispatch(genreInfo(dataX))
     }
 )
+export const getSearch = createAsyncThunk(
+    'getGenre',
+    async (data, {rejectWithValue, dispatch})=>{
+        const response = await fetch('http://134.122.75.14:8666/api/v1/top-manga/')
+        const dataX = await response.json()
+        dispatch(searchInfo(dataX))
+    }
+)
+
+
 
 const mangaSlice = createSlice({
     name:"mangaSlice",
@@ -43,6 +53,7 @@ const mangaSlice = createSlice({
         manga: [],
         comment: [],
         genres: [],
+        searchRes: [],
     },
     reducers:{
         mangasInfo: (state, action) =>{
@@ -57,10 +68,13 @@ const mangaSlice = createSlice({
         genreInfo: (state, action) =>{
             state.genres = action.payload;
         },
+        searchInfo: (state, action) =>{
+            state.searchRes = [action.payload];
+        },
     }
 })
 
 
-export const {mangasInfo, infoManga, commentInfo, genreInfo} = mangaSlice.actions;
+export const {mangasInfo, infoManga, commentInfo, genreInfo, searchInfo} = mangaSlice.actions;
 
 export default mangaSlice.reducer;
