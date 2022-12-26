@@ -67,8 +67,10 @@ function Header(props) {
                         disableUnderline
                         placeholder="Placeholder"
                         startAdornment={
-                            <Button onClick={()=> dispatch(getMangas(`?search=${search.replace(regExpSearch, "%20")}`))} >
-
+                            <Button onClick={()=> dispatch(getMangas(search ? 
+                                `?search=${search.replace(regExpSearch, "%20")}`
+                                : ""
+                                ))} >
                                 <InputAdornment position="start">
                                     <SearchIcon sx={{
                                         color:"black",
@@ -77,8 +79,8 @@ function Header(props) {
                             </Button>
                         }
                         type="search"
-                        onChange={e=>setSearch(e.target.value)}
-                        
+                        onChange={(e)=> { setSearch(e.target.value); dispatch(getMangas(search ? 
+                            `?search=${search.replace(regExpSearch, "%20")}`: ""))} }
                     />
                 </div>
                 <div className={classes.register}>
