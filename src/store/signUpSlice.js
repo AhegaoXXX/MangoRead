@@ -1,23 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 
-export const getLogin = createAsyncThunk(
-    'getLogin',
-    async (data, {rejectWithValue, dispatch})=>{
-        const response = await fetch('http://134.122.75.14:8666/api/v1/top-manga/')
-        const dataX = await response.json()
-        dispatch(infoLogin(dataX))
-    }
-)
-
-
 
 const signUpSlice = createSlice({
     name:"modalSlice",
     initialState:{
         mode: false,
-
-        mode: false,
+        account:false,
     },
     reducers:{
         infoModalOpen: (state, action) =>{
@@ -28,7 +17,9 @@ const signUpSlice = createSlice({
         },
         infoLogin: (state, action) =>{
             state.mode = false;
+            state.account = true;
         },
+        
     }
 })
 

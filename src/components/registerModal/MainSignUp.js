@@ -17,9 +17,6 @@ import ImageUploading from 'react-images-uploading';
 import {FormControl} from '@mui/material';
 import swal from 'sweetalert';
 import axios from 'axios';
-
-// import { DOMEN_SERVER, DOMEN_SITE } from 'http://134.122.75.14:8666';
-import { useMutation } from 'react-query';
 import { getCookie, setCookie } from "react-use-cookie";
 import { infoModalClose} from '../../store/signUpSlice';
 
@@ -159,15 +156,9 @@ function MainSignUp() {
         e.preventDefault();
 
         if (logUser==="" || logPass===""){
-
-            // dispatch(signIn({
-            //     username:"",
-            //     password:"",
-            // }))
             setPlaceholderUsername("This field is required");
             setPlaceholderPassword("This field is required");
             setPlaceholderColor('red')
-
         } else {
 
             let formData = new FormData();
@@ -184,9 +175,11 @@ function MainSignUp() {
             )
             .then(response=> {
                 console.log(response)
+                console.log(response.data) //tokens (access, refresh)
                 swal({
                     icon: "success",
                 });
+                
             }
             )
             .catch(function (error) {

@@ -8,24 +8,46 @@ import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import {getMangas} from '../../store/mangaSlice'
 import MainSignUp from '../registerModal/MainSignUp';
-import {infoModalOpen} from '../../store/signUpSlice';
-
+import { Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import Avatar from '@mui/material/Avatar';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import Logout from '@mui/icons-material/Logout';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import {getMangas} from '../../store/mangaSlice'
+import {infoModalOpen, infoLogin} from '../../store/signUpSlice';
 
 
 
 function Header(props) {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    
     const dispatch = useDispatch();
     const [search, setSearch] = useState("")
     const regExpSearch = / /g;
+    
+    const handleOpen = ()=>dispatch(infoModalOpen())
+
+    const [isLogined, setIsLogined] = useState(false)
+    // const {account} = useSelector(state=>state.signUpReducer)
+    // dispatch(setIsLogined(account))
+
     useEffect(()=>{
         dispatch(getMangas(search))
+
     }, [])
-    const handleOpen = ()=>dispatch(infoModalOpen())
-    const [open, setOpen] = React.useState(false);
-
-
     
 
 
@@ -91,54 +113,147 @@ function Header(props) {
                             ? `?search=${e.target.value.replace(regExpSearch, "%20")}`: ""))}
                     />
                 </div>
-                <div className={classes.register}>
-                    <Button 
+
+                {
+                    isLogined
+                    ?
+                    <Box
                         sx={{
-                            letterSpacing: "1.5px",
-                            fontSize:"16px",
-                            borderColor:"#AD02E0",
-                            color: "black",
-                            width:"142px",
-                            height:"50px",
-                            border: "2px solid #AD02E0",
-                            borderRadius: "8px",
-                            ':hover': {
-                                backgroundColor:"#AD02E0",
-                                boxShadow:"0 0 10px 2px #AD02E0",
-                                color:"white",
-                                borderColor:"#AD02E0"
-                            },
-                            ':active': {
-                                color:"white",
-                                backgroundColor:"purple",
-                            },
+                            display:"flex",
+                            alignItems:"center",
                         }}
-                        variant="outlined"
-                        onClick={handleOpen}
-                    >Войти</Button>
-                    <MainSignUp open={open} />
-                    <Button 
-                        sx={{
-                            letterSpacing: "1.5px",
-                            fontSize:"16px",
-                            backgroundColor:"#AD02E0",
-                            color:"white",
-                            width:"206px",
-                            height:"50px",
-                            borderRadius: "8px",
-                            ':hover': {
+                    >
+                        <Typography
+                            sx={{
+                                fontFamily:"Montserrat",
+                                fontSize:"24px",
+                                fontWeight:400,
+                                textAlign:"right",
+                            }}
+                        >Username</Typography>
+                        <Box>
+                            <Tooltip title="Account settings">
+                                <IconButton
+                                    onClick={handleClick}
+                                    size="small"
+                                    aria-controls={open ? 'account-menu' : undefined}
+                                    aria-haspopup="true"
+                                    aria-expanded={open ? 'true' : undefined}
+                                    sx={{
+                                        ml: 2,
+                                        justifyContent:"space-between",
+                                    }}
+                                >
+                                    <Avatar sx={{ width: 80, height: 80 }}>Me</Avatar>
+                                    <ArrowDropDownIcon 
+                                        sx={{
+                                            fontSize:"30px",
+                                            marginLeft:"10px"
+                                        }}
+                                    />
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                anchorEl={anchorEl}
+                                id="account-menu"
+                                open={open}
+                                onClose={handleClose}
+                                onClick={handleClose}
+                                PaperProps={{
+                                elevation: 0,
+                                sx: {
+                                    overflow: 'visible',
+                                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                    mt: 1.5,
+                                    '& .MuiAvatar-root': {
+                                    width: 32,
+                                    height: 32,
+                                    ml: -0.5,
+                                    mr: 1,
+                                    },
+                                    '&:before': {
+                                    content: '""',
+                                    display: 'block',
+                                    position: 'absolute',
+                                    top: 0,
+                                    right: 14,
+                                    width: 10,
+                                    height: 10,
+                                    bgcolor: 'background.paper',
+                                    transform: 'translateY(-50%) rotate(45deg)',
+                                    zIndex: 0,
+                                    },
+                                },
+                                }}
+                                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                            >
+                                <MenuItem>
+                                    <Button>
+                                        <ListItemIcon>
+                                            <Logout fontSize="small" />
+                                        </ListItemIcon>
+                                        Logout
+                                    </Button>
+                                </MenuItem>
+                            </Menu>
+                        </Box>
+                    
+                    </Box>
+                    :
+                    <div className={classes.register}>
+                        <Button 
+                            sx={{
+                                letterSpacing: "1.5px",
+                                fontSize:"16px",
+                                borderColor:"#AD02E0",
+                                color: "black",
+                                width:"142px",
+                                height:"50px",
+                                border: "2px solid #AD02E0",
+                                borderRadius: "8px",
+                                ':hover': {
+                                    backgroundColor:"#AD02E0",
+                                    boxShadow:"0 0 10px 2px #AD02E0",
+                                    color:"white",
+                                    borderColor:"#AD02E0"
+                                },
+                                ':active': {
+                                    color:"white",
+                                    backgroundColor:"purple",
+                                },
+                            }}
+                            variant="outlined"
+                            onClick={handleOpen}
+                        >Войти</Button>
+                        <MainSignUp/>
+                        <Button 
+                            sx={{
+                                letterSpacing: "1.5px",
+                                fontSize:"16px",
                                 backgroundColor:"#AD02E0",
-                                boxShadow:"0 0 10px 2px #AD02E0",
-                            },
-                            ':active': {
-                                backgroundColor:"purple",
-                            },
-                        }}
-                        variant="contained"
-                        onClick={handleOpen}
-                        
-                    >Регистрация</Button>
-                </div>
+                                color:"white",
+                                width:"206px",
+                                height:"50px",
+                                borderRadius: "8px",
+                                ':hover': {
+                                    backgroundColor:"#AD02E0",
+                                    boxShadow:"0 0 10px 2px #AD02E0",
+                                },
+                                ':active': {
+                                    backgroundColor:"purple",
+                                },
+                            }}
+                            variant="contained"
+                            onClick={handleOpen}
+                            
+                        >Регистрация</Button>
+                    </div>
+                }
+                
+
+
+                
             </Container>
         </div>
     )
