@@ -108,7 +108,6 @@ function MainSignUp() {
         setValue(newValue);
     };
 
-    let formData = new FormData();
 
     const [imageX, setImage] = useState('')
     function handleImage (e) {
@@ -121,18 +120,13 @@ function MainSignUp() {
     const handleRegister = (e)=>{
         if (username=="" || nickname=="" || password==""){
 
-            // dispatch(signUp({
-            //     username="",
-            //     nickname="",
-            //     image_file="",
-            //     password="",
-            // }))
             setPlaceholderUsername("This field is required");
             setPlaceholderNickname("This field is required");
             setPlaceholderPassword("This field is required");
             setPlaceholderColor('red')
 
         } else {
+            let formData = new FormData();
             formData.append("username", username);
             formData.append("nickname", nickname);
             formData.append("image_file", imageX); 
@@ -145,15 +139,18 @@ function MainSignUp() {
                 data:formData
             })
             
-            .then(response=> console.log(response))
+            .then(response=> {
+                console.log(response)
+                swal({
+                    icon: "success",
+                });
+            })
             .catch(function (error) {
                alert(error);
                console.log();
             });
 
-            swal({
-                icon: "success",
-            });
+            
         }
     }
 
@@ -173,17 +170,30 @@ function MainSignUp() {
 
         } else {
 
-            axios.get('http://134.122.75.14:8666/api/auth/signin/',
+            let formData = new FormData();
+            formData.append("username", logUser);
+            formData.append("password", logPass);
+
+            axios.post('http://134.122.75.14:8666/api/auth/signin/',
+                formData,
                 {
                     headers: {
                         'Content-Type': 'application/json',  
                     },
                 }
             )
-            .then(response=> console.log(response))
+            .then(response=> {
+                console.log(response)
+                swal({
+                    icon: "success",
+                });
+            }
+            )
             .catch(function (error) {
                 alert(error);
             });
+
+            
         }
     }
 
