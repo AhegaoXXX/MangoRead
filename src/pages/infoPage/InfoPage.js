@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import MainPage from '../mainPage/MainPage';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {getInfoManga, getComment, getGenre} from '../../store/mangaSlice'
+import {getInfoManga, getComment, getGenre, getMangas} from '../../store/mangaSlice'
 
 
 
@@ -55,7 +55,7 @@ function InfoPage(props) {
       {  manga?.map((item)=>{
             return (
               <Box sx={{
-                height:"1936px",
+                // height:"1936px",
                 bgcolor:"#F3F3F3",
                 // bgcolor:"black",
                 display:"flex",
@@ -111,7 +111,8 @@ function InfoPage(props) {
                       src={item.image}>
                     </Box>
 
-                    <Box sx={{
+                    <Box 
+                      sx={{
                         display:"flex",
                         flexDirection:"column",
                         alignItems:"flex-start",
@@ -191,9 +192,8 @@ function InfoPage(props) {
                     sx={{
                       display:'flex',
                       flexDirection:'column',
-                      height:"819px",
+                      // height:"819px",
                       marginTop:"33px",
-                      marginBottom:"33px",
                       textAlign:"start",
                     }}>
                       <Typography sx={{
@@ -201,8 +201,8 @@ function InfoPage(props) {
                         fontSize:"35px",
                         fontWeight:"500"
                       }}>Топ рецензий</Typography>
-          
-                      {comment ? comment?.slice(0, 4).map((comm, id) =>
+
+                      {comment ? comment?.slice(0, 3).map((comm, id) =>
                         <>
                           <Box sx={{
                             display:"flex",
@@ -226,7 +226,7 @@ function InfoPage(props) {
                               flexDirection:"column",
                               paddingLeft:"26px",
                               borderLeft:"2px solid #878787",
-                              width:"1063px",
+                              // width:"1063px",
                             }}>
                               <Typography sx={{
                                 fontWeight:"400",
@@ -262,15 +262,26 @@ function InfoPage(props) {
                   }}>
                     <ThemeProvider theme={theme}>
                       <Stack spacing={2}>
-                        <Pagination count={99} size="large" color="primary" sx={{
-                          button:{
-                            color: '#A5A5A5',
-                            fontSize:"24px",
-                            width:"45px",
-                            height:"45px",
-                            borderRadius:"50%"
-                          },
-                        }}/>
+
+
+
+                        <Pagination count={352} size="large" color="primary" 
+                          sx={{
+                            button:{
+                              color: '#A5A5A5',
+                              fontSize:"24px",
+                              width:"45px",
+                              height:"45px",
+                              borderRadius:"50%"
+                            },
+                          }}
+                          onChange={(e, value)=> {
+                            console.log(value);
+                            console.log(e);
+                            dispatch(getInfoManga(value))
+                            dispatch(getComment(value))
+                          }}
+                        />
                       </Stack>
                     </ThemeProvider>
                   </Box>

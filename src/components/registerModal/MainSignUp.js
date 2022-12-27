@@ -84,8 +84,6 @@ function MainSignUp() {
     const [placeholderNickname, setPlaceholderNickname] = useState('Nickname');
     const [placeholderPassword, setPlaceholderPassword] = useState('Password');
     const [placeholderColor, setPlaceholderColor] = useState('');
-
-
     const [username, setUsername] = useState('')
     const [nickname, setNickname] = useState('')
     const [password, setPassword] = useState('')
@@ -120,8 +118,6 @@ function MainSignUp() {
     const closeAction = useSelector(state => state.modalReducer.mode)
 
     
-
-
     const handleRegister = (e)=>{
         if (username=="" || nickname=="" || password==""){
 
@@ -176,14 +172,12 @@ function MainSignUp() {
             setPlaceholderColor('red')
 
         } else {
-            const checkPost = "1234567890";
 
             axios.get('http://134.122.75.14:8666/api/auth/signin/',
                 {
                     headers: {
                         'Content-Type': 'application/json',  
                     },
-
                 }
             )
             .then(response=> console.log(response))
@@ -212,18 +206,16 @@ function MainSignUp() {
                 sx={{
                     overflow:"hidden",
                     position:'fixed',
-                    // left:"31.5%",
                     left:"calc(50% - 301px)",
                 }}
 
             >
                 <div className={classes.registerModal}>
-                    <Box sx={{
-                        width:"500px",
-                        // height:"672px",
-                        display:"flex",
-                        flexDirection:'column',
-                        // justifyContent:"center",
+                    <Box 
+                        sx={{
+                            width:"500px",
+                            display:"flex",
+                            flexDirection:'column',
                     }}>
                         <Box sx={{
                             display:"flex",
@@ -433,8 +425,9 @@ function MainSignUp() {
                                                 marginTop:'16px',
                                                 marginBottom:'20px',
                                             }}
-                                        type="file"
-                                        name="file"
+                                            type="file"
+                                            name="file"
+                                            label=""
                                         />
                                         {/* <Button
                                             className='uploadAva'

@@ -182,12 +182,15 @@ function MainPage(props) {
                     </Box>
 
                     <Box 
-                    sx={{
-                      display:'flex',
-                      flexWrap:"wrap",
-                      width:"820px",
-                      height:"700px",
-                      justifyContent:"space-between",
+                      sx={{
+                        display:'flex',
+                        flexWrap:"wrap",
+                        width:"820px",
+                        height:"700px",
+                        justifyContent:"space-between",
+                        "& a":{
+                          textDecoration:"none",
+                        }
                     }}>
                       {data ? data.slice(1, 13).map((item) =>
                         <NavLink to={`/${item.id}`} info={{image : item.image}}>
@@ -207,19 +210,19 @@ function MainPage(props) {
                       width:"45px",
                       height:"45px",
                       borderRadius:"50%",
-
                     },
                     ".MuiPagination-root":{
                       fontSize:"24px",
                     },
                     "& ul":{
                       justifyContent:"center"
-                    }
+                    },
 
                   }}
-                  onClick={(e, pageNumber)=> {
-                    const pageNumb =e.target.innerText
-                    dispatch(getMangas(`?page=${pageNumb}`))
+                  onChange={(e, value)=> {
+                    console.log(value);
+                    console.log(e);
+                    dispatch(getMangas(`?page=${value}`))
                   }}
 
                 />

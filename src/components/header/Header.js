@@ -8,9 +8,9 @@ import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import {getSearch, getMangas} from '../../store/mangaSlice'
+import {getMangas} from '../../store/mangaSlice'
 import MainSignUp from '../registerModal/MainSignUp';
-import { getModalOpenClose, infoModalOpen} from '../../store/modalSlice';
+import {infoModalOpen} from '../../store/modalSlice';
 
 
 
@@ -22,8 +22,6 @@ function Header(props) {
     useEffect(()=>{
         dispatch(getMangas(search))
     }, [])
-
-
     const handleOpen = ()=>dispatch(infoModalOpen())
     const [open, setOpen] = React.useState(false);
 
@@ -120,6 +118,7 @@ function Header(props) {
                         variant="outlined"
                         onClick={handleOpen}
                     >Войти</Button>
+                    <MainSignUp open={open} />
                     <Button 
                         sx={{
                             letterSpacing: "1.5px",
@@ -139,10 +138,9 @@ function Header(props) {
                         }}
                         variant="contained"
                         onClick={handleOpen}
+                        
                     >Регистрация</Button>
                 </div>
-                
-                <MainSignUp open={open} />
             </Container>
         </div>
     )

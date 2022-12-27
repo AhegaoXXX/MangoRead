@@ -5,7 +5,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const getMangas = createAsyncThunk(
     'getMangas',
     async (data, {rejectWithValue, dispatch})=>{
-        await console.log(data)
         const response = await fetch(`http://134.122.75.14:8666/api/v1/top-manga/${data}`)
         const dataX = await response.json()
         dispatch(mangasInfo(dataX?.results))
@@ -54,10 +53,6 @@ const mangaSlice = createSlice({
         comment: [],
         genres: [],
         searchRes: [],
-        
-        currentPage:1,
-        perPage:12,
-        totalCount:352,
     },
     reducers:{
         mangasInfo: (state, action) =>{
