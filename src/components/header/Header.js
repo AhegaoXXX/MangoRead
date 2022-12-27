@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import {getMangas} from '../../store/mangaSlice'
 import MainSignUp from '../registerModal/MainSignUp';
-import {infoModalOpen} from '../../store/modalSlice';
+import {infoModalOpen} from '../../store/signUpSlice';
 
 
 
@@ -24,8 +24,6 @@ function Header(props) {
     }, [])
     const handleOpen = ()=>dispatch(infoModalOpen())
     const [open, setOpen] = React.useState(false);
-
-    
 
 
     

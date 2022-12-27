@@ -21,7 +21,7 @@ import axios from 'axios';
 // import { DOMEN_SERVER, DOMEN_SITE } from 'http://134.122.75.14:8666';
 import { useMutation } from 'react-query';
 import { getCookie, setCookie } from "react-use-cookie";
-import { infoModalClose} from '../../store/modalSlice';
+import { infoModalClose} from '../../store/signUpSlice';
 
 
 
@@ -114,8 +114,8 @@ function MainSignUp() {
     function handleImage (e) {
         setImage(e.target.files[0])
     }
-    const openAction = useSelector(state => state.modalReducer.mode)
-    const closeAction = useSelector(state => state.modalReducer.mode)
+    const openAction = useSelector(state => state.signUpReducer.mode)
+    const closeAction = useSelector(state => state.signUpReducer.mode)
 
     
     const handleRegister = (e)=>{

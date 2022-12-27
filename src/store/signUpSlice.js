@@ -12,7 +12,7 @@ export const getLogin = createAsyncThunk(
 
 
 
-const modalSlice = createSlice({
+const signUpSlice = createSlice({
     name:"modalSlice",
     initialState:{
         mode: false,
@@ -34,6 +34,6 @@ const modalSlice = createSlice({
 
 
 
-export const {infoModalOpen, infoModalClose,infoLogin} = modalSlice.actions;
+export const {infoModalOpen, infoModalClose,infoLogin} = signUpSlice.actions;
 
-export default modalSlice.reducer;
+export default signUpSlice.reducer;

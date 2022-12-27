@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import mangaReducer from "./mangaSlice";
-import modalReducer from "./modalSlice"
+import signUpReducer from "./signUpSlice"
 
 
 export default configureStore({
     reducer: {
         mangaReducer,
-        modalReducer,
+        signUpReducer,
     }
 })
