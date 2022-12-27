@@ -9,21 +9,12 @@ import { Link } from 'react-router-dom';
 
 function CardsMainPage(props) {
 
-  // const [news, setNews] = useState([]);
-
-  // useEffect(()=>{
-  //     fetch('https://jsonplaceholder.typicode.com/posts')
-  //     .then(response=>response.json())
-  //     .then(data=>setNews(data))
-  // }, []);
-
 
 
 
 
   return (
     <>
-
       <Box 
         sx={{
           display:"flex",
@@ -49,6 +40,5 @@ function CardsMainPage(props) {
   )
 }
 
-{/* <img className={`${classes.image}`} src={props.post.image} alt={props.post.name} /> */}
 
 export default CardsMainPage

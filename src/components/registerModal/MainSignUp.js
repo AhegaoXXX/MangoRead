@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, NavLink, Route, Switch, Link } from 'react-router-dom';
 import { Box } from '@mui/system';
 import classes from './MainSignUp.module.css';
@@ -21,6 +21,7 @@ import axios from 'axios';
 // import { DOMEN_SERVER, DOMEN_SITE } from 'http://134.122.75.14:8666';
 import { useMutation } from 'react-query';
 import { getCookie, setCookie } from "react-use-cookie";
+import { infoModalClose} from '../../store/modalSlice';
 
 
 
@@ -78,8 +79,6 @@ function MainSignUp() {
 
     const dispatch = useDispatch();
 
-    useEffect(()=>{
-    }, [])
 
     const [placeholderUsername, setPlaceholderUsername] = useState('Username');
     const [placeholderNickname, setPlaceholderNickname] = useState('Nickname');
@@ -98,13 +97,13 @@ function MainSignUp() {
     
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
     const handleClose = () => {
+        dispatch(infoModalClose())
         setOpen(false)
         setPlaceholderUsername("Username");
         setPlaceholderNickname("Nickname");
         setPlaceholderPassword("Password");
-        setPlaceholderColor('inherit')
+        setPlaceholderColor('inherit');
     };
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
@@ -117,6 +116,9 @@ function MainSignUp() {
     function handleImage (e) {
         setImage(e.target.files[0])
     }
+    const openAction = useSelector(state => state.modalReducer.mode)
+    const closeAction = useSelector(state => state.modalReducer.mode)
+
     
 
 
@@ -175,10 +177,8 @@ function MainSignUp() {
 
         } else {
             const checkPost = "1234567890";
-            
 
             axios.get('http://134.122.75.14:8666/api/auth/signin/',
-                
                 {
                     headers: {
                         'Content-Type': 'application/json',  
@@ -190,18 +190,6 @@ function MainSignUp() {
             .catch(function (error) {
                 alert(error);
             });
-
-            // let user = localStorage.getItem(username);
-            // let data = JSON.parse(user);
-            // console.log(data);
-
-            // if(user==null){
-            //     alert("Username ERROR")
-            // } else if (username == data.username && password==data.password){
-            //     alert("Success")
-            // } else {
-            //     alert("Password ERROR")
-            // }
         }
     }
 
@@ -216,7 +204,7 @@ function MainSignUp() {
         <div className={classes.mainSignUp}>
 
             <Modal
-                open={false}
+                open={openAction}
                 className={classes.modalWindow1}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
@@ -226,7 +214,6 @@ function MainSignUp() {
                     position:'fixed',
                     // left:"31.5%",
                     left:"calc(50% - 301px)",
-
                 }}
 
             >

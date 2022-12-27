@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import {getSearch, getMangas} from '../../store/mangaSlice'
 import MainSignUp from '../registerModal/MainSignUp';
-import { getModalOpenClose} from '../../store/modalSlice';
+import { getModalOpenClose, infoModalOpen} from '../../store/modalSlice';
 
 
 
@@ -24,13 +24,9 @@ function Header(props) {
     }, [])
 
 
-    const handleOpen = ()=>dispatch(getModalOpenClose())
+    const handleOpen = ()=>dispatch(infoModalOpen())
     const [open, setOpen] = React.useState(false);
-    // const openAction = useSelector(state => state.modalReducer.mode)
-    // useEffect(() => {
-    //     setOpen(openAction)
-    //     console.log(openAction);
-    // }, [])
+
     
 
 
@@ -92,6 +88,7 @@ function Header(props) {
                                 </InputAdornment>
                             </Button>
                         }
+                        
                         type="search"
                         onChange={(e)=> dispatch(
                             getMangas(e.target.value

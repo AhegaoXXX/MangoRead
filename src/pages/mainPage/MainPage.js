@@ -45,17 +45,13 @@ function MainPage(props) {
   const dispatch= useDispatch();
 
   const data = useSelector(state => state.mangaReducer.mangas)
-  const currentPage = useSelector(state => state.mangaReducer.currentPage)
-  const perPage = useSelector(state => state.mangaReducer.perPage)
-  const totalCount = useSelector(state => state.mangaReducer.totalCount)
 
-  const pages = [1,2,3,4,5]
+
 
 
   useEffect(() => {
     dispatch(getMangas())
-  }, [currentPage])
-
+  }, [])
 
 
 
@@ -203,7 +199,7 @@ function MainPage(props) {
                     </Box>
                   </Box>
 
-                <Pagination count={30} size="large" color="primary" 
+                <Pagination count={18} size="large" color="primary" 
                   sx={{
                     button:{
                       color: '#A5A5A5',
@@ -221,7 +217,10 @@ function MainPage(props) {
                     }
 
                   }}
-                  onClick={()=>dispatch(currentPage())}
+                  onClick={(e, pageNumber)=> {
+                    const pageNumb =e.target.innerText
+                    dispatch(getMangas(`?page=${pageNumb}`))
+                  }}
 
                 />
               </Stack>
