@@ -18,6 +18,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useDispatch, useSelector} from "react-redux"
 import {Link, NavLink} from "react-router-dom";
 import {getMangas} from '../../store/mangaSlice'
+import AddCommentPage from '../addCommmentPage/AddCommentPage';
 
 
 

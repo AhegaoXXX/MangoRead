@@ -19,9 +19,8 @@
     "bower": "^1.8.14",
     "primereact": "^8.7.3",
     "react": "^18.2.0",
-    "react-avatar-edit": "^1.2.0",
     "react-dom": "^18.2.0",
-    "react-images-uploading": "^3.1.7",
+    "react-image-upload": "^2.0.1",
     "react-query": "^3.39.2",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.5.0",
@@ -30,7 +29,6 @@
     "react-window": "^1.8.8",
     "redux-thunk": "^2.4.2",
     "sweetalert": "^2.1.2",
-    "validator": "^13.7.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

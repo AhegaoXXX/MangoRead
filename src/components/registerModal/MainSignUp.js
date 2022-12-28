@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter, NavLink, Route, Switch, Link } from 'react-router-dom';
 import { Box } from '@mui/system';
 import classes from './MainSignUp.module.css';
 import classesX from './LoginModal.module.css';
@@ -13,16 +12,13 @@ import Checkbox from '@mui/material/Checkbox';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import ImageUploading from 'react-images-uploading';
 import {FormControl} from '@mui/material';
 import swal from 'sweetalert';
 import axios from 'axios';
-import { getCookie, setCookie } from "react-use-cookie";
 import { infoModalClose, getAccount} from '../../store/signUpSlice';
-
-
-
-
+import ImageUploader from "react-image-upload";
+import "react-image-upload/dist/index.css";
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 
 
@@ -72,11 +68,7 @@ return {
 
 function MainSignUp() {
 
-
-
     const dispatch = useDispatch();
-
-
     const [placeholderUsername, setPlaceholderUsername] = useState('Username');
     const [placeholderNickname, setPlaceholderNickname] = useState('Nickname');
     const [placeholderPassword, setPlaceholderPassword] = useState('Password');
@@ -84,12 +76,9 @@ function MainSignUp() {
     const [username, setUsername] = useState('')
     const [nickname, setNickname] = useState('')
     const [password, setPassword] = useState('')
-
     const [logUser, setLogUser] = useState('')
     const [logPass, setLogPass] = useState('')
 
-
-    
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [open, setOpen] = React.useState(false);
     const handleClose = () => {
@@ -104,11 +93,15 @@ function MainSignUp() {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
-
     const [imageX, setImage] = useState('')
-    function handleImage (e) {
-        setImage(e.target.files[0])
+    // function handleImage (e) {
+    //     setImage(e.target.files[0])
+    // }
+    function getImageFileObject(imageFile) {
+        setImage(imageFile.file);
+    }
+    function runAfterImageDelete(file) {
+    console.log({ onDele: file });
     }
     const openAction = useSelector(state => state.signUpReducer.mode)
     const closeAction = useSelector(state => state.signUpReducer.mode)
@@ -137,7 +130,6 @@ function MainSignUp() {
             })
             
             .then(response=> {
-                console.log(response)
                 swal({
                     icon: "success",
                 });
@@ -170,7 +162,6 @@ function MainSignUp() {
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        
                     },
                 }
             )
@@ -421,30 +412,36 @@ function MainSignUp() {
                                     alignItems:'center'
                                 }}
                             >
-                                <FormControl>
-                                        <Input 
-                                            onChange={handleImage}
-                                            sx={{
-                                                width:"181px",
-                                                height:"181px",
-                                                marginTop:'16px',
-                                                marginBottom:'20px',
-                                            }}
-                                            type="file"
-                                            name="file"
-                                            label=""
-                                        />
-                                        {/* <Button
-                                            className='uploadAva'
-                                            onClick={handleApi}
-                                            sx={{
-                                                color:"black",
-                                                fontWeight:"400",
-                                                fontSize:"16px",
-                                                fontFamily:"Montserrat",
-                                                margin:' 0 0 40px 0',
-                                                padding:'0 0 0 15px',
-                                            }}>ДОБАВИТЬ ФОТО</Button> */}
+                                <FormControl sx={{
+                                    marginTop:"24px",
+                                    marginBottom:"44px",
+                                }}>
+                                    <ImageUploader
+                                        onFileAdded={(img) => getImageFileObject(img)}
+                                        onFileRemoved={(img) => runAfterImageDelete(img)}
+                                        style={{ height: 181, width: 181, background: "rgb(153, 150, 150)",
+                                            borderRadius:"50%", marginBottom:"40px",
+                                        }}
+                                        deleteIcon={
+                                            <img
+                                            src="https://img.icons8.com/ios-glyphs/30/000000/delete-sign.png"
+                                            alt=""
+                                            />
+                                        }
+                                        uploadIcon={
+                                            <AddPhotoAlternateIcon
+                                                sx={{
+                                                    fontSize:"90px",
+                                                }}
+                                            />
+                                        }
+                                    />
+                                    <Typography sx={{
+                                        fontFamily:"Montserrat",
+                                        fontWeight:"400",
+                                        fontSize:"16px",
+                                        margin:"0 auto"
+                                    }}>ДОБАВЬТЕ ФОТО</Typography>
                                 </FormControl>
                                 
                                 <FormControl>

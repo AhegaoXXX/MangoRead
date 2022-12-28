@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState} from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import classes from './InfoPage.module.css'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
@@ -12,9 +13,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import MainPage from '../mainPage/MainPage';
 import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import {getInfoManga, getComment, getGenre, getMangas} from '../../store/mangaSlice'
-
+import AddCommentPage from '../../pages/addCommmentPage/AddCommentPage';
+import {addCommentAction} from  "../../store/signUpSlice"
 
 
 
@@ -25,13 +26,17 @@ function InfoPage(props) {
   const manga = useSelector(state=>state.mangaReducer.manga)
   const comment = useSelector(state=>state.mangaReducer.comment)
   const genres = useSelector(state=>state.mangaReducer.genres)
+  const [isLogined, setIsLogined] = useState(false)
+  const {account} = useSelector(state=>state.signUpReducer)
+
+
 
   useEffect(()=>{
     dispatch(getInfoManga(id))
     dispatch(getComment(id))
     dispatch(getGenre())
-  },[])
-  
+    setIsLogined(account)
+  },[dispatch, id, isLogined])
 
   
 
@@ -196,11 +201,19 @@ function InfoPage(props) {
                       marginTop:"33px",
                       textAlign:"start",
                     }}>
+                      {
+                        isLogined===true
+                        ?
+                        <AddCommentPage/>
+                        :
+                        <></>
+                      }
                       <Typography sx={{
                         fontFamily:"Montserrat",
                         fontSize:"35px",
                         fontWeight:"500"
                       }}>Топ рецензий</Typography>
+                  
 
                       {comment ? comment?.slice(0, 3).map((comm, id) =>
                         <>
@@ -262,9 +275,6 @@ function InfoPage(props) {
                   }}>
                     <ThemeProvider theme={theme}>
                       <Stack spacing={2}>
-
-
-
                         <Pagination count={352} size="large" color="primary" 
                           sx={{
                             button:{
@@ -276,8 +286,6 @@ function InfoPage(props) {
                             },
                           }}
                           onChange={(e, value)=> {
-                            console.log(value);
-                            console.log(e);
                             dispatch(getInfoManga(value))
                             dispatch(getComment(value))
                           }}

@@ -2,86 +2,121 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box } from '@mui/system'
 import Input from '@mui/material/Input';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
-import TextField from '@mui/material/TextField';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import { Button } from '@mui/material';
-import Modal from '@mui/material/Modal';
-import CloseIcon from '@mui/icons-material/Close';
+import {Avatar} from '@mui/material';
+import { Typography } from '@mui/material';
+import {addComment, addCommentAction} from '../../store/signUpSlice'
+import { useParams } from 'react-router-dom';
+import swal from 'sweetalert';
 
 
 
 
-
-
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 500,
+    height: 200,
+    bgcolor: 'white',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+    justifyContent:"flex-end",
+    paddingBottom:"30px",
+    alignItems:"center",
+    display:"flex",
+    flexDirection:"column",
+};
 
 function AddCommentPage() {
+  const {id} = useParams()
+
 
     const dispatch=useDispatch();
-    const [open, setOpen] = React.useState(false);
-    const {addComment} = useSelector(state => state.signUpReducer)
-    const handleClose = () => {
-        dispatch( )
-        setOpen(false)
-    };
+    const {user} = useSelector(state=>state.signUpReducer)
+    const [userComment, setUserComment]= useState("");
 
+    const changeInput = () => {
+        dispatch(addCommentAction(id, userComment))
+        swal({
+            icon: "success",
+        });
+    }
     useEffect(()=>{
-        setOpen(addComment)
-    }, [])
 
-
-
-
+    }, [dispatch])
 
 
   return (
-    <>
-        <Modal 
-            open={open}
-            onClose={handleClose}
+    <>   
+        <Box 
             sx={{
+                borderBottom:"2px solid #CECECE",
+                marginBottom:'50px',
+                paddingBottom:'50px',
                 display:"flex",
-                justifyContent:"center",
-                paddingTop:"300px",
-                overflow:"hidden",
-                position:'fixed',
-        }}>
-            <Button onClick={handleClose}
-                                sx={{
-                                    padding:"0",
-                                    margin:'0',
-                                    '.MuiSvgIcon-fontSizeLarge':{
-                                        fontSize:"35px",
-                                        path:{
-                                            transform:'scale(1.1)'
-                                        }
-                                    }
-                                }}>
-                                <CloseIcon fontSize="large" sx={{color:"black",}}/>
-                            </Button>
-            <FormControl variant="standard"
+                flexDirection:"column",
+                alignItems:'center',
+            }}
+        >
+            <Typography
                 sx={{
-                    width:"500px",
-                    border:"5px solid lightgrey",
-                    padding:"10px"
+                    fontSize:"50px",
+                    fontFamily:"Montserrat",
                 }}
-            >
-                <InputLabel htmlFor="input-with-icon-adornment"
-                >
-                    What do you think?
-                </InputLabel>
-                <Input
-                    startAdornment={
-                        <InputAdornment position="start">
-                            <AccountCircle />
-                        </InputAdornment>
-                    }
+            >~ {user?.username} ~</Typography>
+            <Box
+            sx={{
+                minHeight:"200px",
+                justifyContent:"space-between",
+                alignItems:"center",
+                display:"flex",
+            }}>
+                <Avatar 
+                    src={user?.image_file}
+                    sx={{
+                        width:"100px",
+                        height:"100px",
+                        border:"0.8rem ridge #AD02E0",
+                        marginRight:"40px",
+                    }}
                 />
-                <Button > Add comment </Button>
-            </FormControl>
-        </Modal>
+                <Input
+                    margin="dense"
+                    placeholder="What do yo think?"
+                    type="text"
+                    variant="standard"
+                    sx={{
+                        fontSize:"40px",
+                        width:"1000px", 
+                        flexWrap:"wrap" 
+                    }}
+                    onChange={e=>setUserComment(e.target.value)}
+                />
+            </Box>
+            
+            <Button
+                onClick={changeInput}
+                sx={{
+                    backgroundColor:"#AD02E0",
+                    fontSize:"16px",
+                    color:"white",
+                    width:"230px",
+                    height: "52px",
+                    borderRadius: "8px",
+                    ':hover': {
+                        backgroundColor:"#AD02E0",
+                        boxShadow:"0 0 10px 2px #AD02E0",
+                    },
+                    ':active': {
+                        backgroundColor:"purple",
+                    },
+                }}
+                >Post comment</Button>
+        </Box>
+        
     </>
   )
 }

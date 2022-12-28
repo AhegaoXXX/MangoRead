@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { setCookie, getCookie} from "react-use-cookie";
 
 
 
@@ -45,6 +44,29 @@ export const logOutAcc = createAsyncThunk(
         }
     }
 )
+export const addCommentAction = createAsyncThunk(
+    'addCommentAction',
+    async (id, {rejectWithValue, dispatch}, data) => {
+        try {
+            let dataX = {
+                "message": data
+            }
+            await axios.post(`http://134.122.75.14:8666/api/v1/manga/${id}/add-comment/`,
+                {   
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('tokenA'))}`
+                    },
+                    body:dataX
+                }
+            )
+
+        } 
+        catch (error) {
+          console.error(error);
+        }
+    }
+)
 
 
 const signUpSlice = createSlice({
@@ -53,8 +75,7 @@ const signUpSlice = createSlice({
         mode: false,
         account:false,
         user:"",
-
-        addComment:false,
+        comment:"",
     },
     reducers:{
         infoModalOpen: (state) =>{
@@ -71,15 +92,14 @@ const signUpSlice = createSlice({
             state.account = true;
             state.user = action.payload;
         },
-        addCommentOpen: (state) =>{
-            state.addComment = true;
+        addComment: (state, action) =>{
+            state.comment = action.payload;
         },
-        
     }
 })
 
 
 
-export const {infoModalOpen, infoModalClose,infoAccount, AccountLogOut, addCommentOpen} = signUpSlice.actions;
+export const {infoModalOpen, infoModalClose,infoAccount, AccountLogOut, addComment} = signUpSlice.actions;
 
 export default signUpSlice.reducer;

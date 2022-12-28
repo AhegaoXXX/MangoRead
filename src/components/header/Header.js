@@ -48,13 +48,10 @@ function Header(props) {
             "refresh": JSON.parse(localStorage.getItem('tokenR'))
         }))
     }
-    const addCommentOpenFunc = () =>{
-        dispatch(addCommentOpen())
-    }
     useEffect(()=>{
         dispatch(getMangas(search))
         setIsLogined(account)
-    }, [account])
+    }, [dispatch, account, search])
     
 
 
@@ -120,7 +117,7 @@ function Header(props) {
                             ? `?search=${e.target.value.replace(regExpSearch, "%20")}`: ""))}
                     />
                 </div>
-
+                
                 {
                     isLogined===true
                     ?
@@ -196,14 +193,6 @@ function Header(props) {
                                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                             >
                                 <MenuItem>
-                                    <Button onClick={() => addCommentOpenFunc()}>
-                                        <ListItemIcon>
-                                            <AddCommentIcon fontSize="small" />
-                                        </ListItemIcon>
-                                        Add Comment
-                                    </Button>
-                                </MenuItem>
-                                <MenuItem>
                                     <Button onClick={() => logOutFunc()}>
                                         <ListItemIcon>
                                             <Logout fontSize="small" />
@@ -211,8 +200,10 @@ function Header(props) {
                                         Logout
                                     </Button>
                                 </MenuItem>
+                            
                                 
                             </Menu>
+                            
                         </Box>
                     </Box>
                     :
