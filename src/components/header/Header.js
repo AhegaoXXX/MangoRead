@@ -11,6 +11,7 @@ import { NavLink } from 'react-router-dom';
 import MainSignUp from '../registerModal/MainSignUp';
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import AddCommentIcon from '@mui/icons-material/AddComment';
 import Avatar from '@mui/material/Avatar';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Logout from '@mui/icons-material/Logout';
@@ -20,7 +21,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import {getMangas} from '../../store/mangaSlice'
-import {infoModalOpen, infoLogin} from '../../store/signUpSlice';
+import {infoModalOpen, AccountLogOut, logOutAcc, addCommentOpen} from '../../store/signUpSlice';
 
 
 
@@ -39,15 +40,21 @@ function Header(props) {
     const regExpSearch = / /g;
     
     const handleOpen = ()=>dispatch(infoModalOpen())
-
+    const {user} = useSelector(state=>state.signUpReducer)
+    const {account} = useSelector(state=>state.signUpReducer)
     const [isLogined, setIsLogined] = useState(false)
-    // const {account} = useSelector(state=>state.signUpReducer)
-    // dispatch(setIsLogined(account))
-
+    const logOutFunc = ()=>{
+        dispatch(logOutAcc({
+            "refresh": JSON.parse(localStorage.getItem('tokenR'))
+        }))
+    }
+    const addCommentOpenFunc = () =>{
+        dispatch(addCommentOpen())
+    }
     useEffect(()=>{
         dispatch(getMangas(search))
-
-    }, [])
+        setIsLogined(account)
+    }, [account])
     
 
 
@@ -115,7 +122,7 @@ function Header(props) {
                 </div>
 
                 {
-                    isLogined
+                    isLogined===true
                     ?
                     <Box
                         sx={{
@@ -130,7 +137,7 @@ function Header(props) {
                                 fontWeight:400,
                                 textAlign:"right",
                             }}
-                        >Username</Typography>
+                        >{user?.username}</Typography>
                         <Box>
                             <Tooltip title="Account settings">
                                 <IconButton
@@ -144,7 +151,7 @@ function Header(props) {
                                         justifyContent:"space-between",
                                     }}
                                 >
-                                    <Avatar sx={{ width: 80, height: 80 }}>Me</Avatar>
+                                    <Avatar src={user?.image_file} sx={{ width: 80, height: 80 }}>Me</Avatar>
                                     <ArrowDropDownIcon 
                                         sx={{
                                             fontSize:"30px",
@@ -189,16 +196,24 @@ function Header(props) {
                                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                             >
                                 <MenuItem>
-                                    <Button>
+                                    <Button onClick={() => addCommentOpenFunc()}>
+                                        <ListItemIcon>
+                                            <AddCommentIcon fontSize="small" />
+                                        </ListItemIcon>
+                                        Add Comment
+                                    </Button>
+                                </MenuItem>
+                                <MenuItem>
+                                    <Button onClick={() => logOutFunc()}>
                                         <ListItemIcon>
                                             <Logout fontSize="small" />
                                         </ListItemIcon>
                                         Logout
                                     </Button>
                                 </MenuItem>
+                                
                             </Menu>
                         </Box>
-                    
                     </Box>
                     :
                     <div className={classes.register}>
@@ -249,11 +264,7 @@ function Header(props) {
                             
                         >Регистрация</Button>
                     </div>
-                }
-                
-
-
-                
+                }         
             </Container>
         </div>
     )

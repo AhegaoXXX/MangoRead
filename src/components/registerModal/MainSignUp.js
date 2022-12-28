@@ -18,7 +18,7 @@ import {FormControl} from '@mui/material';
 import swal from 'sweetalert';
 import axios from 'axios';
 import { getCookie, setCookie } from "react-use-cookie";
-import { infoModalClose} from '../../store/signUpSlice';
+import { infoModalClose, getAccount} from '../../store/signUpSlice';
 
 
 
@@ -169,16 +169,18 @@ function MainSignUp() {
                 formData,
                 {
                     headers: {
-                        'Content-Type': 'application/json',  
+                        'Content-Type': 'application/json',
+                        
                     },
                 }
             )
             .then(response=> {
-                console.log(response)
-                console.log(response.data) //tokens (access, refresh)
+                localStorage.setItem('tokenA',JSON.stringify(response.data.access))
+                localStorage.setItem('tokenR',JSON.stringify(response.data.refresh))
                 swal({
                     icon: "success",
                 });
+                dispatch(getAccount(logUser))
                 
             }
             )
