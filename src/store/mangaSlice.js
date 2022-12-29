@@ -35,7 +35,7 @@ export const getGenre = createAsyncThunk(
     }
 )
 export const getSearch = createAsyncThunk(
-    'getGenre',
+    'getSearch',
     async (data, {rejectWithValue, dispatch})=>{
         const response = await fetch('http://134.122.75.14:8666/api/v1/top-manga/')
         const dataX = await response.json()
@@ -53,6 +53,8 @@ const mangaSlice = createSlice({
         comment: [],
         genres: [],
         searchRes: [],
+        modalChange:false,
+        filtered:[]
     },
     reducers:{
         mangasInfo: (state, action) =>{
@@ -71,11 +73,17 @@ const mangaSlice = createSlice({
         searchInfo: (state, action) =>{
             state.searchRes = action.payload;
         },
+        changeModalAction:(state,action)=>{
+            state.modalChange = !state.modalChange
+        },
+        filterAction:(state,action)=>{
+            state.filtered = action.payload
+        }
     }
 })
 
 
-export const {mangasInfo, infoManga, commentInfo, genreInfo, searchInfo, } 
+export const {mangasInfo, infoManga, commentInfo, genreInfo, searchInfo, changeModalAction,filterAction} 
 = mangaSlice.actions;
 
 export default mangaSlice.reducer;

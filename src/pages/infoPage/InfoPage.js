@@ -193,7 +193,6 @@ function InfoPage() {
                     sx={{
                       display:'flex',
                       flexDirection:'column',
-                      // height:"819px",
                       marginTop:"33px",
                       textAlign:"start",
                     }}>

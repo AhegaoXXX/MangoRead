@@ -24,6 +24,7 @@ import {infoModalOpen, logOutAcc} from '../../store/signUpSlice';
 
 
 
+
 function Header() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -97,25 +98,22 @@ function Header() {
                         disableUnderline
                         placeholder="Placeholder"
                         startAdornment={
-                            <Button onClick={()=> dispatch(getMangas(search ? 
-                                `?search=${search.replace(regExpSearch, "%20")}`
-                                : ""
-                                ))} >
-                                <InputAdornment position="start">
-                                    <SearchIcon sx={{
-                                        color:"black",
-                                        paddingRight:"4px"}}/>
-                                </InputAdornment>
-                            </Button>
+                            <InputAdornment position="start">
+                                <SearchIcon sx={{
+                                    color:"black",
+                                    paddingRight:"4px"}}/>
+                            </InputAdornment>
                         }
                         
                         type="search"
-                        onChange={(e)=> dispatch(
+                        onChange={(e)=> 
+                            dispatch(
                             getMangas(e.target.value
-                            ? `?search=${e.target.value.replace(regExpSearch, "%20")}`: ""))}
+                            ? `?search=${e.target.value.replace(regExpSearch, "%20")}`: ""))
+                           
+                        }
                     />
                 </div>
-                
                 {
                     isLogined===true
                     ?
