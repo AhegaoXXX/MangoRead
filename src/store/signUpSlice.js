@@ -46,27 +46,26 @@ export const logOutAcc = createAsyncThunk(
 )
 export const addCommentAction = createAsyncThunk(
     'addCommentAction',
-    async (id, {rejectWithValue, dispatch}, data) => {
+    async (data, {rejectWithValue, dispatch}) => { 
+        const {id, dataX} = data;
         try {
-            let dataX = {
-                "message": data
+           await axios.post(`http://134.122.75.14:8666/api/v1/manga/${id}/add-comment/`, 
+           dataX,
+            {   
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${JSON.parse(localStorage.getItem('tokenA'))}`
+                },
             }
-            await axios.post(`http://134.122.75.14:8666/api/v1/manga/${id}/add-comment/`,
-                {   
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('tokenA'))}`
-                    },
-                    body:dataX
-                }
-            )
-
+          )
         } 
         catch (error) {
           console.error(error);
         }
     }
 )
+
+
 
 
 const signUpSlice = createSlice({

@@ -37,9 +37,12 @@ function AddCommentPage() {
     const dispatch=useDispatch();
     const {user} = useSelector(state=>state.signUpReducer)
     const [userComment, setUserComment]= useState("");
-
+    let dataX = {
+        "text": userComment
+    }
+    let data ={id, dataX}
     const changeInput = () => {
-        dispatch(addCommentAction(id, userComment))
+        dispatch(addCommentAction(data))
         swal({
             icon: "success",
         });

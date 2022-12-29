@@ -229,7 +229,9 @@ function InfoPage(props) {
                               borderRadius:"50% ",
                               alignItems:"flex-start",
                               backgroundSize:"cover",
-                              backgroundImage: `url(${comm.user.image})`,
+                              backgroundImage: `url(${
+                                comm.user.image
+                              })`,
                               marginLeft:"10px",
                               marginRight:"26px",
               
