@@ -11,7 +11,6 @@ import { NavLink } from 'react-router-dom';
 import MainSignUp from '../registerModal/MainSignUp';
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import AddCommentIcon from '@mui/icons-material/AddComment';
 import Avatar from '@mui/material/Avatar';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Logout from '@mui/icons-material/Logout';
@@ -21,11 +20,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import {getMangas} from '../../store/mangaSlice'
-import {infoModalOpen, AccountLogOut, logOutAcc, addCommentOpen} from '../../store/signUpSlice';
+import {infoModalOpen, logOutAcc} from '../../store/signUpSlice';
 
 
 
-function Header(props) {
+function Header() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -88,7 +87,6 @@ function Header(props) {
                         sx={{
                             width:"342px",
                             height: "56px",
-                            fontSize:"20px",
                             border: "2px solid grey",
                             borderRadius: "8px",
                             paddingLeft:"16px",
@@ -200,8 +198,6 @@ function Header(props) {
                                         Logout
                                     </Button>
                                 </MenuItem>
-                            
-                                
                             </Menu>
                             
                         </Box>

@@ -11,15 +11,13 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
-import MainPage from '../mainPage/MainPage';
 import { useParams } from 'react-router-dom';
-import {getInfoManga, getComment, getGenre, getMangas} from '../../store/mangaSlice'
-import AddCommentPage from '../../pages/addCommmentPage/AddCommentPage';
-import {addCommentAction} from  "../../store/signUpSlice"
+import {getInfoManga, getComment, getGenre} from '../../store/mangaSlice'
+import AddCommentComp from '../../components/addCommentComp/AddCommentComp';
 
 
 
-function InfoPage(props) {
+function InfoPage() {
   const dispatch = useDispatch();
   const {id} = useParams()
 
@@ -36,7 +34,7 @@ function InfoPage(props) {
     dispatch(getComment(id))
     dispatch(getGenre())
     setIsLogined(account)
-  },[dispatch, id, isLogined])
+  },[dispatch, id, account])
 
   
 
@@ -60,9 +58,7 @@ function InfoPage(props) {
       {  manga?.map((item)=>{
             return (
               <Box sx={{
-                // height:"1936px",
                 bgcolor:"#F3F3F3",
-                // bgcolor:"black",
                 display:"flex",
                 justifyContent:"center"
               }}>
@@ -204,7 +200,7 @@ function InfoPage(props) {
                       {
                         isLogined===true
                         ?
-                        <AddCommentPage/>
+                        <AddCommentComp/>
                         :
                         <></>
                       }
@@ -265,9 +261,6 @@ function InfoPage(props) {
                       
                   </Box>`
                   
-
-                  
-        
                   <Box sx={{
                     display:"flex",
                     alignItems:"center",

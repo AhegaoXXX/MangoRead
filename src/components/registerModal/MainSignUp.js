@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box } from '@mui/system';
 import classes from './MainSignUp.module.css';
-import classesX from './LoginModal.module.css';
 import CloseIcon from '@mui/icons-material/Close';
-import Avatar from '@mui/material/Avatar';
 import Input from '@mui/material/Input';
 import Modal from '@mui/material/Modal';
-import { Button, TextField, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -23,17 +21,7 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 
 
-const style = {
-position: 'absolute',
-top: '50%',
-left: '50%',
-transform: 'translate(-50%, -50%)',
-width: 400,
-bgcolor: 'background.paper',
-border: '2px solid #000',
-boxShadow: 24,
-p: 4,
-};
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -94,9 +82,6 @@ function MainSignUp() {
         setValue(newValue);
     };
     const [imageX, setImage] = useState('')
-    // function handleImage (e) {
-    //     setImage(e.target.files[0])
-    // }
     function getImageFileObject(imageFile) {
         setImage(imageFile.file);
     }
@@ -104,11 +89,10 @@ function MainSignUp() {
     console.log({ onDele: file });
     }
     const openAction = useSelector(state => state.signUpReducer.mode)
-    const closeAction = useSelector(state => state.signUpReducer.mode)
 
     
     const handleRegister = (e)=>{
-        if (username=="" || nickname=="" || password==""){
+        if (username==="" || nickname==="" || password===""){
 
             setPlaceholderUsername("This field is required");
             setPlaceholderNickname("This field is required");
@@ -172,14 +156,11 @@ function MainSignUp() {
                     icon: "success",
                 });
                 dispatch(getAccount(logUser))
-                
             }
             )
             .catch(function (error) {
                 alert(error);
             });
-
-            
         }
     }
 
@@ -239,8 +220,7 @@ function MainSignUp() {
                             </Button>
                         </Box>
 
-                        <Box sx={{ 
-                            borderBottom: 1, 
+                        <Box sx={{
                             borderColor: 'divider', 
                             width:"100%",
                             borderBottom:"2px solid #878787",
@@ -294,7 +274,6 @@ function MainSignUp() {
                                         sx={{
                                             width:"500px",
                                             height: "52px",
-                                            fontSize:"20px",
                                             border: "2px solid grey",
                                             borderRadius: "8px",
                                             paddingLeft:"16px",
@@ -321,7 +300,6 @@ function MainSignUp() {
                                         sx={{
                                             width:"500px",
                                             height: "52px",
-                                            fontSize:"20px",
                                             border: "2px solid grey",
                                             borderRadius: "8px",
                                             paddingLeft:"16px",
@@ -342,7 +320,6 @@ function MainSignUp() {
                                         value={logPass}
                                         onChange={e => setLogPass(e.target.value)}
                                     />
-
                                 </FormControl>
                                 
 
@@ -399,12 +376,9 @@ function MainSignUp() {
                                     variant="contained"
                                 >Вход</Button>
                             </Box>
-                             
                         </TabPanel>
 
                         <TabPanel value={value} index={1} >
-                            
-
                             <Box
                                 sx={{
                                     display:'flex',
@@ -549,13 +523,9 @@ function MainSignUp() {
                                 >Регистрация </Button>
                             </Box>
                         </TabPanel>
-                        
                     </Box>
                 </div>
             </Modal>
-            
-            
-            
         </div>
     )
 }

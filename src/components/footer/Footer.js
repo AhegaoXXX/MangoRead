@@ -19,7 +19,8 @@ import { NavLink } from 'react-router-dom';
 
 function Footer() {
 
-  
+
+
 
   return (
     <Box className={classes.footer}
@@ -62,7 +63,6 @@ function Footer() {
               </Box>
             </NavLink>
             
-
             <Box sx={{ 
               height:"136px",
               display:"flex",
@@ -77,7 +77,7 @@ function Footer() {
                         position: "absolute",
                         left:"17.5px",
                       }}>
-                        <img src={facebookIcon}/>
+                        <img src={facebookIcon} alt="facebookIcon"/>
                       </ListItemIcon>
                       <ListItemText primary="Link One" 
                       sx={{
@@ -95,7 +95,7 @@ function Footer() {
                         position: "absolute",
                         left:"10px"
                       }}>
-                        <img src={instagramIcon}/>
+                        <img src={instagramIcon} alt="instagramIcon"/>
                       </ListItemIcon>
                       <ListItemText primary="Link Two" 
                       sx={{
@@ -112,7 +112,7 @@ function Footer() {
                         position: "absolute",
                         left:"10px"
                       }}>
-                        <img src={twitterIcon}/>
+                        <img src={twitterIcon} alt="twitterIcon"/>
                       </ListItemIcon>
                       <ListItemText primary="Link Two"
                       sx={{
@@ -127,7 +127,7 @@ function Footer() {
 
             <Box>
                 <iframe style={{borderRadius:"20px", boxShadow:"0 0 30px 0px lightgrey"}}
-                class="gmap_iframe" width="400px" height="250px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Bishkek, Gogol 28&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                class="gmap_iframe" width="400px" height="250px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Bishkek, Gogol 28&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" title="googleMap"></iframe>
             </Box>
 
         </Container>
@@ -191,9 +191,6 @@ function Footer() {
               
         </Container>
       </Box>
-
-        
-        
     </Box>
   )
 }

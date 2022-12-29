@@ -16,9 +16,8 @@ import Stack from '@mui/material/Stack';
 import CardsMainPage from '../../components/cardsMainPage/CardsMainPage';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useDispatch, useSelector} from "react-redux"
-import {Link, NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {getMangas} from '../../store/mangaSlice'
-import AddCommentPage from '../addCommmentPage/AddCommentPage';
 
 
 
@@ -34,7 +33,7 @@ function renderRow(props) {
   );
 }
 
-function MainPage(props) {
+function MainPage() {
   const theme = createTheme({
     palette: {
       primary: {
@@ -47,12 +46,9 @@ function MainPage(props) {
 
   const data = useSelector(state => state.mangaReducer.mangas)
 
-
-
-
   useEffect(() => {
     dispatch(getMangas())
-  }, [])
+  }, [dispatch])
 
 
 
@@ -225,21 +221,14 @@ function MainPage(props) {
                     console.log(e);
                     dispatch(getMangas(`?page=${value}`))
                   }}
-
                 />
               </Stack>
             </ThemeProvider>
-            
           </Box>
-
         </Container>
       </Box>
 
-
-
-
       <Footer/>
-
     </div>
   )
 }

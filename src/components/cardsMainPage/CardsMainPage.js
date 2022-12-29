@@ -1,9 +1,6 @@
 import React from 'react'
-import classes from './CardsMainPage.module.css'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 
 
@@ -34,7 +31,6 @@ function CardsMainPage(props) {
           <Typography>Год: {props.post.year}</Typography>
           <Typography>{props.post.name}</Typography>
       </Box>
-    
     </>
     
   )

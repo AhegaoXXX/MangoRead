@@ -5,33 +5,17 @@ import Input from '@mui/material/Input';
 import { Button } from '@mui/material';
 import {Avatar} from '@mui/material';
 import { Typography } from '@mui/material';
-import {addComment, addCommentAction} from '../../store/signUpSlice'
+import {addCommentAction} from '../../store/signUpSlice'
 import { useParams } from 'react-router-dom';
 import swal from 'sweetalert';
 
 
 
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 500,
-    height: 200,
-    bgcolor: 'white',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-    justifyContent:"flex-end",
-    paddingBottom:"30px",
-    alignItems:"center",
-    display:"flex",
-    flexDirection:"column",
-};
 
-function AddCommentPage() {
-  const {id} = useParams()
+
+function AddCommentComp() {
+    const {id} = useParams()
 
 
     const dispatch=useDispatch();
@@ -119,9 +103,8 @@ function AddCommentPage() {
                 }}
                 >Post comment</Button>
         </Box>
-        
     </>
   )
 }
 
-export default AddCommentPage
+export default AddCommentComp
