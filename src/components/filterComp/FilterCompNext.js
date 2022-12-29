@@ -19,22 +19,13 @@ function FilterCompNext() {
 
   const data = useSelector(state => state.mangaReducer.mangas)
   const {genres}=useSelector(state => state.mangaReducer)
-  useEffect(() => {
-    dispatch(getMangas())
-    dispatch(getGenre())
-  }, [dispatch])
-
-  
-
   const [checked, setChecked] = React.useState([0]);
   const [genreId,setGenreId]=useState([])
-  
-  const {filtered}=useSelector(state=>state.mangaReducer) 
-
+  const {filtered}=useSelector(state=>state.mangaReducer)
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
-    
+      
     if (currentIndex === -1) {
       newChecked.push(value);
       newChecked.splice(checked, 1);
@@ -45,8 +36,8 @@ function FilterCompNext() {
     setChecked(newChecked);
   };
   
-  
   const onFilter = () => {
+    console.log(filtered);
     const filteredMangas = filtered.filter(item =>item.genre.includes(genreId)) 
     filteredMangas.length === 0 ? swal({icon: "error"}) : dispatch(filterAction(filteredMangas))
   }
@@ -54,6 +45,10 @@ function FilterCompNext() {
     dispatch(changeModalAction())
   }
 
+  useEffect(() => {
+    dispatch(getMangas())
+    dispatch(getGenre())
+  }, [dispatch])
 
 
 
@@ -61,7 +56,8 @@ function FilterCompNext() {
 
   return (
     <>
-      <Box sx={{
+      <Box 
+      sx={{
         display:"flex",
         flexDirection:"column",
         alignItems:"start",
@@ -73,7 +69,6 @@ function FilterCompNext() {
           alignItems:"center",
           width:"100%"
         }}>
-          
           <Button onClick={handleChangeModal} sx={{
             display:'flex',
             color:"grey", 
@@ -85,7 +80,8 @@ function FilterCompNext() {
           </Button>
         </Box>
         
-        <Box sx={{
+        <Box 
+        sx={{
           display:"flex",
           flexDirection:"column",
         }}>
@@ -95,33 +91,32 @@ function FilterCompNext() {
             fontWeight: 400,
           }}>Жанры</Typography>
           <Box
-            sx={{height: 400, width: 360, bgcolor: 'background.paper',
+            sx={{height: 450, width: 360, bgcolor: 'background.paper',
             overflow:'scroll',overflowX:'hidden'
             }}
           >
-              
-              {genres.map(item=><div style={{display:'flex',alignItems:'center'}}>
-                <ListItemIcon key={item.id}>
-                        <Checkbox id={item.id}
-                          edge="start"
-                          tabIndex={0}
-                          disableRipple
-                          onClick={(e)=>{
-                            if(genreId.includes(e.target.id)) {
-                             setGenreId(genreId.filter(item=>item!==e.target.id))
-                            }else{
-                              setGenreId([...genreId,e.target.id])
-                            }
-                          }}
-                        />
-                      </ListItemIcon>
-                      {item.title}
-              </div>)}
+            {genres.map(item=><div style={{display:'flex',alignItems:'center'}}>
+              <ListItemIcon key={item.id}>
+                      <Checkbox id={item.id}
+                        edge="start"
+                        tabIndex={0}
+                        disableRipple
+                        onClick={(e)=>{
+                          if(genreId.includes(e.target.id)) {
+                            setGenreId(genreId.filter(item=>item!==e.target.id))
+                          }else{
+                            setGenreId([...genreId,e.target.id])
+                          }
+                        }}
+                      />
+                    </ListItemIcon>
+                    {item.title}
+            </div>)}
           </Box>
-
         </Box>
 
-        <Box sx={{
+        <Box 
+        sx={{
           display:"flex", 
           justifyContent:"space-between",
           height:"72px",
@@ -149,8 +144,7 @@ function FilterCompNext() {
               variant="contained"
           >Сбросить</Button>
           <Button 
-              onClick={(e)=> 
-
+              onClick={(e)=>
                 onFilter()
               }
               sx={{

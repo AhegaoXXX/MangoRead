@@ -44,7 +44,6 @@ export const getSearch = createAsyncThunk(
 )
 
 
-
 const mangaSlice = createSlice({
     name:"mangaSlice",
     initialState:{
@@ -59,7 +58,6 @@ const mangaSlice = createSlice({
     reducers:{
         mangasInfo: (state, action) =>{
             state.mangas = action.payload;
-            state.totalCount = action.payload;
         },
         infoManga: (state, action) =>{
             state.manga = [action.payload];
@@ -73,7 +71,7 @@ const mangaSlice = createSlice({
         searchInfo: (state, action) =>{
             state.searchRes = action.payload;
         },
-        changeModalAction:(state,action)=>{
+        changeModalAction:(state)=>{
             state.modalChange = !state.modalChange
         },
         filterAction:(state,action)=>{

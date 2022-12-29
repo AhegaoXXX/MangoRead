@@ -60,7 +60,7 @@ function FilterCompStart() {
     filteredMangas.length === 0 ? swal({icon: "error"}) : dispatch(filterAction(filteredMangas))
     }
     const handleChangeModal=()=>{
-    dispatch(changeModalAction())
+        dispatch(changeModalAction())
     }
 
 
@@ -70,7 +70,7 @@ function FilterCompStart() {
             <Box sx={{
                 display:"flex",
                 flexDirection:"column",
-                alignItems:"start",
+                alignItems:"center",
                 }}>
                 <Box
                 sx={{
@@ -95,93 +95,90 @@ function FilterCompStart() {
                     Все <ArrowForwardIosIcon/>
                 </Button>
                 </Box>
-                
                 <Box sx={{
                 display:"flex",
                 flexDirection:"column",
                 }}>
-                <Typography sx={{
-                    paddingTop:"33px",
-                    fontFamily: "Montserrat",
-                    fontSize: "24px",
-                    fontWeight: 400,
-                }}>Тип</Typography>
-                <Box
-                    sx={{
-                    paddingBottom:"33px",
-                    }}
-                >
-                    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                    {typesManga.map((value) => {
-                        const labelId = `checkbox-list-label-${value}`;
+                    <Typography sx={{
+                        paddingTop:"33px",
+                        fontFamily: "Montserrat",
+                        fontSize: "24px",
+                        fontWeight: 400,
+                    }}>Тип</Typography>
+                    <Box
+                        sx={{
+                        paddingBottom:"33px",
+                        }}
+                    >
+                        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                        {typesManga.map((value) => {
+                            const labelId = `checkbox-list-label-${value}`;
 
-                        return (
-                        <ListItem
-                            key={value}
-                            disablePadding
-                            
-                        >
-                            <ListItemButton role={undefined} 
-                            onClick={handleToggle(value)}
-                            
+                            return (
+                            <ListItem
+                                key={value}
+                                disablePadding
+                                
                             >
-                            <ListItemIcon>
-                                <Checkbox
-                                edge="start"
-                                checked={checked.indexOf(value) !== -1}
-                                tabIndex={0}
-                                disableRipple
-                                inputProps={{ 'aria-labelledby': labelId }}
+                                <ListItemButton role={undefined} 
+                                onClick={handleToggle(value)}
+                                
+                                >
+                                <ListItemIcon>
+                                    <Checkbox
+                                    edge="start"
+                                    checked={checked.indexOf(value) !== -1}
+                                    tabIndex={0}
+                                    disableRipple
+                                    inputProps={{ 'aria-labelledby': labelId }}
 
-                                />
-                            </ListItemIcon>
-                            <ListItemText id={labelId} primary={`${value}`}/>
-                            </ListItemButton>
-                        </ListItem>
-                        );
-                    })}
-                    </List>
+                                    />
+                                </ListItemIcon>
+                                <ListItemText id={labelId} primary={`${value}`}/>
+                                </ListItemButton>
+                            </ListItem>
+                            );
+                        })}
+                        </List>
+                    </Box>
+
+                    <Box
+                        sx={{
+                        display:"flex",
+                        paddingX:"10px",
+                        alignItems:"center",
+                        }}
+                    >
+                        <Input onChange={(e) => setStartYear(e.target.value)}
+                        type="number"
+                        sx={{
+                        width:"168px",
+                        height:"55px",
+                        border:"2px solid #2FE09B",
+                        borderRadius:"8px",
+                        }}
+                        />
+
+                        <RemoveIcon/>
+
+                        <Input onChange={(e) => setEndYear(e.target.value)}
+                        type="number"
+                        sx={{
+                        width:"168px",
+                        height:"55px",
+                        border:"2px solid #2FE09B",
+                        borderRadius:"8px",
+                        }}
+                        />
+                    </Box>
                 </Box>
-
-                <Box
-                    sx={{
-                    display:"flex",
-                    paddingX:"10px",
-                    alignItems:"center",
-                    }}
-                >
-                    <Input onChange={(e) => setStartYear(e.target.value)}
-                    type="number"
-                    sx={{
-                    width:"168px",
-                    height:"55px",
-                    border:"2px solid #2FE09B",
-                    borderRadius:"8px",
-                    }}
-                    />
-
-                    <RemoveIcon/>
-
-                    <Input onChange={(e) => setEndYear(e.target.value)}
-                    type="number"
-                    sx={{
-                    width:"168px",
-                    height:"55px",
-                    border:"2px solid #2FE09B",
-                    borderRadius:"8px",
-                    }}
-                    />
-
-                </Box>
-                </Box>
-
                 <Box sx={{
                 display:"flex", 
                 justifyContent:"space-between",
                 height:"72px",
-                width:"100%",
                 alignItems:"center",
                 marginTop:"auto",
+                width:"360px",
                 }}>
                 <Button
                     sx={{
@@ -205,6 +202,7 @@ function FilterCompStart() {
                 <Button 
                     onClick={(e)=> {
                         dispatch(getMangas(`?type=${type}`))
+                        dispatch(filterAction(data))
                         onFilter()
                     }}
                     sx={{

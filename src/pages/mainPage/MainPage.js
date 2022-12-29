@@ -31,8 +31,7 @@ function MainPage() {
   const dispatch= useDispatch();
 
   const data = useSelector(state => state.mangaReducer.mangas)
-  const {modalChange,filtered} = useSelector(state => state.mangaReducer)
-  console.log(modalChange+' modalChange');
+  const {modalChange, filtered} = useSelector(state => state.mangaReducer)
   useEffect(() => {
     dispatch(getMangas())
   }, [dispatch])
