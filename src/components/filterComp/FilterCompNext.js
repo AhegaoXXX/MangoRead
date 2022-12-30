@@ -25,20 +25,19 @@ function FilterCompNext() {
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
-      
     if (currentIndex === -1) {
       newChecked.push(value);
-      newChecked.splice(checked, 1);
     } else {
       newChecked.splice(currentIndex, 1);
     }
-
     setChecked(newChecked);
   };
   
   const onFilter = () => {
-    console.log(filtered);
-    const filteredMangas = filtered.filter(item =>item.genre.includes(genreId)) 
+    const filteredMangas = filtered.map(item => item.genre.filter(i=>genreId.indexOf(i) ===-1))
+    console.log(filtered.map(item => item.genre.filter(i=>genreId.indexOf(i) === -1)
+    
+    ));
     filteredMangas.length === 0 ? swal({icon: "error"}) : dispatch(filterAction(filteredMangas))
   }
   const handleChangeModal=()=>{
@@ -46,7 +45,6 @@ function FilterCompNext() {
   }
 
   useEffect(() => {
-    dispatch(getMangas())
     dispatch(getGenre())
   }, [dispatch])
 
@@ -97,20 +95,16 @@ function FilterCompNext() {
           >
             {genres.map(item=><div style={{display:'flex',alignItems:'center'}}>
               <ListItemIcon key={item.id}>
-                      <Checkbox id={item.id}
-                        edge="start"
-                        tabIndex={0}
-                        disableRipple
-                        onClick={(e)=>{
-                          if(genreId.includes(e.target.id)) {
-                            setGenreId(genreId.filter(item=>item!==e.target.id))
-                          }else{
-                            setGenreId([...genreId,e.target.id])
-                          }
-                        }}
-                      />
-                    </ListItemIcon>
-                    {item.title}
+                <Checkbox id={item.id}
+                  edge="start"
+                  tabIndex={0}
+                  disableRipple
+                  onClick={(e)=>
+                    setGenreId([...genreId,e.target.id])
+                  }
+                />
+              </ListItemIcon>
+              {item.title}
             </div>)}
           </Box>
         </Box>
@@ -125,23 +119,27 @@ function FilterCompNext() {
           marginTop:"auto",
           }}>
           <Button
-              sx={{
-                  letterSpacing: "1.5px",
-                  fontSize:"16px",
+            onClick={(e)=> {
+              dispatch(getMangas(""))
+              dispatch(filterAction(data))
+            }}
+            sx={{
+                letterSpacing: "1.5px",
+                fontSize:"16px",
+                backgroundColor:"#AD02E0",
+                color:"white",
+                width:"174px",
+                height:"52px",
+                borderRadius: "8px",
+                ':hover': {
                   backgroundColor:"#AD02E0",
-                  color:"white",
-                  width:"174px",
-                  height:"52px",
-                  borderRadius: "8px",
-                  ':hover': {
-                    backgroundColor:"#AD02E0",
-                    boxShadow:"0 0 10px 2px #AD02E0",
-                  },
-                  ':active': {
-                      backgroundColor:"purple",
-                  },
-              }}
-              variant="contained"
+                  boxShadow:"0 0 10px 2px #AD02E0",
+                },
+                ':active': {
+                    backgroundColor:"purple",
+                },
+            }}
+            variant="contained"
           >Сбросить</Button>
           <Button 
               onClick={(e)=>

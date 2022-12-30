@@ -6,7 +6,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import {useDispatch, useSelector} from "react-redux"
-import {changeModalAction, filterAction, getMangas} from '../../store/mangaSlice'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -14,6 +13,7 @@ import Checkbox from '@mui/material/Checkbox';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Input from '@mui/material/Input';
 import swal from 'sweetalert';
+import {changeModalAction, filterAction, getMangas, filterReset} from '../../store/mangaSlice'
 
 
 
@@ -29,39 +29,33 @@ function FilterCompStart() {
     const dispatch= useDispatch();
 
     const data = useSelector(state => state.mangaReducer.mangas)
-
-    useEffect(() => {
-        dispatch(getMangas())
-    }, [dispatch])
-
     const typesManga = ["Манга","Манхва","Комиксы","Маньхуа"]
     const [checked, setChecked] = React.useState([0]);
     const [type, setType] = useState("");
-    const [startYear, setStartYear] = useState("1813");
-    const [endYear, setEndYear] = useState("2023");
-
+    const [startYear, setStartYear] = useState("0");
+    const [endYear, setEndYear] = useState("2022");
     const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-    setType(value)
-    
-    if (currentIndex === -1) {
-        newChecked.push(value);
-        newChecked.splice(checked, 1);
-    } else {
-        newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
+        const currentIndex = checked.indexOf(value);
+        const newChecked = [...checked];
+        setType(value)
+        
+        if (currentIndex === -1) {
+            newChecked.push(value);
+            newChecked.splice(checked, 1);
+        } else {
+            newChecked.splice(currentIndex, 1);
+        }
+        setChecked(newChecked);
     };
-    
-    const onFilter = () => {
-    const filteredMangas = data.filter(item => item.issue_year >= startYear && item.issue_year <= endYear)
-    filteredMangas.length === 0 ? swal({icon: "error"}) : dispatch(filterAction(filteredMangas))
-    }
     const handleChangeModal=()=>{
         dispatch(changeModalAction())
     }
+
+    const onFilter = () => {
+        const filteredMangas = data.filter(item => item.issue_year >= startYear && item.issue_year <= endYear)
+        dispatch(filterAction(filteredMangas))
+    }
+    
 
 
 
@@ -149,7 +143,9 @@ function FilterCompStart() {
                         alignItems:"center",
                         }}
                     >
-                        <Input onChange={(e) => setStartYear(e.target.value)}
+                        <Input 
+                        onChange={(e)=>(setStartYear(e.target.value))}
+                        placeholder="От 0"
                         type="number"
                         sx={{
                         width:"168px",
@@ -162,6 +158,7 @@ function FilterCompStart() {
                         <RemoveIcon/>
 
                         <Input onChange={(e) => setEndYear(e.target.value)}
+                        placeholder="До 2022"
                         type="number"
                         sx={{
                         width:"168px",
@@ -181,7 +178,12 @@ function FilterCompStart() {
                 width:"360px",
                 }}>
                 <Button
+                    onClick={(e)=> {
+                        dispatch(getMangas())
+                        dispatch(filterAction(data))
+                    }}
                     sx={{
+                        
                         letterSpacing: "1.5px",
                         fontSize:"16px",
                         backgroundColor:"#AD02E0",
@@ -202,7 +204,6 @@ function FilterCompStart() {
                 <Button 
                     onClick={(e)=> {
                         dispatch(getMangas(`?type=${type}`))
-                        dispatch(filterAction(data))
                         onFilter()
                     }}
                     sx={{

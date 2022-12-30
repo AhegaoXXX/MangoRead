@@ -37,10 +37,6 @@ function MainPage() {
   }, [dispatch])
  
   const [page, setPage] = useState(1);
-
-  
-
-
   
 
 
@@ -105,8 +101,8 @@ function MainPage() {
                     }}>
 
                       {filtered.length !== 0 
-                      ? 
-                      filtered.slice(0, 12).map((item) =>
+                        ? 
+                        filtered.slice(0, 12).map((item) =>
                         <NavLink to={`/${item.id}`} info={{image : item.image}}>
                           <CardsMainPage key={item} post={{image : item?.image , year: item?.issue_year, name : item?.ru_name}} />
                         </NavLink>) 
@@ -115,7 +111,7 @@ function MainPage() {
                         <NavLink to={`/${item.id}`} info={{image : item.image}}>
                           <CardsMainPage key={item} post={{image : item?.image , year: item?.issue_year, name : item?.ru_name}} />
                         </NavLink>)
-                        }
+                      }
 
                     </Box>
                   </Box>

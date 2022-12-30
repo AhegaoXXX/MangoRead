@@ -53,7 +53,7 @@ const mangaSlice = createSlice({
         genres: [],
         searchRes: [],
         modalChange:false,
-        filtered:[]
+        filtered:[],
     },
     reducers:{
         mangasInfo: (state, action) =>{
@@ -76,12 +76,15 @@ const mangaSlice = createSlice({
         },
         filterAction:(state,action)=>{
             state.filtered = action.payload
+        },
+        filterReset:(state)=>{
+            state.filtered = state.mangas
         }
     }
 })
 
 
-export const {mangasInfo, infoManga, commentInfo, genreInfo, searchInfo, changeModalAction,filterAction} 
+export const {mangasInfo, infoManga, commentInfo, genreInfo, searchInfo, changeModalAction,filterAction, filterReset} 
 = mangaSlice.actions;
 
 export default mangaSlice.reducer;
