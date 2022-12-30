@@ -84,7 +84,7 @@ function MainPage() {
 
                       }}>
                       {
-                         modalChange?<FilterCompStart/>:<FilterCompNext/>
+                        !modalChange?<FilterCompStart/>:<FilterCompNext/>
                       }
                     </Box>
 

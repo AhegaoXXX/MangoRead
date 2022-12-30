@@ -21,6 +21,7 @@ function FilterCompNext() {
   const {genres}=useSelector(state => state.mangaReducer)
   const [checked, setChecked] = React.useState([0]);
   const [genreId,setGenreId]=useState([])
+  const [filteredMangas, setFilteredMangas] = useState([])
   const {filtered}=useSelector(state=>state.mangaReducer)
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -34,17 +35,19 @@ function FilterCompNext() {
   };
   
   const onFilter = () => {
-    const filteredMangas = filtered.map(item => item.genre.filter(i=>genreId.indexOf(i) ===-1))
-    console.log(filtered.map(item=>item.genre.filter(i=>i===5))+" -filtered")
-    console.log(genreId+" -genreId")
-    console.log(filtered.map(item => item.genre.filter(i=>genreId.indexOf(i) === -1)
+    let filteredMangas = null
+    genreId.map(item => {
+      return filteredMangas=  filtered.filter(i => i.genre.includes(item));
+    })
+    console.log(filteredMangas)
     
-    ));
     filteredMangas.length === 0 ? swal({icon: "error"}) : dispatch(filterAction(filteredMangas))
   }
+
+
   const handleChangeModal=()=>{
     dispatch(changeModalAction())
-  }
+  } 
 
   useEffect(() => {
     dispatch(getGenre())
@@ -108,9 +111,13 @@ function FilterCompNext() {
                   size="large"
                   edge="start" 
                   tabIndex={0}
-                  disableRipple
-                  onClick={(e)=>
-                    setGenreId([...genreId,e.target.id])
+                  onClick={(e)=>{
+                    if(genreId.includes(+e.target.id)){
+                        setGenreId(genreId.filter(item=>item!== Number(e.target.id)))
+                    }else{
+                      setGenreId([...genreId,+e.target.id])
+                    }
+                  }
                   }
                   sx={{
                     color: "#2FE09B",

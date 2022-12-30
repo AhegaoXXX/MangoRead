@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import {Button, Typography} from '@mui/material';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 import {useDispatch, useSelector} from "react-redux"
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import List from '@mui/material/List';
@@ -13,7 +12,7 @@ import Checkbox from '@mui/material/Checkbox';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Input from '@mui/material/Input';
 import swal from 'sweetalert';
-import {changeModalAction, filterAction, getMangas, filterReset} from '../../store/mangaSlice'
+import {changeModalAction, filterAction, getMangas} from '../../store/mangaSlice'
 
 
 
@@ -207,8 +206,8 @@ function FilterCompStart() {
                 width:"360px",
                 }}>
                     <Button
-                        onClick={(e)=> {
-                            dispatch(getMangas())
+                        onClick={()=> {
+                            dispatch(getMangas(""))
                             dispatch(filterAction(data))
                         }}
                         sx={{

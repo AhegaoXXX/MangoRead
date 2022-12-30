@@ -76,9 +76,6 @@ const mangaSlice = createSlice({
         },
         filterAction:(state,action)=>{
             state.filtered = action.payload
-        },
-        filterReset:(state)=>{
-            state.filtered = state.mangas
         }
     }
 })

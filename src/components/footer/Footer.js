@@ -155,6 +155,9 @@ function Footer() {
           <Typography>
             ©2022, All right reserved.
           </Typography>
+          {/* <Typography>
+            ©2022, By Elmurat Dzhumabaev. All right reserved.
+          </Typography> */}
 
           <Box sx={{ 
               display:"flex",
