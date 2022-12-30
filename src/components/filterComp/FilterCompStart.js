@@ -76,6 +76,7 @@ function FilterCompStart() {
                 <Typography sx={{
                     fontFamily: "Montserrat",
                     fontSize: "24px",
+                    paddingLeft:"10px",
                     fontWeight: 400,
 
                 }}>Жанры</Typography>
@@ -95,6 +96,7 @@ function FilterCompStart() {
                 }}>
                     <Typography sx={{
                         paddingTop:"33px",
+                        paddingLeft:"10px",
                         fontFamily: "Montserrat",
                         fontSize: "24px",
                         fontWeight: 400,
@@ -104,7 +106,14 @@ function FilterCompStart() {
                         paddingBottom:"33px",
                         }}
                     >
-                        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                        <List 
+                        sx={{ 
+                            width: '100%', 
+                            maxWidth: 360, 
+                            bgcolor: 'background.paper',
+                            fontSize:"45px",
+                            padding:"0",
+                        }}>
                         {typesManga.map((value) => {
                             const labelId = `checkbox-list-label-${value}`;
 
@@ -112,23 +121,43 @@ function FilterCompStart() {
                             <ListItem
                                 key={value}
                                 disablePadding
-                                
                             >
-                                <ListItemButton role={undefined} 
+                                <ListItemButton
                                 onClick={handleToggle(value)}
-                                
+                                sx={{
+                                    padding:"0",
+                                    paddingLeft:"10px",
+                                    height:"40px",
+                                }}
                                 >
-                                <ListItemIcon>
-                                    <Checkbox
-                                    edge="start"
-                                    checked={checked.indexOf(value) !== -1}
-                                    tabIndex={0}
-                                    disableRipple
-                                    inputProps={{ 'aria-labelledby': labelId }}
-
-                                    />
-                                </ListItemIcon>
-                                <ListItemText id={labelId} primary={`${value}`}/>
+                                    <ListItemIcon
+                                    sx={{
+                                        alignItems:"center",
+                                    }}
+                                    >
+                                        <Checkbox
+                                        edge="start"
+                                        checked={checked.indexOf(value) !== -1}
+                                        tabIndex={0}
+                                        inputProps={{ 'aria-labelledby': labelId }}
+                                        size="large"
+                                        sx={{
+                                            color: "#2FE09B",
+                                            '&.Mui-checked': {
+                                            color: "#2FE09B",
+                                            },
+                                        }}
+                                        />
+                                        <Typography id={labelId}
+                                        sx={{
+                                            fontFamily: "Montserrat",
+                                            fontSize: "24px",
+                                            fontWeight: 400,
+                                            color:"black",
+                                        }}
+                                        >{value}</Typography>
+                                    </ListItemIcon>
+                                    
                                 </ListItemButton>
                             </ListItem>
                             );
@@ -145,7 +174,7 @@ function FilterCompStart() {
                     >
                         <Input 
                         onChange={(e)=>(setStartYear(e.target.value))}
-                        placeholder="От 0"
+                        placeholder="  От 0"
                         type="number"
                         sx={{
                         width:"168px",
@@ -158,7 +187,7 @@ function FilterCompStart() {
                         <RemoveIcon/>
 
                         <Input onChange={(e) => setEndYear(e.target.value)}
-                        placeholder="До 2022"
+                        placeholder="  До 2022"
                         type="number"
                         sx={{
                         width:"168px",
@@ -177,53 +206,53 @@ function FilterCompStart() {
                 marginTop:"auto",
                 width:"360px",
                 }}>
-                <Button
-                    onClick={(e)=> {
-                        dispatch(getMangas())
-                        dispatch(filterAction(data))
-                    }}
-                    sx={{
-                        
-                        letterSpacing: "1.5px",
-                        fontSize:"16px",
-                        backgroundColor:"#AD02E0",
-                        color:"white",
-                        width:"174px",
-                        height:"52px",
-                        borderRadius: "8px",
-                        ':hover': {
+                    <Button
+                        onClick={(e)=> {
+                            dispatch(getMangas())
+                            dispatch(filterAction(data))
+                        }}
+                        sx={{
+                            
+                            letterSpacing: "1.5px",
+                            fontSize:"16px",
                             backgroundColor:"#AD02E0",
-                            boxShadow:"0 0 10px 2px #AD02E0",
-                        },
-                        ':active': {
-                            backgroundColor:"purple",
-                        },
-                    }}
-                    variant="contained"
-                >Сбросить</Button>
-                <Button 
-                    onClick={(e)=> {
-                        dispatch(getMangas(`?type=${type}`))
-                        onFilter()
-                    }}
-                    sx={{
-                        letterSpacing: "1.5px",
-                        fontSize:"16px",
-                        backgroundColor:"#AD02E0",
-                        color:"white",
-                        width:"174px",
-                        height:"52px",
-                        borderRadius: "8px",
-                        ':hover': {
+                            color:"white",
+                            width:"174px",
+                            height:"52px",
+                            borderRadius: "8px",
+                            ':hover': {
+                                backgroundColor:"#AD02E0",
+                                boxShadow:"0 0 10px 2px #AD02E0",
+                            },
+                            ':active': {
+                                backgroundColor:"$C94CEE",
+                            },
+                        }}
+                        variant="contained"
+                    >Сбросить</Button>
+                    <Button 
+                        onClick={(e)=> {
+                            dispatch(getMangas(`?type=${type}`))
+                            onFilter()
+                        }}
+                        sx={{
+                            letterSpacing: "1.5px",
+                            fontSize:"16px",
                             backgroundColor:"#AD02E0",
-                            boxShadow:"0 0 10px 2px #AD02E0",
-                        },
-                        ':active': {
-                            backgroundColor:"purple",
-                        },
-                    }}
-                    variant="contained"
-                >Применить</Button>
+                            color:"white",
+                            width:"174px",
+                            height:"52px",
+                            borderRadius: "8px",
+                            ':hover': {
+                                backgroundColor:"#AD02E0",
+                                boxShadow:"0 0 10px 2px #AD02E0",
+                            },
+                            ':active': {
+                                backgroundColor:"$C94CEE",
+                            },
+                        }}
+                        variant="contained"
+                    >Применить</Button>
                 </Box>
             </Box>
         </>

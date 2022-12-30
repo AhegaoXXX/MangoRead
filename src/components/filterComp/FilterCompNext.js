@@ -35,6 +35,8 @@ function FilterCompNext() {
   
   const onFilter = () => {
     const filteredMangas = filtered.map(item => item.genre.filter(i=>genreId.indexOf(i) ===-1))
+    console.log(filtered.map(item=>item.genre.filter(i=>i===5))+" -filtered")
+    console.log(genreId+" -genreId")
     console.log(filtered.map(item => item.genre.filter(i=>genreId.indexOf(i) === -1)
     
     ));
@@ -89,22 +91,43 @@ function FilterCompNext() {
             fontWeight: 400,
           }}>Жанры</Typography>
           <Box
-            sx={{height: 450, width: 360, bgcolor: 'background.paper',
-            overflow:'scroll',overflowX:'hidden'
+            sx={{height: 505, width: 360, bgcolor: 'background.paper',
+            overflow:'scroll',overflowX:'hidden',
             }}
           >
-            {genres.map(item=><div style={{display:'flex',alignItems:'center'}}>
-              <ListItemIcon key={item.id}>
+            {genres.map(item=><div 
+              style={{
+                padding:"0",
+              }}>
+              <ListItemIcon key={item.id}
+              sx={{
+                height:"42px",
+                alignItems:"center",
+              }}>
                 <Checkbox id={item.id}
-                  edge="start"
+                  size="large"
+                  edge="start" 
                   tabIndex={0}
                   disableRipple
                   onClick={(e)=>
                     setGenreId([...genreId,e.target.id])
                   }
+                  sx={{
+                    color: "#2FE09B",
+                    '&.Mui-checked': {
+                    color: "#2FE09B",
+                    },
+                  }}
                 />
+                <Typography
+                sx={{
+                    fontFamily: "Montserrat",
+                    fontSize: "24px",
+                    color:"black",
+                    fontWeight: 400,
+                }}
+                >{item.title}</Typography>
               </ListItemIcon>
-              {item.title}
             </div>)}
           </Box>
         </Box>
@@ -136,7 +159,7 @@ function FilterCompNext() {
                   boxShadow:"0 0 10px 2px #AD02E0",
                 },
                 ':active': {
-                    backgroundColor:"purple",
+                  backgroundColor:"$C94CEE",
                 },
             }}
             variant="contained"
@@ -158,7 +181,7 @@ function FilterCompNext() {
                     boxShadow:"0 0 10px 2px #AD02E0",
                   },
                   ':active': {
-                      backgroundColor:"purple",
+                    backgroundColor:"$C94CEE",
                   },
               }}
               variant="contained"
