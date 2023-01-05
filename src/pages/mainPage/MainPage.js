@@ -29,13 +29,13 @@ function MainPage() {
     }
   })
   const dispatch= useDispatch();
-
+  const countMangas = useSelector(state=> state.mangaReducer.countMangas)
   const data = useSelector(state => state.mangaReducer.mangas)
   const {modalChange, filtered} = useSelector(state => state.mangaReducer)
   useEffect(() => {
     dispatch(getMangas())
   }, [dispatch])
- 
+  const mangaCount = Math.ceil(countMangas/data.length);
   const [page, setPage] = useState(1);
   
 
@@ -116,7 +116,7 @@ function MainPage() {
                     </Box>
                   </Box>
 
-                <Pagination count={Math.ceil(data.length - 2)} size="large" color="primary" 
+                <Pagination count={mangaCount} size="large" color="primary" 
                   sx={{
                     button:{
                       color: '#A5A5A5',

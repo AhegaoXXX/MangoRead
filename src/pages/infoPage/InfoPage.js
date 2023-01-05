@@ -22,6 +22,7 @@ function InfoPage() {
   const {id} = useParams()
 
   const manga = useSelector(state=>state.mangaReducer.manga)
+  const countMangas = useSelector(state=> state.mangaReducer.countMangas)
   const comment = useSelector(state=>state.mangaReducer.comment)
   const genres = useSelector(state=>state.mangaReducer.genres)
   const [isLogined, setIsLogined] = useState(false)
@@ -269,7 +270,7 @@ function InfoPage() {
                   }}>
                     <ThemeProvider theme={theme}>
                       <Stack spacing={2}>
-                        <Pagination count={352} size="large" color="primary" 
+                        <Pagination count={countMangas} size="large" color="primary" 
                           sx={{
                             button:{
                               color: '#A5A5A5',
