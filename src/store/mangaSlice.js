@@ -54,7 +54,6 @@ const mangaSlice = createSlice({
         genres: [],
         searchRes: [],
         modalChange:false,
-        filtered:[],
     },
     reducers:{
         mangasInfo: (state, action) =>{
@@ -77,7 +76,7 @@ const mangaSlice = createSlice({
             state.modalChange = !state.modalChange
         },
         filterAction:(state,action)=>{
-            state.filtered = action.payload
+            state.mangas = action.payload
         }
     }
 })

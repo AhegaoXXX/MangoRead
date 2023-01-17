@@ -22,7 +22,6 @@ function FilterCompNext() {
   const [checked, setChecked] = React.useState([0]);
   const [genreId,setGenreId]=useState([])
   const [filteredMangas, setFilteredMangas] = useState([])
-  const {filtered}=useSelector(state=>state.mangaReducer)
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -37,7 +36,7 @@ function FilterCompNext() {
   const onFilter = () => {
     let filteredMangas = null
     genreId.map(item => {
-      return filteredMangas=  filtered.filter(i => i.genre.includes(item));
+      return filteredMangas=  data.filter(i => i.genre.includes(item));
     })
     console.log(filteredMangas)
     

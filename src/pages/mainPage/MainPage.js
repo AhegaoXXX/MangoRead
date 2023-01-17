@@ -100,17 +100,14 @@ function MainPage() {
                         }
                     }}>
 
-                      {filtered.length !== 0 
-                        ? 
-                        filtered.slice(0, 12).map((item) =>
-                        <NavLink to={`/${item.id}`} info={{image : item.image}}>
-                          <CardsMainPage key={item} post={{image : item?.image , year: item?.issue_year, name : item?.ru_name}} />
-                        </NavLink>) 
-                        :
+                      {data
+                        ?
                         data.slice(0, 12).map((item) =>
                         <NavLink to={`/${item.id}`} info={{image : item.image}}>
                           <CardsMainPage key={item} post={{image : item?.image , year: item?.issue_year, name : item?.ru_name}} />
                         </NavLink>)
+                        :
+                        <>Nope</>
                       }
 
                     </Box>
