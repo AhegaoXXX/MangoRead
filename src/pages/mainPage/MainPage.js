@@ -99,10 +99,11 @@ function MainPage() {
                     {data ? (
                       data.slice(0, 12).map((item, id) => (
                         <NavLink
-                          to={`/${item.id}`}
-                          info={{ image: item.image }}
+                          key={id}
+                          to={`/${item?.id}`}
                         >
                           <CardsMainPage
+                            key={id}
                             post={{
                               image: item?.image,
                               year: item?.issue_year,

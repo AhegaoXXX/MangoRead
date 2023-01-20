@@ -19,7 +19,7 @@ function CardsMainPage(props) {
           backgroundSize: "cover",
           color: "white",
           textAlign: "start",
-          backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.07044021221769958) 4%, rgba(60,59,59,0.7259023970916492) 69%), url(${props.post.image})`,
+          backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.07044021221769958) 4%, rgba(60,59,59,0.7259023970916492) 69%), url(${props?.post?.image})`,
         }}
       >
         <Typography>Год: {props.post.year}</Typography>

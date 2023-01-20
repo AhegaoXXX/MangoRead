@@ -45,7 +45,7 @@ function InfoPage() {
     <div className={classes.infoPage}>
       <Header />
 
-      {manga?.map((item) => {
+      {manga?.map((item, id) => {
         return (
           <Box
             sx={{
@@ -67,8 +67,6 @@ function InfoPage() {
               <Box
                 sx={{
                   display: "flex",
-                  // paddingTop:"33px",
-                  // paddingBottom:"33px",
                   "& a": {
                     textDecoration: "none",
                   },
