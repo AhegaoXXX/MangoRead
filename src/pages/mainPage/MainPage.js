@@ -97,13 +97,12 @@ function MainPage() {
                     }}
                   >
                     {data ? (
-                      data.slice(0, 12).map((item) => (
+                      data.slice(0, 12).map((item, id) => (
                         <NavLink
                           to={`/${item.id}`}
                           info={{ image: item.image }}
                         >
                           <CardsMainPage
-                            key={item}
                             post={{
                               image: item?.image,
                               year: item?.issue_year,
@@ -119,7 +118,7 @@ function MainPage() {
                 </Box>
 
                 <Pagination
-                  count={mangaCount}
+                  count={mangaCount ? mangaCount : 1}
                   size="large"
                   color="primary"
                   sx={{

@@ -211,7 +211,7 @@ function MainSignUp() {
                 onChange={handleChange}
                 aria-label="basic tabs"
                 indicatorColor="secondary"
-                textColor="black"
+                textColor="inherit"
               >
                 <Tab
                   label="Вход"

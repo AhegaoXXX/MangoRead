@@ -320,7 +320,7 @@ function InfoPage() {
                 <ThemeProvider theme={theme}>
                   <Stack spacing={2}>
                     <Pagination
-                      count={countMangas}
+                      count={countMangas ? countMangas : 1}
                       size="large"
                       color="primary"
                       sx={{

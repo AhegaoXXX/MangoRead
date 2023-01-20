@@ -143,13 +143,13 @@ function Footer() {
                 borderRadius: "20px",
                 boxShadow: "0 0 30px 0px lightgrey",
               }}
-              class="gmap_iframe"
+              className="gmap_iframe"
               width="400px"
               height="250px"
-              frameborder="0"
+              frameBorder="0"
               scrolling="no"
-              marginheight="0"
-              marginwidth="0"
+              marginHeight="0"
+              marginWidth="0"
               src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Bishkek, Gogol 28&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
               title="googleMap"
             ></iframe>
