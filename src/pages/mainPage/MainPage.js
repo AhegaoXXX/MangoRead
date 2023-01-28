@@ -25,13 +25,11 @@ function MainPage() {
     },
   });
   const dispatch = useDispatch();
-  const countMangas = useSelector((state) => state.mangaReducer.countMangas);
-  const data = useSelector((state) => state.mangaReducer.mangas);
-  const { modalChange, filtered } = useSelector((state) => state.mangaReducer);
+  const { modalChange, filtered, mangas, countMangas } = useSelector((state) => state.mangaReducer);
   useEffect(() => {
     dispatch(getMangas());
   }, [dispatch]);
-  const mangaCount = Math.ceil(countMangas / data.length);
+  // const mangaCount = Math.ceil(countMangas / mangas.length);
   const [page, setPage] = useState(1);
 
   return (
@@ -96,8 +94,8 @@ function MainPage() {
                       },
                     }}
                   >
-                    {data ? (
-                      data.slice(0, 12).map((item, id) => (
+                    {(
+                      mangas?.slice(0, 12).map((item, id) => (
                         <NavLink
                           key={id}
                           to={`/${item?.id}`}
@@ -112,14 +110,13 @@ function MainPage() {
                           />
                         </NavLink>
                       ))
-                    ) : (
-                      <>Nope</>
                     )}
                   </Box>
                 </Box>
 
                 <Pagination
-                  count={mangaCount ? mangaCount : 1}
+                  // count={mangaCount ? mangaCount : 1}
+                  count={10}
                   size="large"
                   color="primary"
                   sx={{

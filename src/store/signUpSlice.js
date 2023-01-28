@@ -6,7 +6,7 @@ export const getAccount = createAsyncThunk(
   async (logUser, { rejectWithValue, dispatch }) => {
     try {
       const response = await axios.get(
-        `http://134.122.75.14:8666/api/auth/profile/`,
+        `http://134.122.75.14:8666/api/auth/profile/?limit=-1&offset=0`,
         {
           headers: {
             "Content-Type": "multipart/form-data",
