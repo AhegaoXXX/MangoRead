@@ -28,11 +28,8 @@ function MainPage() {
   const { modalChange, filtered, mangas, countMangas } = useSelector(
     (state) => state.mangaReducer
   );
-  useEffect(() => {
-    dispatch(getMangas());
-  }, [dispatch]);
-  // const mangaCount = Math.ceil(countMangas / mangas.length);
-  const [page, setPage] = useState(1);
+  useEffect(() => {}, [dispatch]);
+  const mangaCount = Math.ceil(countMangas / 12);
 
   return (
     <div className={classes.mainPage}>
@@ -96,24 +93,28 @@ function MainPage() {
                       },
                     }}
                   >
-                    {mangas?.slice(0, 12).map((item, id) => (
-                      <NavLink key={id} to={`/${item?.id}`}>
-                        <CardsMainPage
-                          key={id}
-                          post={{
-                            image: item?.image,
-                            year: item?.issue_year,
-                            name: item?.ru_name,
-                          }}
-                        />
-                      </NavLink>
-                    ))}
+                    {mangas ? (
+                      mangas.slice(0, 12).map((item, id) => (
+                        <NavLink key={id} to={`/${item?.id}`}>
+                          <CardsMainPage
+                            key={id}
+                            post={{
+                              image: item?.image,
+                              year: item?.issue_year,
+                              name: item?.ru_name,
+                            }}
+                            pag={mangaCount}
+                          />
+                        </NavLink>
+                      ))
+                    ) : (
+                      <></>
+                    )}
                   </Box>
                 </Box>
 
                 <Pagination
-                  // count={mangaCount ? mangaCount : 1}
-                  count={10}
+                  count={mangaCount ? mangaCount : 1}
                   size="large"
                   color="primary"
                   sx={{
@@ -132,8 +133,7 @@ function MainPage() {
                     },
                   }}
                   onChange={(e, value) => {
-                    dispatch(getMangas(`?page=${value}`));
-                    setPage(value);
+                    dispatch(getMangas(`offset=${value * 12 - 1}`));
                   }}
                 />
               </Stack>

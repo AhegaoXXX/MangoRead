@@ -4,12 +4,10 @@ export const getMangas = createAsyncThunk(
   "getMangas",
   async (data, { rejectWithValue, dispatch }) => {
     const response = await fetch(
-      data ?
-      `http://134.122.75.14:8666/api/v1/manga/${data}`
-      :
-      `http://134.122.75.14:8666/api/v1/manga/`
+      `http://134.122.75.14:8666/api/v1/manga/?limit=12&${data}`
     );
     const dataX = await response.json();
+    console.log(dataX);
     dispatch(mangasInfo(dataX));
   }
 );
@@ -68,7 +66,7 @@ const mangaSlice = createSlice({
   },
   reducers: {
     mangasInfo: (state, action) => {
-      state.mangas = action.payload;
+      state.mangas = action.payload.results;
       state.countMangas = action.payload.count;
     },
     infoManga: (state, action) => {
