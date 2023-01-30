@@ -5,7 +5,6 @@ import Input from "@mui/material/Input";
 import { FormControl } from "@mui/material";
 import swal from "sweetalert";
 import axios from "axios";
-import "react-image-upload/dist/index.css";
 import initialAvatar from "../../../img/initialAvatar.png";
 
 function SecondRegModalComp() {

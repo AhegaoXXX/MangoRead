@@ -8,7 +8,6 @@ import { FormControl } from "@mui/material";
 import swal from "sweetalert";
 import axios from "axios";
 import { infoModalClose, getAccount } from "../../../store/signUpSlice";
-import "react-image-upload/dist/index.css";
 
 function FirstRegModalComp() {
   const dispatch = useDispatch();

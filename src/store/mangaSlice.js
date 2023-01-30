@@ -7,7 +7,6 @@ export const getMangas = createAsyncThunk(
       `http://134.122.75.14:8666/api/v1/manga/?limit=12&${data}`
     );
     const dataX = await response.json();
-    console.log(dataX);
     dispatch(mangasInfo(dataX));
   }
 );
@@ -41,16 +40,6 @@ export const getGenre = createAsyncThunk(
     dispatch(genreInfo(dataX));
   }
 );
-export const getSearch = createAsyncThunk(
-  "getSearch",
-  async (data, { rejectWithValue, dispatch }) => {
-    const response = await fetch(
-      "http://134.122.75.14:8666/api/v1/manga/"
-    );
-    const dataX = await response.json();
-    dispatch(searchInfo(dataX));
-  }
-);
 
 const mangaSlice = createSlice({
   name: "mangaSlice",
@@ -61,7 +50,6 @@ const mangaSlice = createSlice({
     manga: [],
     comment: [],
     genres: [],
-    searchRes: [],
     modalChange: false,
   },
   reducers: {
@@ -78,9 +66,6 @@ const mangaSlice = createSlice({
     genreInfo: (state, action) => {
       state.genres = action.payload;
     },
-    searchInfo: (state, action) => {
-      state.searchRes = action.payload;
-    },
     changeModalAction: (state) => {
       state.modalChange = !state.modalChange;
     },
@@ -95,7 +80,6 @@ export const {
   infoManga,
   commentInfo,
   genreInfo,
-  searchInfo,
   changeModalAction,
   filterAction,
   filterReset,

@@ -110,7 +110,7 @@ function Header() {
               dispatch(
                 getMangas(
                   e.target.value
-                    ? `?search=${e.target.value.replace(regExpSearch, "%20")}`
+                    ? `search=${e.target.value.replace(regExpSearch, "%20")}`
                     : ""
                 )
               )

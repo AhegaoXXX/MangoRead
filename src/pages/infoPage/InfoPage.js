@@ -14,9 +14,12 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { getInfoManga, getComment, getGenre } from "../../store/mangaSlice";
 import AddCommentComp from "../../components/addCommentComp/AddCommentComp";
+import parse from 'html-react-parser';
+
 
 function InfoPage() {
   const dispatch = useDispatch();
+  const parse = require('html-react-parser');
   const { id } = useParams();
 
   const { manga, countMangas, comment, genres } = useSelector(
@@ -140,7 +143,10 @@ function InfoPage() {
                           paddingBottom: "20px",
                         }}
                       >
-                        Информация:
+                        Информация: &nbsp;
+                          {item?.chapters_quantity} глав, &nbsp;
+                          {item?.likes} &hearts;, &nbsp;
+                          {item?.rating} &#9733;
                       </Typography>
                       <Typography
                         sx={{
@@ -210,7 +216,7 @@ function InfoPage() {
                         height: "374px",
                       }}
                     >
-                      {item?.description}
+                      {parse(item?.description)}
                     </Typography>
                   </Box>
                   <Box
