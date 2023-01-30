@@ -25,7 +25,9 @@ function MainPage() {
     },
   });
   const dispatch = useDispatch();
-  const { modalChange, filtered, mangas, countMangas } = useSelector((state) => state.mangaReducer);
+  const { modalChange, filtered, mangas, countMangas } = useSelector(
+    (state) => state.mangaReducer
+  );
   useEffect(() => {
     dispatch(getMangas());
   }, [dispatch]);
@@ -94,23 +96,18 @@ function MainPage() {
                       },
                     }}
                   >
-                    {(
-                      mangas?.slice(0, 12).map((item, id) => (
-                        <NavLink
+                    {mangas?.slice(0, 12).map((item, id) => (
+                      <NavLink key={id} to={`/${item?.id}`}>
+                        <CardsMainPage
                           key={id}
-                          to={`/${item?.id}`}
-                        >
-                          <CardsMainPage
-                            key={id}
-                            post={{
-                              image: item?.image,
-                              year: item?.issue_year,
-                              name: item?.ru_name,
-                            }}
-                          />
-                        </NavLink>
-                      ))
-                    )}
+                          post={{
+                            image: item?.image,
+                            year: item?.issue_year,
+                            name: item?.ru_name,
+                          }}
+                        />
+                      </NavLink>
+                    ))}
                   </Box>
                 </Box>
 

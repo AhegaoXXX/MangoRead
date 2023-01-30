@@ -44,16 +44,13 @@ function FilterCompStart() {
     dispatch(changeModalAction());
   };
 
-  
   const onFilter = () => {
     const filteredMangas = data.filter(
       (item) => item?.issue_year >= startYear && item?.issue_year <= endYear
     );
     dispatch(filterAction(filteredMangas));
   };
-  useEffect(() => {
-    
-  }, [dispatch]);
+  useEffect(() => {}, [dispatch]);
 
   return (
     <>

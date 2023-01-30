@@ -4,7 +4,10 @@ export const getMangas = createAsyncThunk(
   "getMangas",
   async (data, { rejectWithValue, dispatch }) => {
     const response = await fetch(
-      `http://134.122.75.14:8666/api/v1/manga/?limit=-1&offset=0&${data}`
+      data ?
+      `http://134.122.75.14:8666/api/v1/manga/${data}`
+      :
+      `http://134.122.75.14:8666/api/v1/manga/`
     );
     const dataX = await response.json();
     dispatch(mangasInfo(dataX));
@@ -14,7 +17,7 @@ export const getInfoManga = createAsyncThunk(
   "getInfoManga",
   async (id, { rejectWithValue, dispatch }) => {
     const response = await fetch(
-      `http://134.122.75.14:8666/api/v1/manga/?limit=-1&offset=0&${id}`
+      `http://134.122.75.14:8666/api/v1/manga/${id}`
     );
     const dataX = await response.json();
     dispatch(infoManga(dataX));
@@ -33,7 +36,9 @@ export const getComment = createAsyncThunk(
 export const getGenre = createAsyncThunk(
   "getGenre",
   async (data, { rejectWithValue, dispatch }) => {
-    const response = await fetch("http://134.122.75.14:8666/api/v1/genre/?limit=-1&offset=0");
+    const response = await fetch(
+      "http://134.122.75.14:8666/api/v1/genre/"
+    );
     const dataX = await response.json();
     dispatch(genreInfo(dataX));
   }
@@ -41,7 +46,9 @@ export const getGenre = createAsyncThunk(
 export const getSearch = createAsyncThunk(
   "getSearch",
   async (data, { rejectWithValue, dispatch }) => {
-    const response = await fetch("http://134.122.75.14:8666/api/v1/manga/?limit=-1&offset=0");
+    const response = await fetch(
+      "http://134.122.75.14:8666/api/v1/manga/"
+    );
     const dataX = await response.json();
     dispatch(searchInfo(dataX));
   }
@@ -61,8 +68,8 @@ const mangaSlice = createSlice({
   },
   reducers: {
     mangasInfo: (state, action) => {
-      state.mangas = action.payload?.results;
-      state.countMangas = action.payload?.count;
+      state.mangas = action.payload;
+      state.countMangas = action.payload.count;
     },
     infoManga: (state, action) => {
       state.manga = [action.payload];
@@ -81,7 +88,6 @@ const mangaSlice = createSlice({
     },
     filterAction: (state, action) => {
       state.mangas = action.payload;
-      // state.filtered = action.payload;
     },
   },
 });
