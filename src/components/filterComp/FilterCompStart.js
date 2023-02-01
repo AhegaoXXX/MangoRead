@@ -11,7 +11,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Checkbox from "@mui/material/Checkbox";
 import RemoveIcon from "@mui/icons-material/Remove";
 import Input from "@mui/material/Input";
-import swal from "sweetalert";
 import {
   changeModalAction,
   filterAction,
@@ -21,8 +20,8 @@ import {
 function FilterCompStart() {
   const dispatch = useDispatch();
 
-  const data = useSelector((state) => state.mangaReducer.mangas);
-  const typesManga = ["Манга", "Манхва", "Комиксы", "Маньхуа"];
+  const { mangas } = useSelector((state) => state.mangaReducer);
+  const typesManga = ["Манга", "Манхва", "Западный комикс", "Маньхуа"];
   const [checked, setChecked] = React.useState([0]);
   const [type, setType] = useState("");
   const [startYear, setStartYear] = useState("0");
@@ -45,7 +44,7 @@ function FilterCompStart() {
   };
 
   const onFilter = () => {
-    const filteredMangas = data.filter(
+    const filteredMangas = mangas?.results?.filter(
       (item) => item?.issue_year >= startYear && item?.issue_year <= endYear
     );
     dispatch(filterAction(filteredMangas));
@@ -220,7 +219,7 @@ function FilterCompStart() {
           <Button
             onClick={() => {
               dispatch(getMangas(""));
-              dispatch(filterAction(data));
+              dispatch(filterAction(mangas));
             }}
             sx={{
               letterSpacing: "1.5px",
@@ -243,8 +242,8 @@ function FilterCompStart() {
             Сбросить
           </Button>
           <Button
-            onClick={(e) => {
-              dispatch(getMangas(`?type=${type}`));
+            onClick={() => {
+              dispatch(getMangas(`type=${type}`));
               onFilter();
             }}
             sx={{

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import classes from "./MainPage.module.css";
@@ -25,11 +25,26 @@ function MainPage() {
     },
   });
   const dispatch = useDispatch();
-  const { modalChange, filtered, mangas, countMangas } = useSelector(
+  const { modalChange, mangas, filtered, countMangas } = useSelector(
     (state) => state.mangaReducer
   );
   useEffect(() => {}, [dispatch]);
   const mangaCount = Math.ceil(countMangas / 12);
+  const mangaListFunc = (arr) => {
+    return arr?.slice(0, 12)?.map((item, id) => (
+      <NavLink key={id} to={`/${item?.id}`}>
+        <CardsMainPage
+          key={id}
+          post={{
+            image: item?.image,
+            year: item?.issue_year,
+            name: item?.ru_name,
+          }}
+          pag={mangaCount}
+        />
+      </NavLink>
+    ));
+  };
 
   return (
     <div className={classes.mainPage}>
@@ -93,23 +108,9 @@ function MainPage() {
                       },
                     }}
                   >
-                    {mangas ? (
-                      mangas.slice(0, 12).map((item, id) => (
-                        <NavLink key={id} to={`/${item?.id}`}>
-                          <CardsMainPage
-                            key={id}
-                            post={{
-                              image: item?.image,
-                              year: item?.issue_year,
-                              name: item?.ru_name,
-                            }}
-                            pag={mangaCount}
-                          />
-                        </NavLink>
-                      ))
-                    ) : (
-                      <></>
-                    )}
+                    {filtered.length === 0
+                      ? mangaListFunc(mangas?.results)
+                      : mangaListFunc(filtered)}
                   </Box>
                 </Box>
 

@@ -33,9 +33,7 @@ export const getComment = createAsyncThunk(
 export const getGenre = createAsyncThunk(
   "getGenre",
   async (data, { rejectWithValue, dispatch }) => {
-    const response = await fetch(
-      "http://134.122.75.14:8666/api/v1/genre/"
-    );
+    const response = await fetch("http://134.122.75.14:8666/api/v1/genre/");
     const dataX = await response.json();
     dispatch(genreInfo(dataX));
   }
@@ -54,7 +52,7 @@ const mangaSlice = createSlice({
   },
   reducers: {
     mangasInfo: (state, action) => {
-      state.mangas = action.payload.results;
+      state.mangas = action.payload;
       state.countMangas = action.payload.count;
     },
     infoManga: (state, action) => {
@@ -70,7 +68,7 @@ const mangaSlice = createSlice({
       state.modalChange = !state.modalChange;
     },
     filterAction: (state, action) => {
-      state.mangas = action.payload;
+      state.filtered = action.payload;
     },
   },
 });

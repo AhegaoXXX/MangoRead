@@ -17,28 +17,18 @@ import swal from "sweetalert";
 function FilterCompNext() {
   const dispatch = useDispatch();
 
-  const data = useSelector((state) => state.mangaReducer.mangas);
-  const { genres } = useSelector((state) => state.mangaReducer);
+  const { genres, mangas } = useSelector((state) => state.mangaReducer);
   const [checked, setChecked] = React.useState([0]);
   const [genreId, setGenreId] = useState([]);
   const [filteredMangas, setFilteredMangas] = useState([]);
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-    setChecked(newChecked);
-  };
 
   const onFilter = () => {
     let filteredMangas = null;
     genreId.map((item) => {
-      return (filteredMangas = data.filter((i) => i.genre.includes(item)));
+      return (filteredMangas = mangas?.results?.filter((i) =>
+        i.genre.includes(item)
+      ));
     });
-    console.log(filteredMangas);
 
     filteredMangas.length === 0
       ? swal({ icon: "error" })
@@ -171,7 +161,7 @@ function FilterCompNext() {
           <Button
             onClick={(e) => {
               dispatch(getMangas(""));
-              dispatch(filterAction(data));
+              dispatch(filterAction(mangas));
             }}
             sx={{
               letterSpacing: "1.5px",
@@ -194,7 +184,7 @@ function FilterCompNext() {
             Сбросить
           </Button>
           <Button
-            onClick={(e) => onFilter()}
+            onClick={() => onFilter()}
             sx={{
               letterSpacing: "1.5px",
               fontSize: "16px",
