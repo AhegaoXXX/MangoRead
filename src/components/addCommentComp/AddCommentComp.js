@@ -24,6 +24,8 @@ function AddCommentComp() {
   const changeInput = () => {
     dispatch(addCommentAction(data));
     swal({
+      title: "Success:",
+      text: "You are commented successfully!",
       icon: "success",
     });
   };

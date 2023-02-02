@@ -21,6 +21,7 @@ import {
 import AddCommentComp from "../../components/addCommentComp/AddCommentComp";
 import swal from "sweetalert";
 import parse from "html-react-parser";
+import ReactDOM from "react-dom/client";
 
 function InfoPage() {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ function InfoPage() {
     dispatch(getComment(id));
     dispatch(getGenre());
     setIsLogined(account);
-  }, [dispatch, id, account]);
+  }, [dispatch, id, account, comment]);
 
   const theme = createTheme({
     palette: {
