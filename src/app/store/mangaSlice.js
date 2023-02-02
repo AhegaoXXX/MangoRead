@@ -47,6 +47,7 @@ const mangaSlice = createSlice({
     countMangas: 0,
     manga: [],
     comment: [],
+    addCommentModal: false,
     genres: [],
     modalChange: false,
   },
@@ -70,6 +71,9 @@ const mangaSlice = createSlice({
     filterAction: (state, action) => {
       state.filtered = action.payload;
     },
+    addCommentMode: (state) => {
+      state.addCommentModal = !state.addCommentModal;
+    },
   },
 });
 
@@ -81,6 +85,7 @@ export const {
   changeModalAction,
   filterAction,
   filterReset,
+  addCommentMode,
 } = mangaSlice.actions;
 
 export default mangaSlice.reducer;

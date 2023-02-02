@@ -12,8 +12,14 @@ import Stack from "@mui/material/Stack";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { getInfoManga, getComment, getGenre } from "../../app/store/mangaSlice";
+import {
+  getInfoManga,
+  getComment,
+  getGenre,
+  addCommentMode,
+} from "../../app/store/mangaSlice";
 import AddCommentComp from "../../components/addCommentComp/AddCommentComp";
+import swal from "sweetalert";
 import parse from "html-react-parser";
 
 function InfoPage() {
@@ -21,12 +27,11 @@ function InfoPage() {
   const parse = require("html-react-parser");
   const { id } = useParams();
 
-  const { mangas, manga, countMangas, comment, genres } = useSelector(
-    (state) => state.mangaReducer
-  );
+  const { mangas, manga, countMangas, comment, genres, addCommentModal } =
+    useSelector((state) => state.mangaReducer);
+  let newCommentSection = [...comment];
   const [isLogined, setIsLogined] = useState(false);
   const { account } = useSelector((state) => state.signUpReducer);
-
   useEffect(() => {
     dispatch(getInfoManga(id));
     dispatch(getComment(id));
@@ -212,6 +217,11 @@ function InfoPage() {
                     color: "#616161",
                     fontFamily: "Montserrat",
                     height: "374px",
+                    overflow: "scroll",
+                    overflowX: "hidden",
+                    "&::-webkit-scrollbar": {
+                      width: "0px",
+                    },
                   }}
                 >
                   {parse(item?.description)}
@@ -225,74 +235,112 @@ function InfoPage() {
                   textAlign: "start",
                 }}
               >
-                {isLogined === true ? <AddCommentComp /> : <></>}
-                <Typography
+                <Box
                   sx={{
-                    fontFamily: "Montserrat",
-                    fontSize: "35px",
-                    fontWeight: "500",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
                   }}
                 >
-                  Топ рецензий
-                </Typography>
+                  <span
+                    style={{
+                      fontFamily: "Montserrat",
+                      fontSize: "35px",
+                      fontWeight: "500",
+                      width: "20%",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    Топ рецензий
+                  </span>
+                  <Button
+                    onClick={() => {
+                      isLogined === true
+                        ? dispatch(addCommentMode())
+                        : swal({
+                            title: "Error:",
+                            text: "You are not authorized",
+                            icon: "error",
+                          });
+                    }}
+                    sx={{
+                      color: "#AD02E0",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Добавить комментарий
+                  </Button>
+                  {addCommentModal === true ? <AddCommentComp /> : <></>}
+                </Box>
 
-                {comment ? (
-                  comment?.slice(0, 3).map((comm, id) => (
-                    <span key={id}>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          paddingTop: "33px",
-                          height: "200px",
-                        }}
-                      >
+                <Box
+                  sx={{
+                    maxHeight: "650px",
+                    overflow: "scroll",
+                    overflowX: "hidden",
+                    "&::-webkit-scrollbar": {
+                      width: "0px",
+                    },
+                  }}
+                >
+                  {comment ? (
+                    newCommentSection.reverse()?.map((comm, id) => (
+                      <span key={id}>
                         <Box
                           sx={{
                             display: "flex",
-                            minWidth: "100px",
-                            height: "100px",
-                            borderRadius: "50% ",
-                            alignItems: "flex-start",
-                            backgroundSize: "cover",
-                            backgroundImage: `url(${comm?.user?.image_file})`,
-                            marginLeft: "10px",
-                            marginRight: "26px",
-                          }}
-                        ></Box>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            paddingLeft: "26px",
-                            borderLeft: "2px solid #878787",
+                            paddingTop: "33px",
+                            height: "200px",
                           }}
                         >
-                          <Typography
+                          <Box
                             sx={{
-                              fontWeight: "400",
-                              fontSize: "35px",
-                              fontFamily: "Montserrat",
+                              display: "flex",
+                              minWidth: "100px",
+                              height: "100px",
+                              borderRadius: "50% ",
+                              alignItems: "flex-start",
+                              backgroundSize: "cover",
+                              backgroundImage: `url(${comm?.user?.image_file})`,
+                              marginLeft: "10px",
+                              marginRight: "26px",
+                            }}
+                          ></Box>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              flexDirection: "column",
+                              paddingLeft: "26px",
+                              borderLeft: "2px solid #878787",
                             }}
                           >
-                            {comm?.user?.username}
-                          </Typography>
-                          <Typography
-                            sx={{
-                              fontWeight: "400",
-                              fontSize: "24px",
-                              fontFamily: "Montserrat",
-                              color: "#878787",
-                            }}
-                          >
-                            {comm.text}
-                          </Typography>
+                            <Typography
+                              sx={{
+                                fontWeight: "400",
+                                fontSize: "35px",
+                                fontFamily: "Montserrat",
+                              }}
+                            >
+                              {comm?.user?.username}
+                            </Typography>
+                            <Typography
+                              sx={{
+                                fontWeight: "400",
+                                fontSize: "24px",
+                                fontFamily: "Montserrat",
+                                color: "#878787",
+                              }}
+                            >
+                              {comm.text}
+                            </Typography>
+                          </Box>
                         </Box>
-                      </Box>
-                    </span>
-                  ))
-                ) : (
-                  <>OMG</>
-                )}
+                      </span>
+                    ))
+                  ) : (
+                    <>There is empty</>
+                  )}
+                </Box>
               </Box>
               `
               <Box

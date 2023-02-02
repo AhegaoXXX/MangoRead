@@ -122,7 +122,7 @@ function FilterCompStart() {
                 padding: "0",
               }}
             >
-              {typesManga.map((value) => {
+              {typesManga.map((value, id) => {
                 const labelId = `checkbox-list-label-${value}`;
 
                 return (

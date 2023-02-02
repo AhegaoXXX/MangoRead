@@ -22,7 +22,7 @@ function FilterCompNext() {
 
   const onFilter = () => {
     let filteredMangas = null;
-    genreId.map((item) => {
+    genreId.map((item, id) => {
       return (filteredMangas = mangas?.results?.filter((i) =>
         i.genre.includes(item)
       ));
@@ -96,11 +96,12 @@ function FilterCompNext() {
               overflowX: "hidden",
             }}
           >
-            {genres.map((item) => (
+            {genres.map((item, id) => (
               <div
                 style={{
                   padding: "0",
                 }}
+                key={id}
               >
                 <ListItemIcon
                   key={item.id}
