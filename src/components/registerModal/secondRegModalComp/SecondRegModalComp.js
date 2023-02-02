@@ -31,6 +31,8 @@ function SecondRegModalComp() {
     })
       .then((response) => {
         swal({
+          title: "Success:",
+          text: "You are registered successfully!",
           icon: "success",
         });
       })
@@ -52,14 +54,14 @@ function SecondRegModalComp() {
 
   return (
     <div>
-      <Box
+      <FormControl
         sx={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        <FormControl
+        <Box
           sx={{
             marginBottom: "14px",
           }}
@@ -102,87 +104,81 @@ function SecondRegModalComp() {
               ДОБАВЬТЕ ФОТО
             </Button>
           </label>
-        </FormControl>
+        </Box>
 
-        <FormControl>
-          <Input
-            sx={{
-              width: "500px",
-              height: "52px",
-              fontSize: "20px",
-              border: "2px solid grey",
-              borderRadius: "8px",
-              paddingLeft: "16px",
-              fontSize: "24px",
-              fontWeight: "400",
-              display: "flex",
-              letterSpacing: "1.5px",
-              fontFamily: "Montserrat",
-              marginBottom: "30px",
-              color: `${placeholderColor}`,
-            }}
-            disableUnderline
-            placeholder={placeholderUsername}
-            type="username"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </FormControl>
+        <Input
+          sx={{
+            width: "500px",
+            height: "52px",
+            fontSize: "20px",
+            border: "2px solid grey",
+            borderRadius: "8px",
+            paddingLeft: "16px",
+            fontSize: "24px",
+            fontWeight: "400",
+            display: "flex",
+            letterSpacing: "1.5px",
+            fontFamily: "Montserrat",
+            marginBottom: "30px",
+            color: `${placeholderColor}`,
+          }}
+          disableUnderline
+          placeholder={placeholderUsername}
+          type="username"
+          name="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
 
-        <FormControl>
-          <Input
-            sx={{
-              width: "500px",
-              height: "52px",
-              fontSize: "20px",
-              border: "2px solid grey",
-              borderRadius: "8px",
-              paddingLeft: "16px",
-              fontSize: "24px",
-              fontWeight: "400",
-              display: "flex",
-              letterSpacing: "1.5px",
-              fontFamily: "Montserrat",
-              marginBottom: "30px",
-              color: `${placeholderColor}`,
-            }}
-            disableUnderline
-            placeholder={placeholderNickname}
-            type="nickname"
-            id="nickname"
-            name="nickname"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-          />
-        </FormControl>
+        <Input
+          sx={{
+            width: "500px",
+            height: "52px",
+            fontSize: "20px",
+            border: "2px solid grey",
+            borderRadius: "8px",
+            paddingLeft: "16px",
+            fontSize: "24px",
+            fontWeight: "400",
+            display: "flex",
+            letterSpacing: "1.5px",
+            fontFamily: "Montserrat",
+            marginBottom: "30px",
+            color: `${placeholderColor}`,
+          }}
+          disableUnderline
+          placeholder={placeholderNickname}
+          type="nickname"
+          id="nickname"
+          name="nickname"
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
+        />
 
-        <FormControl>
-          <Input
-            sx={{
-              width: "500px",
-              height: "52px",
-              fontSize: "20px",
-              border: "2px solid grey",
-              borderRadius: "8px",
-              paddingLeft: "16px",
-              fontSize: "24px",
-              fontWeight: "400",
-              display: "flex",
-              letterSpacing: "1.5px",
-              fontFamily: "Montserrat",
-              marginBottom: "30px",
-              color: `${placeholderColor}`,
-            }}
-            disableUnderline
-            placeholder={placeholderPassword}
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </FormControl>
+        <Input
+          sx={{
+            width: "500px",
+            height: "52px",
+            fontSize: "20px",
+            border: "2px solid grey",
+            borderRadius: "8px",
+            paddingLeft: "16px",
+            fontSize: "24px",
+            fontWeight: "400",
+            display: "flex",
+            letterSpacing: "1.5px",
+            fontFamily: "Montserrat",
+            marginBottom: "30px",
+            color: `${placeholderColor}`,
+          }}
+          disableUnderline
+          placeholder={placeholderPassword}
+          type="password"
+          id="password"
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
         <Button
           onClick={handleRegister}
@@ -206,7 +202,7 @@ function SecondRegModalComp() {
         >
           Регистрация{" "}
         </Button>
-      </Box>
+      </FormControl>
     </div>
   );
 }

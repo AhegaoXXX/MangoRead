@@ -36,6 +36,8 @@ function FirstRegModalComp() {
         localStorage.setItem("tokenA", JSON.stringify(response.data.access));
         localStorage.setItem("tokenR", JSON.stringify(response.data.refresh));
         swal({
+          title: "Success:",
+          text: "You are logged in successfully!",
           icon: "success",
         });
         dispatch(getAccount(logUser));
@@ -47,7 +49,7 @@ function FirstRegModalComp() {
 
   return (
     <div>
-      <Box
+      <FormControl
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -55,57 +57,53 @@ function FirstRegModalComp() {
           paddingTop: "45px",
         }}
       >
-        <FormControl>
-          <Input
-            sx={{
-              width: "500px",
-              height: "52px",
-              border: "2px solid grey",
-              borderRadius: "8px",
-              paddingLeft: "16px",
-              fontSize: "24px",
-              fontWeight: "400",
-              display: "flex",
-              letterSpacing: "1.5px",
-              fontFamily: "Montserrat",
-              marginBottom: "30px",
-              color: `${placeholderColor}`,
-            }}
-            disableUnderline
-            placeholder={placeholderUsername}
-            type="username"
-            id="logUser"
-            name="logUser"
-            value={logUser}
-            onChange={(e) => setLogUser(e.target.value)}
-          />
-        </FormControl>
+        <Input
+          sx={{
+            width: "500px",
+            height: "52px",
+            border: "2px solid grey",
+            borderRadius: "8px",
+            paddingLeft: "16px",
+            fontSize: "24px",
+            fontWeight: "400",
+            display: "flex",
+            letterSpacing: "1.5px",
+            fontFamily: "Montserrat",
+            marginBottom: "30px",
+            color: `${placeholderColor}`,
+          }}
+          disableUnderline
+          placeholder={placeholderUsername}
+          type="username"
+          id="logUser"
+          name="logUser"
+          value={logUser}
+          onChange={(e) => setLogUser(e.target.value)}
+        />
 
-        <FormControl>
-          <Input
-            sx={{
-              width: "500px",
-              height: "52px",
-              border: "2px solid grey",
-              borderRadius: "8px",
-              paddingLeft: "16px",
-              fontSize: "24px",
-              fontWeight: "400",
-              display: "flex",
-              letterSpacing: "1.5px",
-              fontFamily: "Montserrat",
-              marginBottom: "30px",
-              color: `${placeholderColor}`,
-            }}
-            disableUnderline
-            placeholder={placeholderPassword}
-            type="password"
-            id="logPass"
-            name="logPass"
-            value={logPass}
-            onChange={(e) => setLogPass(e.target.value)}
-          />
-        </FormControl>
+        <Input
+          sx={{
+            width: "500px",
+            height: "52px",
+            border: "2px solid grey",
+            borderRadius: "8px",
+            paddingLeft: "16px",
+            fontSize: "24px",
+            fontWeight: "400",
+            display: "flex",
+            letterSpacing: "1.5px",
+            fontFamily: "Montserrat",
+            marginBottom: "30px",
+            color: `${placeholderColor}`,
+          }}
+          disableUnderline
+          placeholder={placeholderPassword}
+          type="password"
+          id="logPass"
+          name="logPass"
+          value={logPass}
+          onChange={(e) => setLogPass(e.target.value)}
+        />
 
         <Box
           sx={{
@@ -169,7 +167,7 @@ function FirstRegModalComp() {
         >
           Вход
         </Button>
-      </Box>
+      </FormControl>
     </div>
   );
 }
