@@ -1,9 +1,8 @@
-import "./App.css";
-import MainPage from "./pages/mainPage/MainPage";
-import InfoPage from "./pages/infoPage/InfoPage";
+import MainPage from "../pages/mainPage/MainPage";
+import InfoPage from "../pages/infoPage/InfoPage";
 import { Route, Routes } from "react-router-dom";
 
-function App(props) {
+function App() {
   return (
     <Routes>
       <Route index element={<MainPage />} />

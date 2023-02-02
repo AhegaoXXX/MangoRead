@@ -8,7 +8,7 @@ import { Button, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { infoModalClose, getAccount } from "../../store/signUpSlice";
+import { infoModalClose, getAccount } from "../../app/store/signUpSlice";
 import FirstRegModalComp from './firstRegModalComp/FirstRegModalComp'
 import SecondRegModalComp from "./secondRegModalComp/SecondRegModalComp";
 

@@ -19,8 +19,8 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import { getMangas } from "../../store/mangaSlice";
-import { infoModalOpen, logOutAcc } from "../../store/signUpSlice";
+import { getMangas } from "../../app/store/mangaSlice";
+import { infoModalOpen, logOutAcc } from "../../app/store/signUpSlice";
 
 function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);

@@ -9,7 +9,7 @@ import {
   filterAction,
   getGenre,
   getMangas,
-} from "../../store/mangaSlice";
+} from "../../app/store/mangaSlice";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Checkbox from "@mui/material/Checkbox";
 import swal from "sweetalert";
@@ -18,9 +18,7 @@ function FilterCompNext() {
   const dispatch = useDispatch();
 
   const { genres, mangas } = useSelector((state) => state.mangaReducer);
-  const [checked, setChecked] = React.useState([0]);
   const [genreId, setGenreId] = useState([]);
-  const [filteredMangas, setFilteredMangas] = useState([]);
 
   const onFilter = () => {
     let filteredMangas = null;
@@ -161,7 +159,7 @@ function FilterCompNext() {
           <Button
             onClick={(e) => {
               dispatch(getMangas(""));
-              dispatch(filterAction(mangas));
+              dispatch(filterAction(mangas?.results));
             }}
             sx={{
               letterSpacing: "1.5px",

@@ -15,7 +15,7 @@ import {
   changeModalAction,
   filterAction,
   getMangas,
-} from "../../store/mangaSlice";
+} from "../../app/store/mangaSlice";
 
 function FilterCompStart() {
   const dispatch = useDispatch();
@@ -219,7 +219,7 @@ function FilterCompStart() {
           <Button
             onClick={() => {
               dispatch(getMangas(""));
-              dispatch(filterAction(mangas));
+              dispatch(filterAction(mangas?.results));
             }}
             sx={{
               letterSpacing: "1.5px",

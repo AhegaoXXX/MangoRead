@@ -11,7 +11,7 @@ import CardsMainPage from "../../components/cardsMainPage/CardsMainPage";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { getMangas } from "../../store/mangaSlice";
+import { getMangas } from "../../app/store/mangaSlice";
 import FilterCompStart from "../../components/filterComp/FilterCompStart";
 import FilterCompNext from "../../components/filterComp/FilterCompNext";
 
@@ -29,7 +29,7 @@ function MainPage() {
     (state) => state.mangaReducer
   );
   useEffect(() => {}, [dispatch]);
-  const mangaCount = Math.ceil(countMangas / 12);
+  const mangaCount = Math.ceil(countMangas / 12)-1;
   const mangaListFunc = (arr) => {
     return arr?.slice(0, 12)?.map((item, id) => (
       <NavLink key={id} to={`/${item?.id}`}>

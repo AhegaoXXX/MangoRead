@@ -12,7 +12,7 @@ import Stack from "@mui/material/Stack";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { getInfoManga, getComment, getGenre } from "../../store/mangaSlice";
+import { getInfoManga, getComment, getGenre } from "../../app/store/mangaSlice";
 import AddCommentComp from "../../components/addCommentComp/AddCommentComp";
 import parse from "html-react-parser";
 
@@ -42,7 +42,6 @@ function InfoPage() {
       },
     },
   });
-  const mangaCount = Math.ceil(countMangas / 12);
 
   return (
     <div className={classes.infoPage}>
@@ -56,6 +55,7 @@ function InfoPage() {
               display: "flex",
               justifyContent: "center",
             }}
+            key={id}
           >
             <Box
               sx={{
@@ -174,8 +174,8 @@ function InfoPage() {
                     }}
                   >
                     Жанр:{" "}
-                    {item?.genre?.map((i) => (
-                      <>{genres[i - 1]?.title}, </>
+                    {item?.genre?.map((i, id) => (
+                      <span key={id}>{genres[i - 1]?.title}, </span>
                     ))}
                   </Typography>
                 </Box>
@@ -238,7 +238,7 @@ function InfoPage() {
 
                 {comment ? (
                   comment?.slice(0, 3).map((comm, id) => (
-                    <>
+                    <span key={id}>
                       <Box
                         sx={{
                           display: "flex",
@@ -288,7 +288,7 @@ function InfoPage() {
                           </Typography>
                         </Box>
                       </Box>
-                    </>
+                    </span>
                   ))
                 ) : (
                   <>OMG</>

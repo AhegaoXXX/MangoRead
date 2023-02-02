@@ -5,7 +5,7 @@ import Input from "@mui/material/Input";
 import { Button } from "@mui/material";
 import { Avatar } from "@mui/material";
 import { Typography } from "@mui/material";
-import { addCommentAction } from "../../store/signUpSlice";
+import { addCommentAction } from "../../app/store/signUpSlice";
 import { useParams } from "react-router-dom";
 import swal from "sweetalert";
 
