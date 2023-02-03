@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import Header from "../../widgets/header/Header";
-import Footer from "../../widgets/footer/Footer";
 import classes from "./MainPage.module.css";
 import "@fontsource/montserrat";
 import Box from "@mui/material/Box";
@@ -48,7 +46,6 @@ function MainPage() {
 
   return (
     <div className={classes.mainPage}>
-      <Header />
 
       <Box
         sx={{
@@ -143,7 +140,6 @@ function MainPage() {
         </Container>
       </Box>
 
-      <Footer />
     </div>
   );
 }

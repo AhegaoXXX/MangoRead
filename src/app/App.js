@@ -1,13 +1,8 @@
-import MainPage from "../pages/mainPage/MainPage";
-import InfoPage from "../pages/infoPage/InfoPage";
-import { Route, Routes } from "react-router-dom";
+import RoutePages from "./routePages/RoutePages";
 
 function App() {
   return (
-    <Routes>
-      <Route index element={<MainPage />} />
-      <Route path="/:id" element={<InfoPage />} />
-    </Routes>
+    <RoutePages/>
   );
 }
 

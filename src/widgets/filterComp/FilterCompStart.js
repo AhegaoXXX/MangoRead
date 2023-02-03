@@ -16,6 +16,8 @@ import {
   filterAction,
   getMangas,
 } from "../../app/store/mangaSlice";
+import StandardButton from "../../shared/components/buttons/StandardButton";
+import DoubleButtonsFilter from "../../features/doubleButtonsFilter/DoubleButtonsFilter";
 
 function FilterCompStart() {
   const dispatch = useDispatch();
@@ -216,56 +218,16 @@ function FilterCompStart() {
             width: "360px",
           }}
         >
-          <Button
-            onClick={() => {
+          <DoubleButtonsFilter
+            resetFilter={() => {
               dispatch(getMangas(""));
               dispatch(filterAction(mangas?.results));
             }}
-            sx={{
-              letterSpacing: "1.5px",
-              fontSize: "16px",
-              backgroundColor: "#AD02E0",
-              color: "white",
-              width: "174px",
-              height: "52px",
-              borderRadius: "8px",
-              ":hover": {
-                backgroundColor: "#AD02E0",
-                boxShadow: "0 0 10px 2px #AD02E0",
-              },
-              ":active": {
-                backgroundColor: "$C94CEE",
-              },
-            }}
-            variant="contained"
-          >
-            Сбросить
-          </Button>
-          <Button
-            onClick={() => {
+            applyFilter={() => {
               dispatch(getMangas(`type=${type}`));
               onFilter();
             }}
-            sx={{
-              letterSpacing: "1.5px",
-              fontSize: "16px",
-              backgroundColor: "#AD02E0",
-              color: "white",
-              width: "174px",
-              height: "52px",
-              borderRadius: "8px",
-              ":hover": {
-                backgroundColor: "#AD02E0",
-                boxShadow: "0 0 10px 2px #AD02E0",
-              },
-              ":active": {
-                backgroundColor: "$C94CEE",
-              },
-            }}
-            variant="contained"
-          >
-            Применить
-          </Button>
+          />
         </Box>
       </Box>
     </>

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import classes from "./InfoPage.module.css";
-import Header from "../../widgets/header/Header";
-import Footer from "../../widgets/footer/Footer";
 import "@fontsource/montserrat";
 import Box from "@mui/material/Box";
 import { Button, Typography } from "@mui/material";
@@ -49,7 +47,6 @@ function InfoPage() {
 
   return (
     <div className={classes.infoPage}>
-      <Header />
 
       {manga?.map((item, id) => {
         return (
@@ -379,8 +376,6 @@ function InfoPage() {
           </Box>
         );
       })}
-
-      <Footer />
     </div>
   );
 }

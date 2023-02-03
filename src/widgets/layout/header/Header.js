@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import classes from "./Header.module.css";
 import Container from "@mui/material/Container";
-import logo from "../../shared/img/logo.svg";
+import logo from "../../../shared/media/img/logo.svg";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import MainSignUp from "../registerModal/MainSignUp";
+import MainSignUp from "../../registerModal/MainSignUp";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import Avatar from "@mui/material/Avatar";
@@ -19,8 +19,9 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import { getMangas } from "../../app/store/mangaSlice";
-import { infoModalOpen, logOutAcc } from "../../app/store/signUpSlice";
+import { getMangas } from "../../../app/store/mangaSlice";
+import { infoModalOpen, logOutAcc } from "../../../app/store/signUpSlice";
+import StandardButton from "../../../shared/components/buttons/StandardButton";
 
 function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -205,55 +206,30 @@ function Header() {
           </Box>
         ) : (
           <div className={classes.register}>
-            <Button
-              sx={{
-                letterSpacing: "1.5px",
-                fontSize: "16px",
-                borderColor: "#AD02E0",
-                color: "black",
+            <StandardButton
+              styling={{
                 width: "142px",
                 height: "50px",
+                bgColor: "white",
+                color: "black",
                 border: "2px solid #AD02E0",
-                borderRadius: "8px",
-                ":hover": {
-                  backgroundColor: "#AD02E0",
-                  boxShadow: "0 0 10px 2px #AD02E0",
-                  color: "white",
-                  borderColor: "#AD02E0",
-                },
-                ":active": {
-                  color: "white",
-                  backgroundColor: "purple",
-                },
+                hoverColor: "white",
+                activeColor: "white",
               }}
-              variant="outlined"
-              onClick={handleOpen}
             >
-              Войти
-            </Button>
+              <a href onClick={handleOpen}>Войти</a>
+            </StandardButton>
             <MainSignUp />
-            <Button
-              sx={{
-                letterSpacing: "1.5px",
-                fontSize: "16px",
-                backgroundColor: "#AD02E0",
-                color: "white",
+            <StandardButton
+              styling={{
                 width: "206px",
                 height: "50px",
-                borderRadius: "8px",
-                ":hover": {
-                  backgroundColor: "#AD02E0",
-                  boxShadow: "0 0 10px 2px #AD02E0",
-                },
-                ":active": {
-                  backgroundColor: "purple",
-                },
+                bgColor: "#AD02E0",
+                color: "white",
               }}
-              variant="contained"
-              onClick={handleOpen}
             >
-              Регистрация
-            </Button>
+              <a href onClick={handleOpen}>Регистрация</a>
+            </StandardButton>
           </div>
         )}
       </Container>

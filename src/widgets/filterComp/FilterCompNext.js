@@ -13,6 +13,8 @@ import {
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Checkbox from "@mui/material/Checkbox";
 import swal from "sweetalert";
+import StandardButton from "../../shared/components/buttons/StandardButton";
+import DoubleButtonsFilter from "../../features/doubleButtonsFilter/DoubleButtonsFilter";
 
 function FilterCompNext() {
   const dispatch = useDispatch();
@@ -161,53 +163,13 @@ function FilterCompNext() {
             marginTop: "auto",
           }}
         >
-          <Button
-            onClick={(e) => {
+          <DoubleButtonsFilter
+            resetFilter={(e) => {
               dispatch(getMangas(""));
               dispatch(filterAction(mangas?.results));
             }}
-            sx={{
-              letterSpacing: "1.5px",
-              fontSize: "16px",
-              backgroundColor: "#AD02E0",
-              color: "white",
-              width: "174px",
-              height: "52px",
-              borderRadius: "8px",
-              ":hover": {
-                backgroundColor: "#AD02E0",
-                boxShadow: "0 0 10px 2px #AD02E0",
-              },
-              ":active": {
-                backgroundColor: "$C94CEE",
-              },
-            }}
-            variant="contained"
-          >
-            Сбросить
-          </Button>
-          <Button
-            onClick={() => onFilter()}
-            sx={{
-              letterSpacing: "1.5px",
-              fontSize: "16px",
-              backgroundColor: "#AD02E0",
-              color: "white",
-              width: "174px",
-              height: "52px",
-              borderRadius: "8px",
-              ":hover": {
-                backgroundColor: "#AD02E0",
-                boxShadow: "0 0 10px 2px #AD02E0",
-              },
-              ":active": {
-                backgroundColor: "$C94CEE",
-              },
-            }}
-            variant="contained"
-          >
-            Применить
-          </Button>
+            applyFilter={onFilter}
+          />
         </Box>
       </Box>
     </>
