@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./Header.module.css";
 import Container from "@mui/material/Container";
-import logo from "../../img/logo.svg";
+import logo from "../../shared/img/logo.svg";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
@@ -33,7 +33,6 @@ function Header() {
   };
 
   const dispatch = useDispatch();
-  const [search, setSearch] = useState("");
   const regExpSearch = / /g;
 
   const handleOpen = () => dispatch(infoModalOpen());
@@ -47,9 +46,9 @@ function Header() {
     );
   };
   useEffect(() => {
-    dispatch(getMangas(search));
+    dispatch(getMangas());
     setIsLogined(account);
-  }, [dispatch, account, search]);
+  }, [dispatch, account]);
 
   return (
     <div className={classes.header}>

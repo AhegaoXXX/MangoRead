@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import classes from "./InfoPage.module.css";
-import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
+import Header from "../../widgets/header/Header";
+import Footer from "../../widgets/footer/Footer";
 import "@fontsource/montserrat";
 import Box from "@mui/material/Box";
 import { Button, Typography } from "@mui/material";
@@ -20,8 +20,6 @@ import {
 } from "../../app/store/mangaSlice";
 import AddCommentComp from "../../components/addCommentComp/AddCommentComp";
 import swal from "sweetalert";
-import parse from "html-react-parser";
-import ReactDOM from "react-dom/client";
 
 function InfoPage() {
   const dispatch = useDispatch();

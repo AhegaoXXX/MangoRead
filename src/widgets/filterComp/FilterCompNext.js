@@ -29,7 +29,11 @@ function FilterCompNext() {
     });
 
     filteredMangas.length === 0
-      ? swal({ icon: "error" })
+      ? swal({
+          title: "Error:",
+          text: "No such genres here",
+          icon: "error",
+        })
       : dispatch(filterAction(filteredMangas));
   };
 

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/system";
-import Input from "@mui/material/Input";
 import { Button, TextField } from "@mui/material";
 import { Avatar } from "@mui/material";
 import { Typography } from "@mui/material";
@@ -23,6 +22,7 @@ function AddCommentComp() {
   let data = { id, dataX };
   const changeInput = () => {
     dispatch(addCommentAction(data));
+    dispatch(addCommentMode());
     swal({
       title: "Success:",
       text: "You are commented successfully!",

@@ -1,7 +1,6 @@
 .registerModal{
     display: flex;
     width: 603px;
-    /* height: 672px; */
     border-radius: 30px;
     margin: 0 auto;
     border: 3px solid gray;

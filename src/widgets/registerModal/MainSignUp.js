@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import classes from "./MainSignUp.module.css";
@@ -8,9 +8,9 @@ import { Button, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { infoModalClose, getAccount } from "../../app/store/signUpSlice";
-import FirstRegModalComp from './firstRegModalComp/FirstRegModalComp'
-import SecondRegModalComp from "./secondRegModalComp/SecondRegModalComp";
+import { infoModalClose } from "../../app/store/signUpSlice";
+import FirstRegModalComp from "../../features/firstRegModalComp/FirstRegModalComp";
+import SecondRegModalComp from "../../features/secondRegModalComp/SecondRegModalComp";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -155,11 +155,11 @@ function MainSignUp() {
               </Tabs>
             </Box>
             <TabPanel value={value} index={0} sx={{}}>
-              <FirstRegModalComp/>
+              <FirstRegModalComp />
             </TabPanel>
 
             <TabPanel value={value} index={1}>
-              <SecondRegModalComp/>
+              <SecondRegModalComp />
             </TabPanel>
           </Box>
         </div>

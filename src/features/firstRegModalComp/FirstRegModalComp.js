@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Box } from "@mui/system";
 import Input from "@mui/material/Input";
 import { Button, Typography } from "@mui/material";
@@ -7,13 +7,10 @@ import Checkbox from "@mui/material/Checkbox";
 import { FormControl } from "@mui/material";
 import swal from "sweetalert";
 import axios from "axios";
-import { infoModalClose, getAccount } from "../../../app/store/signUpSlice";
+import { getAccount } from "../../app/store/signUpSlice";
 
 function FirstRegModalComp() {
   const dispatch = useDispatch();
-  const [placeholderUsername, setPlaceholderUsername] = useState("Username");
-  const [placeholderPassword, setPlaceholderPassword] = useState("Password");
-  const [placeholderColor, setPlaceholderColor] = useState("");
   const [logUser, setLogUser] = useState("");
   const [logPass, setLogPass] = useState("");
 
@@ -70,10 +67,9 @@ function FirstRegModalComp() {
             letterSpacing: "1.5px",
             fontFamily: "Montserrat",
             marginBottom: "30px",
-            color: `${placeholderColor}`,
           }}
           disableUnderline
-          placeholder={placeholderUsername}
+          placeholder="Username"
           type="username"
           id="logUser"
           name="logUser"
@@ -94,10 +90,9 @@ function FirstRegModalComp() {
             letterSpacing: "1.5px",
             fontFamily: "Montserrat",
             marginBottom: "30px",
-            color: `${placeholderColor}`,
           }}
           disableUnderline
-          placeholder={placeholderPassword}
+          placeholder="Password"
           type="password"
           id="logPass"
           name="logPass"

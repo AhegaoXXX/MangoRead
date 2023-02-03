@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
-import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
+import Header from "../../widgets/header/Header";
+import Footer from "../../widgets/footer/Footer";
 import classes from "./MainPage.module.css";
 import "@fontsource/montserrat";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import CardsMainPage from "../../components/cardsMainPage/CardsMainPage";
+import CardsMainPage from "../../entities/cardsMainPage/CardsMainPage";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getMangas } from "../../app/store/mangaSlice";
-import FilterCompStart from "../../components/filterComp/FilterCompStart";
-import FilterCompNext from "../../components/filterComp/FilterCompNext";
+import FilterCompStart from "../../widgets/filterComp/FilterCompStart";
+import FilterCompNext from "../../widgets/filterComp/FilterCompNext";
 
 function MainPage() {
   const theme = createTheme({
@@ -29,7 +29,7 @@ function MainPage() {
     (state) => state.mangaReducer
   );
   useEffect(() => {}, [dispatch]);
-  const mangaCount = Math.ceil(countMangas / 12)-1;
+  const mangaCount = Math.ceil(countMangas / 12) - 1;
   const mangaListFunc = (arr) => {
     return arr?.slice(0, 12)?.map((item, id) => (
       <NavLink key={id} to={`/${item?.id}`}>

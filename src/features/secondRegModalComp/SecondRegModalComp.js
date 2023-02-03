@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Box, Button, InputLabel } from "@mui/material";
-import { Label } from "@mui/icons-material";
+import { Box, Button } from "@mui/material";
 import Input from "@mui/material/Input";
 import { FormControl } from "@mui/material";
 import swal from "sweetalert";
 import axios from "axios";
-import initialAvatar from "../../../img/initialAvatar.png";
+import initialAvatar from "../../shared/img/initialAvatar.png";
 
 function SecondRegModalComp() {
-  const [placeholderUsername, setPlaceholderUsername] = useState("Username");
-  const [placeholderNickname, setPlaceholderNickname] = useState("Nickname");
-  const [placeholderPassword, setPlaceholderPassword] = useState("Password");
-  const [placeholderColor, setPlaceholderColor] = useState("");
   const [username, setUsername] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
@@ -120,10 +115,9 @@ function SecondRegModalComp() {
             letterSpacing: "1.5px",
             fontFamily: "Montserrat",
             marginBottom: "30px",
-            color: `${placeholderColor}`,
           }}
           disableUnderline
-          placeholder={placeholderUsername}
+          placeholder="Username"
           type="username"
           name="username"
           value={username}
@@ -144,10 +138,9 @@ function SecondRegModalComp() {
             letterSpacing: "1.5px",
             fontFamily: "Montserrat",
             marginBottom: "30px",
-            color: `${placeholderColor}`,
           }}
           disableUnderline
-          placeholder={placeholderNickname}
+          placeholder="Nickname"
           type="nickname"
           id="nickname"
           name="nickname"
@@ -169,10 +162,9 @@ function SecondRegModalComp() {
             letterSpacing: "1.5px",
             fontFamily: "Montserrat",
             marginBottom: "30px",
-            color: `${placeholderColor}`,
           }}
           disableUnderline
-          placeholder={placeholderPassword}
+          placeholder="Password"
           type="password"
           id="password"
           name="password"
