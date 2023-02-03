@@ -18,7 +18,7 @@ import {
   getGenre,
   addCommentMode,
 } from "../../app/store/mangaSlice";
-import AddCommentComp from "../../components/addCommentComp/AddCommentComp";
+import AddCommentComp from "../../features/addCommentComp/AddCommentComp";
 import swal from "sweetalert";
 
 function InfoPage() {
