@@ -7,7 +7,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import MainSignUp from "../../registerModal/MainSignUp";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
@@ -217,7 +217,7 @@ function Header() {
                 activeColor: "white",
               }}
             >
-              <a href onClick={handleOpen}>Войти</a>
+              <Link style={{textDecoration:"none", color:"inherit"}} onClick={handleOpen}>Войти</Link>
             </StandardButton>
             <MainSignUp />
             <StandardButton
@@ -228,7 +228,7 @@ function Header() {
                 color: "white",
               }}
             >
-              <a href onClick={handleOpen}>Регистрация</a>
+              <Link style={{textDecoration:"none", color:"inherit"}} onClick={handleOpen}>Регистрация</Link>
             </StandardButton>
           </div>
         )}

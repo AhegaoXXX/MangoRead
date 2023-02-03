@@ -1,5 +1,6 @@
 import React from "react";
 import StandardButton from "../../shared/components/buttons/StandardButton";
+import { Link } from "react-router-dom";
 
 function DoubleButtonsFilter({ resetFilter, applyFilter }) {
   return (
@@ -12,9 +13,9 @@ function DoubleButtonsFilter({ resetFilter, applyFilter }) {
           color: "white",
         }}
       >
-        <a href onClick={resetFilter}>
+        <Link style={{textDecoration:"none", color:"inherit"}} onClick={resetFilter}>
           Сбросить
-        </a>
+        </Link>
       </StandardButton>
       <StandardButton
         styling={{
@@ -24,9 +25,9 @@ function DoubleButtonsFilter({ resetFilter, applyFilter }) {
           color: "white",
         }}
       >
-        <a href onClick={applyFilter}>
+        <Link style={{textDecoration:"none", color:"inherit"}} onClick={applyFilter}>
           Применить
-        </a>
+        </Link>
       </StandardButton>
     </>
   );
