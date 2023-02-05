@@ -1,7 +1,6 @@
 import React from "react";
 import classes from "./Footer.module.css";
 import Container from "@mui/material/Container";
-import logo from "../../../shared/media/img/logo.svg";
 import Box from "@mui/material/Box";
 import facebookIcon from "../../../shared/media/img/Facebook.svg";
 import instagramIcon from "../../../shared/media/img/Instagram.svg";
@@ -14,6 +13,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { NavLink } from "react-router-dom";
+import FullLogo from "../../../shared/ui/branding/FullLogo";
 
 function Footer() {
   return (
@@ -51,15 +51,7 @@ function Footer() {
           }}
         >
           <NavLink to="/">
-            <Box className={classes.logo}>
-              <div className={classes.logoImg}>
-                <img src={logo} alt="logo" />
-              </div>
-              <div className={classes.logoText}>
-                <h1>MangoRead</h1>
-                <p>Читай мангу с нами</p>
-              </div>
-            </Box>
+            <FullLogo />
           </NavLink>
 
           <Box
