@@ -5,7 +5,7 @@ const mangaSlice = createSlice({
   initialState: {
     mangas: [],
     filtered: [],
-    manga: [],
+    manga: {},
     comment: [],
     addCommentModal: false,
     genres: [],
@@ -17,7 +17,7 @@ const mangaSlice = createSlice({
       state.countMangas = action.payload.count;
     },
     infoManga: (state, action) => {
-      state.manga = [action.payload];
+      state.manga = action.payload;
     },
     commentInfo: (state, action) => {
       state.comment = action.payload;

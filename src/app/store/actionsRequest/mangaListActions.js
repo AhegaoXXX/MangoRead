@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { API } from "../../../shared/API/API";
+import axios from "axios";
 import { mangasInfo, infoManga, commentInfo, genreInfo } from "../mangaSlice";
 
 const { apiMangaListV1, apiGenreListV1 } = API;
@@ -14,10 +15,16 @@ export const getMangas = createAsyncThunk(
 export const getInfoManga = createAsyncThunk(
   "getInfoManga",
   async (id, { rejectWithValue, dispatch }) => {
-    const response = await fetch(`${apiMangaListV1}${id}`);
-    const dataX = await response.json();
-    dispatch(infoManga(dataX));
+    try {
+      const response = await axios.get(`${apiMangaListV1}${id}`)
+      const dataX = response?.data
+      dispatch(infoManga(dataX));
+
+    } catch (error) {
+      console.error(error);
+    }
   }
+  
 );
 export const getComment = createAsyncThunk(
   "getComment",
