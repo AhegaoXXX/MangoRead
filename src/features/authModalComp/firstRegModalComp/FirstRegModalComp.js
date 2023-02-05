@@ -7,7 +7,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { FormControl } from "@mui/material";
 import swal from "sweetalert";
 import axios from "axios";
-import { getAccount } from "../../app/store/signUpSlice";
+import { getAccount } from "../../../app/store/actionsRequest/authActions";
 
 function FirstRegModalComp() {
   const dispatch = useDispatch();

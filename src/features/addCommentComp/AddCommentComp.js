@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 import { Button, TextField } from "@mui/material";
 import { Avatar } from "@mui/material";
 import { Typography } from "@mui/material";
-import { addCommentAction } from "../../app/store/signUpSlice";
+import { addCommentAction } from "../../app/store/actionsRequest/addCommentAction";
 import { useParams } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import swal from "sweetalert";

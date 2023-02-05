@@ -11,12 +11,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Checkbox from "@mui/material/Checkbox";
 import RemoveIcon from "@mui/icons-material/Remove";
 import Input from "@mui/material/Input";
-import {
-  changeModalAction,
-  filterAction,
-  getMangas,
-} from "../../app/store/mangaSlice";
-import StandardButton from "../../shared/components/buttons/StandardButton";
+import { changeModalAction, filterAction } from "../../app/store/mangaSlice";
+import { getMangas } from "../../app/store/actionsRequest/mangaListActions";
 import DoubleButtonsFilter from "../../features/doubleButtonsFilter/DoubleButtonsFilter";
 
 function FilterCompStart() {

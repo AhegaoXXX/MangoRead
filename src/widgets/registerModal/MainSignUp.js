@@ -8,9 +8,9 @@ import { Button, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { infoModalClose } from "../../app/store/signUpSlice";
-import FirstRegModalComp from "../../features/firstRegModalComp/FirstRegModalComp";
-import SecondRegModalComp from "../../features/secondRegModalComp/SecondRegModalComp";
+import { infoModalClose, changeAuthModalTabs } from "../../app/store/signUpSlice";
+import FirstRegModalComp from "../../features/authModalComp/firstRegModalComp/FirstRegModalComp";
+import SecondRegModalComp from "../../features/authModalComp/secondRegModalComp/SecondRegModalComp";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,16 +44,16 @@ function a11yProps(index) {
 
 function MainSignUp() {
   const dispatch = useDispatch();
-
+  const { authModalTabsIndex }= useSelector(state=>state.signUpReducer)
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
     dispatch(infoModalClose());
     setOpen(false);
   };
-  const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    dispatch(changeAuthModalTabs(newValue));
+
   };
   const openAction = useSelector((state) => state.signUpReducer.mode);
 
@@ -118,7 +118,7 @@ function MainSignUp() {
               }}
             >
               <Tabs
-                value={value}
+                value={authModalTabsIndex}
                 onChange={handleChange}
                 aria-label="basic tabs"
                 indicatorColor="secondary"
@@ -154,11 +154,11 @@ function MainSignUp() {
                 />
               </Tabs>
             </Box>
-            <TabPanel value={value} index={0} sx={{}}>
+            <TabPanel value={authModalTabsIndex} index={0} sx={{}}>
               <FirstRegModalComp />
             </TabPanel>
 
-            <TabPanel value={value} index={1}>
+            <TabPanel value={authModalTabsIndex} index={1}>
               <SecondRegModalComp />
             </TabPanel>
           </Box>

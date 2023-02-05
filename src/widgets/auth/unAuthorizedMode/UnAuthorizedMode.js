@@ -1,14 +1,24 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { infoModalOpen } from "../../../app/store/signUpSlice";
-import StandardButton from "../../../shared/components/buttons/StandardButton";
+import {
+  infoModalOpen,
+  changeAuthModalTabs,
+} from "../../../app/store/signUpSlice";
+import StandardButton from "../../../shared/ui/buttons/StandardButton";
 import MainSignUp from "../../../widgets/registerModal/MainSignUp";
 import { Link } from "react-router-dom";
 
 function UnAuthorizedMode() {
   const dispatch = useDispatch();
 
-  const handleOpen = () => dispatch(infoModalOpen());
+  const loginTabOpen = () => {
+    dispatch(infoModalOpen());
+    dispatch(changeAuthModalTabs(0));
+  };
+  const registerTabOpen = () => {
+    dispatch(infoModalOpen());
+    dispatch(changeAuthModalTabs(1));
+  };
   useEffect(() => {}, [dispatch]);
   return (
     <div
@@ -21,40 +31,41 @@ function UnAuthorizedMode() {
         height: "50px",
       }}
     >
-      <StandardButton
-        styling={{
-          width: "142px",
-          height: "50px",
-          bgColor: "white",
-          color: "black",
-          border: "2px solid #AD02E0",
-          hoverColor: "white",
-          activeColor: "white",
-        }}
+      <Link
+        style={{ textDecoration: "none", color: "inherit" }}
+        onClick={loginTabOpen}
       >
-        <Link
-          style={{ textDecoration: "none", color: "inherit" }}
-          onClick={handleOpen}
+        <StandardButton
+          styling={{
+            width: "142px",
+            height: "50px",
+            bgColor: "white",
+            color: "black",
+            border: "2px solid #AD02E0",
+            hoverColor: "white",
+            activeColor: "white",
+          }}
         >
           Войти
-        </Link>
-      </StandardButton>
+        </StandardButton>
+      </Link>
       <MainSignUp />
-      <StandardButton
-        styling={{
-          width: "206px",
-          height: "50px",
-          bgColor: "#AD02E0",
-          color: "white",
-        }}
+
+      <Link
+        style={{ textDecoration: "none", color: "inherit" }}
+        onClick={registerTabOpen}
       >
-        <Link
-          style={{ textDecoration: "none", color: "inherit" }}
-          onClick={handleOpen}
+        <StandardButton
+          styling={{
+            width: "206px",
+            height: "50px",
+            bgColor: "#AD02E0",
+            color: "white",
+          }}
         >
           Регистрация
-        </Link>
-      </StandardButton>
+        </StandardButton>
+      </Link>
     </div>
   );
 }

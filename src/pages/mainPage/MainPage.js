@@ -9,7 +9,7 @@ import CardsMainPage from "../../entities/cardsMainPage/CardsMainPage";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { getMangas } from "../../app/store/mangaSlice";
+import { getMangas } from "../../app/store/actionsRequest/mangaListActions";
 import FilterCompStart from "../../widgets/filterComp/FilterCompStart";
 import FilterCompNext from "../../widgets/filterComp/FilterCompNext";
 
@@ -46,7 +46,6 @@ function MainPage() {
 
   return (
     <div className={classes.mainPage}>
-
       <Box
         sx={{
           display: "flex",
@@ -139,7 +138,6 @@ function MainPage() {
           </Box>
         </Container>
       </Box>
-
     </div>
   );
 }

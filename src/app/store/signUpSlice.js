@@ -1,66 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-export const getAccount = createAsyncThunk(
-  "getLogin",
-  async (logUser, { rejectWithValue, dispatch }) => {
-    try {
-      const response = await axios.get(
-        `http://134.122.75.14:8666/api/auth/profile/?limit=-1&offset=0`,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      const foundAccount = response?.data.find(
-        (info) => info.username === logUser
-      );
-      dispatch(infoAccount(foundAccount));
-    } catch (error) {
-      console.error(error);
-    }
-  }
-);
-export const logOutAcc = createAsyncThunk(
-  "logOutAcc",
-  async (data, { rejectWithValue, dispatch }) => {
-    try {
-      await axios.post(`http://134.122.75.14:8666/api/auth/logout/`, data, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem("tokenA"))}`,
-        },
-        body: data,
-      });
-      dispatch(AccountLogOut());
-    } catch (error) {
-      console.error(error);
-    }
-  }
-);
-export const addCommentAction = createAsyncThunk(
-  "addCommentAction",
-  async (data, { rejectWithValue, dispatch }) => {
-    const { id, dataX } = data;
-    try {
-      await axios.post(
-        `http://134.122.75.14:8666/api/v1/manga/${id}/add-comment/`,
-        dataX,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${JSON.parse(
-              localStorage.getItem("tokenA")
-            )}`,
-          },
-        }
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
 
 const signUpSlice = createSlice({
   name: "signUpSlice",
@@ -69,6 +7,7 @@ const signUpSlice = createSlice({
     account: false,
     user: "",
     comment: "",
+    authModalTabsIndex: 0,
   },
   reducers: {
     infoModalOpen: (state) => {
@@ -88,6 +27,9 @@ const signUpSlice = createSlice({
     addComment: (state, action) => {
       state.comment = action.payload;
     },
+    changeAuthModalTabs: (state, action) => {
+      state.authModalTabsIndex = action.payload;
+    },
   },
 });
 
@@ -97,6 +39,7 @@ export const {
   infoAccount,
   AccountLogOut,
   addComment,
+  changeAuthModalTabs,
 } = signUpSlice.actions;
 
 export default signUpSlice.reducer;

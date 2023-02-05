@@ -13,7 +13,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import { Logout } from "@mui/icons-material";
-import { logOutAcc } from "../../../app/store/signUpSlice";
+import { logOutAcc } from "../../../app/store/actionsRequest/authActions";
 
 function AuthorizedMode() {
   const { user } = useSelector((state) => state.signUpReducer);

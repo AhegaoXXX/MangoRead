@@ -10,12 +10,12 @@ import Stack from "@mui/material/Stack";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { addCommentMode } from "../../app/store/mangaSlice";
 import {
+  getGenre,
   getInfoManga,
   getComment,
-  getGenre,
-  addCommentMode,
-} from "../../app/store/mangaSlice";
+} from "../../app/store/actionsRequest/mangaListActions";
 import AddCommentComp from "../../features/addCommentComp/AddCommentComp";
 import swal from "sweetalert";
 
@@ -24,8 +24,9 @@ function InfoPage() {
   const parse = require("html-react-parser");
   const { id } = useParams();
 
-  const { mangas, manga, countMangas, comment, genres, addCommentModal } =
-    useSelector((state) => state.mangaReducer);
+  const { mangas, manga, comment, genres, addCommentModal } = useSelector(
+    (state) => state.mangaReducer
+  );
   let newCommentSection = [...comment];
   const [isLogined, setIsLogined] = useState(false);
   const { account } = useSelector((state) => state.signUpReducer);
@@ -47,7 +48,6 @@ function InfoPage() {
 
   return (
     <div className={classes.infoPage}>
-
       {manga?.map((item, id) => {
         return (
           <Box

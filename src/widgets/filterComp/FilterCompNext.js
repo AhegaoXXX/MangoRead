@@ -4,16 +4,14 @@ import Box from "@mui/material/Box";
 import { Button, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { useDispatch, useSelector } from "react-redux";
+import { changeModalAction, filterAction } from "../../app/store/mangaSlice";
 import {
-  changeModalAction,
-  filterAction,
   getGenre,
   getMangas,
-} from "../../app/store/mangaSlice";
+} from "../../app/store/actionsRequest/mangaListActions";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Checkbox from "@mui/material/Checkbox";
 import swal from "sweetalert";
-import StandardButton from "../../shared/components/buttons/StandardButton";
 import DoubleButtonsFilter from "../../features/doubleButtonsFilter/DoubleButtonsFilter";
 
 function FilterCompNext() {

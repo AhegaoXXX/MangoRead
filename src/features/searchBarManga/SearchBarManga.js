@@ -1,7 +1,7 @@
 import { Input, InputAdornment } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getMangas } from "../../app/store/mangaSlice";
+import { getMangas } from "../../app/store/actionsRequest/mangaListActions";
 import SearchIcon from "@mui/icons-material/Search";
 
 function SearchBarManga() {

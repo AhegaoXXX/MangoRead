@@ -4,7 +4,7 @@ import Input from "@mui/material/Input";
 import { FormControl } from "@mui/material";
 import swal from "sweetalert";
 import axios from "axios";
-import initialAvatar from "../../shared/media/img/initialAvatar.png";
+import initialAvatar from "../../../shared/media/img/initialAvatar.png";
 
 function SecondRegModalComp() {
   const [username, setUsername] = useState("");
