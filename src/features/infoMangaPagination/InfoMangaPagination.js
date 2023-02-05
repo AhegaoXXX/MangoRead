@@ -9,10 +9,12 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getInfoManga,
-  getComment,
 } from "../../app/store/actionsRequest/mangaListActions";
+import {
+  getComment,
+} from "../../app/store/actionsRequest/commentAction";
 
-function InfoMangaPagination({ pagItem }) {
+function InfoMangaPagination({id}) {
   const theme = createTheme({
     palette: {
       primary: {
@@ -23,10 +25,10 @@ function InfoMangaPagination({ pagItem }) {
   });
   const dispatch = useDispatch();
 
-  const { manga, mangas } = useSelector((state) => state.mangaReducer);
+  const { mangas, manga } = useSelector((state) => state.mangaReducer);
   useEffect(() => {
 
-  }, [dispatch, mangas, manga, pagItem]);
+  }, [dispatch, manga ]);
   return (
     <>
       <Box
@@ -41,7 +43,7 @@ function InfoMangaPagination({ pagItem }) {
         <ThemeProvider theme={theme}>
           <Stack spacing={2}>
             <Pagination
-              defaultPage={pagItem?.id}
+              defaultPage={+id}
               count={mangas?.count}
               size="large"
               color="primary"

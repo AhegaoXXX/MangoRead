@@ -1,9 +1,10 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddCommentComp from "../../features/addCommentComp/AddCommentComp";
 import { addCommentMode } from "../../app/store/mangaSlice";
 import swal from "sweetalert";
+import UsersComments from "../../entities/reviews/UsersComments";
 
 function CommentSection() {
   const dispatch = useDispatch();
@@ -13,9 +14,10 @@ function CommentSection() {
   let newCommentSection = [...comment];
   const [isLogined, setIsLogined] = useState(false);
   const { account } = useSelector((state) => state.signUpReducer);
+
   useEffect(() => {
     setIsLogined(account);
-  }, [dispatch, account, comment]);
+  }, [dispatch, account, comment, addCommentModal]);
 
   return (
     <>
@@ -76,59 +78,9 @@ function CommentSection() {
           }}
         >
           {comment ? (
-            newCommentSection.reverse()?.map((comm, id) => (
-              <span key={id}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    paddingTop: "33px",
-                    height: "200px",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      minWidth: "100px",
-                      height: "100px",
-                      borderRadius: "50% ",
-                      alignItems: "flex-start",
-                      backgroundSize: "cover",
-                      backgroundImage: `url(${comm?.user?.image_file})`,
-                      marginLeft: "10px",
-                      marginRight: "26px",
-                    }}
-                  ></Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      paddingLeft: "26px",
-                      borderLeft: "2px solid #878787",
-                    }}
-                  >
-                    <Typography
-                      sx={{
-                        fontWeight: "400",
-                        fontSize: "35px",
-                        fontFamily: "Montserrat",
-                      }}
-                    >
-                      {comm?.user?.username}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontWeight: "400",
-                        fontSize: "24px",
-                        fontFamily: "Montserrat",
-                        color: "#878787",
-                      }}
-                    >
-                      {comm.text}
-                    </Typography>
-                  </Box>
-                </Box>
-              </span>
-            ))
+            newCommentSection
+              .reverse()
+              ?.map((comm, id) => <UsersComments key={id} comm={comm} />)
           ) : (
             <>There is empty</>
           )}

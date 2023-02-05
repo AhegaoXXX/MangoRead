@@ -7,8 +7,8 @@ import { useParams } from "react-router-dom";
 import {
   getGenre,
   getInfoManga,
-  getComment,
 } from "../../app/store/actionsRequest/mangaListActions";
+import { getComment } from "../../app/store/actionsRequest/commentAction";
 import BackButton from "../../shared/ui/buttons/BackButton";
 import InfoAboutManga from "../../widgets/infoAboutManga/InfoAboutManga";
 import InfoMangaPagination from "../../features/infoMangaPagination/InfoMangaPagination";
@@ -18,12 +18,15 @@ function InfoPage() {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const { manga } = useSelector((state) => state.mangaReducer);
+  const { comment } = useSelector((state) => state.mangaReducer);
+
   useEffect(() => {
     dispatch(getInfoManga(id));
     dispatch(getComment(id));
     dispatch(getGenre());
-  }, [dispatch, id]);
+  }, [dispatch, id, comment]);
+  // Если убрать "comment" из зависимости, то заработает пагинация. Пока не решил конфликт
+  // Без "comment" комментарии не будут появляться в реальном времени
 
   return (
     <div className={classes.infoPage}>
@@ -55,11 +58,11 @@ function InfoPage() {
           >
             <BackButton />
           </Box>
-          <InfoAboutManga mangaItem={manga} />
+          <InfoAboutManga />
 
           <CommentSection />
 
-          <InfoMangaPagination pagItem={manga} />
+          <InfoMangaPagination id={id}/>
         </Box>
       </Box>
     </div>

@@ -8,7 +8,10 @@ import { Button, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { infoModalClose, changeAuthModalTabs } from "../../app/store/signUpSlice";
+import {
+  infoModalClose,
+  changeAuthModalTabs,
+} from "../../app/store/signUpSlice";
 import FirstRegModalComp from "../../features/authModalComp/firstRegModalComp/FirstRegModalComp";
 import SecondRegModalComp from "../../features/authModalComp/secondRegModalComp/SecondRegModalComp";
 
@@ -44,7 +47,7 @@ function a11yProps(index) {
 
 function MainSignUp() {
   const dispatch = useDispatch();
-  const { authModalTabsIndex }= useSelector(state=>state.signUpReducer)
+  const { authModalTabsIndex } = useSelector((state) => state.signUpReducer);
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
@@ -53,7 +56,6 @@ function MainSignUp() {
   };
   const handleChange = (event, newValue) => {
     dispatch(changeAuthModalTabs(newValue));
-
   };
   const openAction = useSelector((state) => state.signUpReducer.mode);
 

@@ -6,8 +6,6 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@fontsource/montserrat": "^4.5.13",
-    "@googlemaps/js-api-loader": "^1.15.1",
-    "@googlemaps/react-wrapper": "^1.1.35",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.0",
     "@reduxjs/toolkit": "^1.9.1",
@@ -22,9 +20,6 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.5.0",
     "react-scripts": "5.0.1",
-    "react-use-cookie": "^1.4.0",
-    "react-window": "^1.8.8",
-    "redux-thunk": "^2.4.2",
     "sweetalert": "^2.1.2",
     "web-vitals": "^2.1.4"
   },

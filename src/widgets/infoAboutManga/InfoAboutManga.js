@@ -2,11 +2,12 @@ import { Box, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-function InfoAboutManga({ mangaItem }) {
+function InfoAboutManga() {
   const parse = require("html-react-parser");
+  const { manga } = useSelector((state) => state.mangaReducer);
 
-  const { genres, manga } = useSelector((state) => state.mangaReducer);
-  useEffect(() => {}, [mangaItem]);
+  const { genres } = useSelector((state) => state.mangaReducer);
+  useEffect(() => {}, [manga]);
   return (
     <>
       <Box
@@ -25,7 +26,7 @@ function InfoAboutManga({ mangaItem }) {
             boxShadow: "0 0 20px 0 grey",
           }}
           alt="img"
-          src={mangaItem?.image}
+          src={manga?.image}
         ></Box>
 
         <Box
@@ -45,7 +46,7 @@ function InfoAboutManga({ mangaItem }) {
               lineHeight: "48.76px",
             }}
           >
-            {mangaItem?.ru_name}
+            {manga?.ru_name}
           </Typography>
           <Typography
             sx={{
@@ -56,9 +57,9 @@ function InfoAboutManga({ mangaItem }) {
             }}
           >
             Информация: &nbsp;
-            {mangaItem?.chapters_quantity} глав, &nbsp;
-            {mangaItem?.likes} &hearts;, &nbsp;
-            {mangaItem?.rating} &#9733;
+            {manga?.chapters_quantity} глав, &nbsp;
+            {manga?.likes} &hearts;, &nbsp;
+            {manga?.rating} &#9733;
           </Typography>
           <Typography
             sx={{
@@ -68,7 +69,7 @@ function InfoAboutManga({ mangaItem }) {
               paddingBottom: "20px",
             }}
           >
-            Тип: {mangaItem?.type}
+            Тип: {manga?.type}
           </Typography>
           <Typography
             sx={{
@@ -78,7 +79,7 @@ function InfoAboutManga({ mangaItem }) {
               paddingBottom: "20px",
             }}
           >
-            Год: {mangaItem?.issue_year}
+            Год: {manga?.issue_year}
           </Typography>
           <Typography
             sx={{
@@ -88,7 +89,7 @@ function InfoAboutManga({ mangaItem }) {
             }}
           >
             Жанр:{" "}
-            {mangaItem?.genre?.map((i, id) => (
+            {manga?.genre?.map((i, id) => (
               <span key={id}>{genres[i - 1]?.title}, </span>
             ))}
           </Typography>
@@ -133,7 +134,7 @@ function InfoAboutManga({ mangaItem }) {
             },
           }}
         >
-          {parse(mangaItem?.description || "")}
+          {parse(manga?.description || "")}
         </Typography>
       </Box>
     </>

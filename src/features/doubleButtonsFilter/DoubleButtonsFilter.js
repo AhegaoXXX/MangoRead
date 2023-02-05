@@ -13,7 +13,10 @@ function DoubleButtonsFilter({ resetFilter, applyFilter }) {
           color: "white",
         }}
       >
-        <Link style={{textDecoration:"none", color:"inherit"}} onClick={resetFilter}>
+        <Link
+          style={{ textDecoration: "none", color: "inherit" }}
+          onClick={resetFilter}
+        >
           Сбросить
         </Link>
       </StandardButton>
@@ -25,7 +28,10 @@ function DoubleButtonsFilter({ resetFilter, applyFilter }) {
           color: "white",
         }}
       >
-        <Link style={{textDecoration:"none", color:"inherit"}} onClick={applyFilter}>
+        <Link
+          style={{ textDecoration: "none", color: "inherit" }}
+          onClick={applyFilter}
+        >
           Применить
         </Link>
       </StandardButton>

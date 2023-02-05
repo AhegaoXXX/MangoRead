@@ -43,7 +43,6 @@ function SecondRegModalComp() {
     if (selectedImage) {
       setImageUrl(URL.createObjectURL(selectedImage));
       setImageForm(selectedImage);
-      console.log(imageForm);
     }
   }, [selectedImage]);
 
@@ -105,7 +104,6 @@ function SecondRegModalComp() {
           sx={{
             width: "500px",
             height: "52px",
-            fontSize: "20px",
             border: "2px solid grey",
             borderRadius: "8px",
             paddingLeft: "16px",
@@ -128,7 +126,6 @@ function SecondRegModalComp() {
           sx={{
             width: "500px",
             height: "52px",
-            fontSize: "20px",
             border: "2px solid grey",
             borderRadius: "8px",
             paddingLeft: "16px",
@@ -152,7 +149,6 @@ function SecondRegModalComp() {
           sx={{
             width: "500px",
             height: "52px",
-            fontSize: "20px",
             border: "2px solid grey",
             borderRadius: "8px",
             paddingLeft: "16px",

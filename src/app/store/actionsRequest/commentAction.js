@@ -1,8 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { API } from "../../../shared/API/API";
-const { apiMangaListV1 } = API;
+import { commentInfo } from "../mangaSlice";
 
+const { apiMangaListV1 } = API;
 export const addCommentAction = createAsyncThunk(
   "addCommentAction",
   async (data, { rejectWithValue, dispatch }) => {
@@ -17,5 +18,14 @@ export const addCommentAction = createAsyncThunk(
     } catch (error) {
       console.error(error);
     }
+  }
+);
+
+export const getComment = createAsyncThunk(
+  "getComment",
+  async (id, { rejectWithValue, dispatch }) => {
+    const response = await fetch(`${apiMangaListV1}${id}/comments/`);
+    const dataX = await response.json();
+    dispatch(commentInfo(dataX));
   }
 );

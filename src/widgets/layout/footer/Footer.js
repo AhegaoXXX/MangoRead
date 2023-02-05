@@ -54,10 +54,10 @@ function Footer() {
               alignItems: "center",
             }}
           >
-            <LinksContact/>
+            <LinksContact />
           </Box>
 
-          <GMap/>
+          <GMap />
         </Container>
       </Box>
 
@@ -69,7 +69,7 @@ function Footer() {
           justifyContent: "center",
         }}
       >
-        <ProductRightsLinks/>
+        <ProductRightsLinks />
       </Box>
     </Box>
   );
