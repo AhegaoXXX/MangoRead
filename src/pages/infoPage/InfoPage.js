@@ -1,33 +1,15 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import classes from "./InfoPage.module.css";
 import "@fontsource/montserrat";
 import Box from "@mui/material/Box";
-import { useParams } from "react-router-dom";
-import {
-  getGenre,
-  getInfoManga,
-} from "../../app/store/actionsRequest/mangaListActions";
-import { getComment } from "../../app/store/actionsRequest/commentAction";
 import BackButton from "../../shared/ui/buttons/BackButton";
 import InfoAboutManga from "../../widgets/infoAboutManga/InfoAboutManga";
 import InfoMangaPagination from "../../features/infoMangaPagination/InfoMangaPagination";
 import CommentSection from "../../widgets/commentSection/CommentSection";
+import { useParams } from "react-router-dom";
 
 function InfoPage() {
-  const dispatch = useDispatch();
   const { id } = useParams();
-
-  const { comment } = useSelector((state) => state.mangaReducer);
-
-  useEffect(() => {
-    dispatch(getInfoManga(id));
-    dispatch(getComment(id));
-    dispatch(getGenre());
-  }, [dispatch, id, comment]);
-  // Если убрать "comment" из зависимости, то заработает пагинация. Пока не решил конфликт
-  // Без "comment" комментарии не будут появляться в реальном времени
-
   return (
     <div className={classes.infoPage}>
       <Box
@@ -36,7 +18,6 @@ function InfoPage() {
           display: "flex",
           justifyContent: "center",
         }}
-        key={id}
       >
         <Box
           sx={{
@@ -58,11 +39,11 @@ function InfoPage() {
           >
             <BackButton />
           </Box>
-          <InfoAboutManga />
+          <InfoAboutManga id={id} />
 
-          <CommentSection />
+          <CommentSection id={id} />
 
-          <InfoMangaPagination id={id}/>
+          <InfoMangaPagination id={id} />
         </Box>
       </Box>
     </div>

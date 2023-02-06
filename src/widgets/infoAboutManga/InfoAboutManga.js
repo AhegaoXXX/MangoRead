@@ -1,13 +1,21 @@
 import { Box, Typography } from "@mui/material";
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getGenre,
+  getInfoManga,
+} from "../../app/store/actionsRequest/mangaListActions";
 
-function InfoAboutManga() {
+function InfoAboutManga({ id }) {
+  const dispatch = useDispatch();
+
   const parse = require("html-react-parser");
-  const { manga } = useSelector((state) => state.mangaReducer);
+  const { manga, genres } = useSelector((state) => state.mangaReducer);
+  useEffect(() => {
+    dispatch(getInfoManga(id));
+    dispatch(getGenre());
+  }, [dispatch, id]);
 
-  const { genres } = useSelector((state) => state.mangaReducer);
-  useEffect(() => {}, [manga]);
   return (
     <>
       <Box

@@ -7,14 +7,10 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getInfoManga,
-} from "../../app/store/actionsRequest/mangaListActions";
-import {
-  getComment,
-} from "../../app/store/actionsRequest/commentAction";
+import { getInfoManga } from "../../app/store/actionsRequest/mangaListActions";
+import { getComment } from "../../app/store/actionsRequest/commentAction";
 
-function InfoMangaPagination({id}) {
+function InfoMangaPagination({ id }) {
   const theme = createTheme({
     palette: {
       primary: {
@@ -25,10 +21,11 @@ function InfoMangaPagination({id}) {
   });
   const dispatch = useDispatch();
 
-  const { mangas, manga } = useSelector((state) => state.mangaReducer);
+  const { mangas } = useSelector((state) => state.mangaReducer);
   useEffect(() => {
-
-  }, [dispatch, manga ]);
+    dispatch(getInfoManga());
+    dispatch(getComment());
+  }, [dispatch]);
   return (
     <>
       <Box

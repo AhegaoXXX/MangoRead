@@ -1,1 +1,3 @@
-This time i didn't give names to my commits, but of course i will do it on real projects. And i could create more components, but my laziness and deadline said me no. So i can see moments i can improve. I've learned many things.
+FSD architecture.
+
+npm i => npm start

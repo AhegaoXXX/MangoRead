@@ -5,8 +5,9 @@ import AddCommentComp from "../../features/addCommentComp/AddCommentComp";
 import { addCommentMode } from "../../app/store/mangaSlice";
 import swal from "sweetalert";
 import UsersComments from "../../entities/reviews/UsersComments";
+import { getComment } from "../../app/store/actionsRequest/commentAction";
 
-function CommentSection() {
+function CommentSection({ id }) {
   const dispatch = useDispatch();
   const { comment, addCommentModal } = useSelector(
     (state) => state.mangaReducer
@@ -17,7 +18,9 @@ function CommentSection() {
 
   useEffect(() => {
     setIsLogined(account);
-  }, [dispatch, account, comment, addCommentModal]);
+    dispatch(getComment(id));
+  }, [dispatch, account, id]);
+  //${comment}, который для RealTimeComments, конфликтует в зависимости, пока не решено
 
   return (
     <>
