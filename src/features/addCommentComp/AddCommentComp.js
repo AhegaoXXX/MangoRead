@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import swal from "sweetalert";
 import { addCommentMode } from "../../app/store/mangaSlice";
+import { getComment } from "../../app/store/actionsRequest/commentAction";
 
 function AddCommentComp() {
   const { id } = useParams();
@@ -23,13 +24,14 @@ function AddCommentComp() {
   const changeInput = () => {
     dispatch(addCommentAction(data));
     dispatch(addCommentMode());
+    dispatch(getComment(id));
     swal({
       title: "Success:",
       text: "You are commented successfully!",
       icon: "success",
     });
   };
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => {}, [dispatch, id]);
   const handleClose = () => {
     dispatch(addCommentMode());
   };

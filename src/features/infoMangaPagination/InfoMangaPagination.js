@@ -22,10 +22,8 @@ function InfoMangaPagination({ id }) {
   const dispatch = useDispatch();
 
   const { mangas } = useSelector((state) => state.mangaReducer);
-  useEffect(() => {
-    dispatch(getInfoManga());
-    dispatch(getComment());
-  }, [dispatch]);
+  useEffect(() => {}, [dispatch]);
+
   return (
     <>
       <Box

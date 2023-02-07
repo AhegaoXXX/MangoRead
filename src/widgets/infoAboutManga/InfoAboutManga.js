@@ -5,6 +5,7 @@ import {
   getGenre,
   getInfoManga,
 } from "../../app/store/actionsRequest/mangaListActions";
+import { getComment } from "../../app/store/actionsRequest/commentAction";
 
 function InfoAboutManga({ id }) {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ function InfoAboutManga({ id }) {
   const { manga, genres } = useSelector((state) => state.mangaReducer);
   useEffect(() => {
     dispatch(getInfoManga(id));
+    dispatch(getComment(id));
     dispatch(getGenre());
   }, [dispatch, id]);
 
