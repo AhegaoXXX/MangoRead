@@ -4,7 +4,7 @@ import {
   infoModalOpen,
   changeAuthModalTabs,
 } from "../../../app/store/signUpSlice";
-import StandardButton from "../../../shared/ui/buttons/StandardButton";
+import StandardButton from "../../../shared/components/buttons/StandardButton";
 import MainSignUp from "../../../widgets/registerModal/MainSignUp";
 import { Link } from "react-router-dom";
 

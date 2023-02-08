@@ -1,5 +1,5 @@
 import React from "react";
-import StandardButton from "../../shared/ui/buttons/StandardButton";
+import StandardButton from "../../shared/components/buttons/StandardButton";
 import { Link } from "react-router-dom";
 
 function DoubleButtonsFilter({ resetFilter, applyFilter }) {

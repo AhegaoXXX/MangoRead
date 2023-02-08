@@ -1,5 +1,4 @@
 import React from "react";
-import classes from "./MainPage.module.css";
 import "@fontsource/montserrat";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -20,7 +19,11 @@ function MainPage() {
   });
 
   return (
-    <div className={classes.mainPage}>
+    <div
+      style={{
+        fontFamily: "Montserrat",
+      }}
+    >
       <Box
         sx={{
           display: "flex",

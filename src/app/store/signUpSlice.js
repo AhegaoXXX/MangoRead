@@ -8,7 +8,6 @@ const signUpSlice = createSlice({
     user: "",
     comment: "",
     authModalTabsIndex: 0,
-    // userAccount: localStorage.getItem("tokenA"),
   },
   reducers: {
     infoModalOpen: (state) => {

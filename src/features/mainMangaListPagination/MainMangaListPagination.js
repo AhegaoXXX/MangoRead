@@ -31,7 +31,7 @@ function MainMangaListPagination() {
           },
         }}
         onChange={(e, value) => {
-          dispatch(getMangas(`offset=${value * 12 - 1}`));
+          dispatch(getMangas(`offset=${(value-1 )* 12}`));
         }}
       />
     </>
