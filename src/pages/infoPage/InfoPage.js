@@ -1,5 +1,4 @@
 import React from "react";
-import classes from "./InfoPage.module.css";
 import "@fontsource/montserrat";
 import Box from "@mui/material/Box";
 import BackButton from "../../shared/ui/buttons/BackButton";
@@ -12,7 +11,11 @@ function InfoPage() {
   const { id } = useParams();
 
   return (
-    <div className={classes.infoPage}>
+    <div
+      style={{
+        fontFamily: "Montserrat",
+      }}
+    >
       <Box
         sx={{
           bgcolor: "#F3F3F3",

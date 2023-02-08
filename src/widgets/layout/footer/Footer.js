@@ -1,5 +1,4 @@
 import React from "react";
-import classes from "./Footer.module.css";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { NavLink } from "react-router-dom";
@@ -11,7 +10,6 @@ import ProductRightsLinks from "../../../entities/ui/productRightsLinks/ProductR
 function Footer() {
   return (
     <Box
-      className={classes.footer}
       sx={{
         height: "402px",
         display: "flex",

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import classes from "./Header.module.css";
 import Container from "@mui/material/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -18,7 +17,12 @@ function Header() {
   }, [dispatch, account]);
 
   return (
-    <div className={classes.header}>
+    <div
+      style={{
+        height: "110px",
+        boxShadow: "0 4px 15px 0px rgba(128, 128, 128, 0.226)",
+      }}
+    >
       <Container
         disableGutters
         maxWidth="1240px"
@@ -38,7 +42,12 @@ function Header() {
         <NavLink to="/">
           <FullLogo />
         </NavLink>
-        <div className={classes.search}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
           <SearchBarManga />
         </div>
         {isLogined === true ? <AuthorizedMode /> : <UnAuthorizedMode />}

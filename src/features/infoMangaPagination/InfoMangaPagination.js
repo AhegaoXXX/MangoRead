@@ -7,10 +7,10 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getInfoManga } from "../../app/store/actionsRequest/mangaListActions";
-import { getComment } from "../../app/store/actionsRequest/commentAction";
+import { useNavigate } from "react-router-dom";
 
 function InfoMangaPagination({ id }) {
+  const navigate = useNavigate();
   const theme = createTheme({
     palette: {
       primary: {
@@ -52,8 +52,7 @@ function InfoMangaPagination({ id }) {
                 },
               }}
               onChange={(e, value) => {
-                dispatch(getInfoManga(value));
-                dispatch(getComment(value));
+                navigate(`/${value}`);
               }}
             />
           </Stack>
