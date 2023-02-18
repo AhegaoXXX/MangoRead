@@ -5,14 +5,17 @@ import Input from "@mui/material/Input";
 import { Button, Typography } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import { FormControl } from "@mui/material";
-import swal from "sweetalert";
-import axios from "axios";
-import { getAccount } from "../../../app/store/actionsRequest/authActions";
+import { postLoginAccount } from "../../../app/store/actionsRequest/authActions";
 
 function FirstRegModalComp() {
   const dispatch = useDispatch();
-  const [logUser, setLogUser] = useState("");
-  const [logPass, setLogPass] = useState("");
+  const [loginAccount, setLoginAccount] = useState({
+    logUser: "",
+    logPass: "",
+  });
+
+  // const [logUser, setLogUser] = useState("");
+  // const [logPass, setLogPass] = useState("");
 
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -20,28 +23,13 @@ function FirstRegModalComp() {
     e.preventDefault();
 
     let formData = new FormData();
-    formData.append("username", logUser);
-    formData.append("password", logPass);
-
-    axios
-      .post("http://134.122.75.14:8666/api/auth/signin/", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        localStorage.setItem("tokenA", JSON.stringify(response.data.access));
-        localStorage.setItem("tokenR", JSON.stringify(response.data.refresh));
-        swal({
-          title: "Success:",
-          text: "You are logged in successfully!",
-          icon: "success",
-        });
-        dispatch(getAccount(logUser));
-      })
-      .catch(function (error) {
-        alert(error);
-      });
+    formData.append("username", loginAccount.logUser);
+    formData.append("password", loginAccount.logPass);
+    const data = {
+      formData: formData,
+      logUser: loginAccount.logUser,
+    };
+    dispatch(postLoginAccount(data));
   };
 
   return (
@@ -73,8 +61,10 @@ function FirstRegModalComp() {
           type="username"
           id="logUser"
           name="logUser"
-          value={logUser}
-          onChange={(e) => setLogUser(e.target.value)}
+          value={loginAccount.logUser}
+          onChange={(e) =>
+            setLoginAccount({ ...loginAccount, logUser: e.target.value })
+          }
         />
 
         <Input
@@ -96,8 +86,10 @@ function FirstRegModalComp() {
           type="password"
           id="logPass"
           name="logPass"
-          value={logPass}
-          onChange={(e) => setLogPass(e.target.value)}
+          value={loginAccount.logPass}
+          onChange={(e) =>
+            setLoginAccount({ ...loginAccount, logPass: e.target.value })
+          }
         />
 
         <Box

@@ -2,47 +2,35 @@ import React, { useState, useEffect } from "react";
 import { Box, Button } from "@mui/material";
 import Input from "@mui/material/Input";
 import { FormControl } from "@mui/material";
-import swal from "sweetalert";
-import axios from "axios";
 import initialAvatar from "../../../shared/media/img/initialAvatar.png";
+import { postRegisterAccount } from "../../../app/store/actionsRequest/authActions";
+import { useDispatch } from "react-redux";
 
 function SecondRegModalComp() {
-  const [username, setUsername] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleRegister = (e) => {
-    let formData = new FormData();
-    formData.append("username", username);
-    formData.append("nickname", nickname);
-    formData.append("image_file", imageForm);
-    formData.append("password", password);
-
-    axios({
-      method: "POST",
-      url: "http://134.122.75.14:8666/api/auth/signup/",
-      headers: { "Content-type": "multipart/form-data" },
-      data: formData,
-    })
-      .then((response) => {
-        swal({
-          title: "Success:",
-          text: "You are registered successfully!",
-          icon: "success",
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
+  const dispatch = useDispatch();
+  const [regAccount, setRegAccount] = useState({
+    username: "",
+    nickname: "",
+    password: "",
+    imageForm: null,
+  });
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState();
-  const [imageForm, setImageForm] = useState();
+
+  const handleRegister = () => {
+    let formData = new FormData();
+    formData.append("username", regAccount.username);
+    formData.append("nickname", regAccount.nickname);
+    formData.append("image_file", regAccount.imageForm);
+    formData.append("password", regAccount.password);
+
+    dispatch(postRegisterAccount(formData));
+  };
+
   useEffect(() => {
     if (selectedImage) {
       setImageUrl(URL.createObjectURL(selectedImage));
-      setImageForm(selectedImage);
+      setRegAccount({ ...regAccount, imageForm: selectedImage });
     }
   }, [selectedImage]);
 
@@ -118,8 +106,10 @@ function SecondRegModalComp() {
           placeholder="Username"
           type="username"
           name="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={regAccount.username}
+          onChange={(e) =>
+            setRegAccount({ ...regAccount, username: e.target.value })
+          }
         />
 
         <Input
@@ -141,8 +131,10 @@ function SecondRegModalComp() {
           type="nickname"
           id="nickname"
           name="nickname"
-          value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
+          value={regAccount.nickname}
+          onChange={(e) =>
+            setRegAccount({ ...regAccount, nickname: e.target.value })
+          }
         />
 
         <Input
@@ -164,8 +156,10 @@ function SecondRegModalComp() {
           type="password"
           id="password"
           name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={regAccount.password}
+          onChange={(e) =>
+            setRegAccount({ ...regAccount, password: e.target.value })
+          }
         />
 
         <Button

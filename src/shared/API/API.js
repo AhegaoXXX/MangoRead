@@ -3,4 +3,6 @@ export const API = {
   apiGenreListV1: "http://134.122.75.14:8666/api/v1/genre/",
   apiAuthProfile: "http://134.122.75.14:8666/api/auth/profile/",
   apiAuthLogout: "http://134.122.75.14:8666/api/auth/logout/",
+  apiSignUp: "http://134.122.75.14:8666/api/auth/signup/",
+  apiSignIn: "http://134.122.75.14:8666/api/auth/signin/",
 };
