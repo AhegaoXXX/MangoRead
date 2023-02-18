@@ -14,9 +14,6 @@ function FirstRegModalComp() {
     logPass: "",
   });
 
-  // const [logUser, setLogUser] = useState("");
-  // const [logPass, setLogPass] = useState("");
-
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
   const handleLogin = (e) => {
